@@ -1,0 +1,858 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Oloolua Forest Conservation: Blockchain-Powered Ecosystem</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        :root {
+            --primary-green: #2E8B57;
+            --secondary-green: #3CB371;
+            --dark-green: #1A5D3A;
+            --light-green: #E8F5E9;
+            --accent-gold: #FFD700;
+            --accent-blue: #1E90FF;
+            --text-dark: #1A1A1A;
+            --text-light: #F5F5F5;
+            --shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+            --transition: all 0.3s ease;
+        }
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            line-height: 1.7;
+            color: var(--text-dark);
+            background-color: #f9f9f9;
+            background-image: linear-gradient(to bottom, #f9f9f9, #e8f5e9);
+            overflow-x: hidden;
+        }
+        
+        /* Header & Navigation */
+        header {
+            background: linear-gradient(135deg, var(--dark-green), var(--primary-green));
+            color: white;
+            padding: 1.5rem 2rem;
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+            box-shadow: var(--shadow);
+        }
+        
+        .header-container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            max-width: 1400px;
+            margin: 0 auto;
+        }
+        
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            font-size: 1.8rem;
+            font-weight: 700;
+        }
+        
+        .logo-icon {
+            font-size: 2.2rem;
+            color: var(--accent-gold);
+        }
+
+        .logo-badge {
+            height: 46px;
+            width: auto;
+            border-radius: 8px;
+            background: white;
+            padding: 6px;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15);
+        }
+        
+        nav ul {
+            display: flex;
+            list-style: none;
+            gap: 2rem;
+        }
+        
+        nav a {
+            color: white;
+            text-decoration: none;
+            font-weight: 600;
+            padding: 0.5rem 1rem;
+            border-radius: 4px;
+            transition: var(--transition);
+        }
+        
+        nav a:hover {
+            background-color: rgba(255, 255, 255, 0.2);
+            transform: translateY(-2px);
+        }
+        
+        .mobile-menu-btn {
+            display: none;
+            background: none;
+            border: none;
+            color: white;
+            font-size: 1.5rem;
+            cursor: pointer;
+        }
+        
+        /* Hero Section */
+        .hero {
+            background: linear-gradient(rgba(26, 93, 58, 0.85), rgba(46, 139, 87, 0.9)), url('https://images.unsplash.com/photo-1500382017468-9049fed747ef?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2070&q=80');
+            background-size: cover;
+            background-position: center;
+            color: white;
+            text-align: center;
+            padding: 6rem 2rem;
+            margin-bottom: 3rem;
+        }
+        
+        .hero h1 {
+            font-size: 3.2rem;
+            margin-bottom: 1.5rem;
+            text-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
+        }
+        
+        .hero p {
+            font-size: 1.3rem;
+            max-width: 800px;
+            margin: 0 auto 2rem;
+            opacity: 0.9;
+        }
+        
+        .cta-button {
+            display: inline-block;
+            background-color: var(--accent-gold);
+            color: var(--dark-green);
+            padding: 1rem 2.5rem;
+            border-radius: 50px;
+            font-weight: 700;
+            font-size: 1.1rem;
+            text-decoration: none;
+            transition: var(--transition);
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+        }
+        
+        .cta-button:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 6px 20px rgba(0, 0, 0, 0.25);
+            background-color: #FFE44D;
+        }
+        
+        /* Main Content Sections */
+        main {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 0 2rem 4rem;
+        }
+        
+        .section-container {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 2rem;
+            margin-bottom: 3rem;
+        }
+        
+        @media (max-width: 992px) {
+            .section-container {
+                grid-template-columns: 1fr;
+            }
+        }
+        
+        .content-card {
+            background-color: white;
+            border-radius: 12px;
+            padding: 2.5rem;
+            box-shadow: var(--shadow);
+            transition: var(--transition);
+            border-left: 5px solid var(--primary-green);
+            height: 100%;
+        }
+        
+        .content-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.15);
+        }
+        
+        .content-card h2 {
+            color: var(--primary-green);
+            margin-bottom: 1.2rem;
+            font-size: 1.8rem;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        
+        .content-card h2 i {
+            color: var(--accent-blue);
+        }
+        
+        .content-card p {
+            margin-bottom: 1.2rem;
+        }
+        
+        .example-box {
+            background-color: var(--light-green);
+            border-left: 4px solid var(--accent-blue);
+            padding: 1.2rem;
+            margin: 1.5rem 0;
+            border-radius: 0 8px 8px 0;
+        }
+        
+        /* Interactive Dashboard */
+        .dashboard {
+            background: linear-gradient(to right, var(--dark-green), var(--primary-green));
+            color: white;
+            border-radius: 12px;
+            padding: 2.5rem;
+            margin: 4rem 0;
+            box-shadow: var(--shadow);
+        }
+        
+        .dashboard h2 {
+            text-align: center;
+            margin-bottom: 2.5rem;
+            font-size: 2.2rem;
+        }
+        
+        .stats-container {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 1.5rem;
+            margin-bottom: 2rem;
+        }
+        
+        .stat-card {
+            background-color: rgba(255, 255, 255, 0.1);
+            border-radius: 10px;
+            padding: 1.5rem;
+            text-align: center;
+            backdrop-filter: blur(10px);
+        }
+        
+        .stat-number {
+            font-size: 2.8rem;
+            font-weight: 700;
+            color: var(--accent-gold);
+            display: block;
+            margin-bottom: 0.5rem;
+        }
+        
+        .stat-label {
+            font-size: 1.1rem;
+            opacity: 0.9;
+        }
+        
+        /* Interactive Features */
+        .interactive-section {
+            background-color: white;
+            border-radius: 12px;
+            padding: 2.5rem;
+            margin: 3rem 0;
+            box-shadow: var(--shadow);
+        }
+        
+        .tabs {
+            display: flex;
+            flex-wrap: wrap;
+            border-bottom: 2px solid #eee;
+            margin-bottom: 2rem;
+        }
+        
+        .tab-button {
+            padding: 1rem 1.5rem;
+            background: none;
+            border: none;
+            font-weight: 600;
+            color: #666;
+            cursor: pointer;
+            transition: var(--transition);
+            position: relative;
+        }
+        
+        .tab-button.active {
+            color: var(--primary-green);
+        }
+        
+        .tab-button.active::after {
+            content: '';
+            position: absolute;
+            bottom: -2px;
+            left: 0;
+            width: 100%;
+            height: 3px;
+            background-color: var(--primary-green);
+        }
+        
+        .tab-content {
+            display: none;
+            padding: 1.5rem 0;
+            animation: fadeIn 0.5s ease;
+        }
+        
+        .tab-content.active {
+            display: block;
+        }
+        
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        
+        /* Token Calculator */
+        .calculator {
+            background-color: var(--light-green);
+            border-radius: 10px;
+            padding: 2rem;
+            margin-top: 2rem;
+        }
+        
+        .calculator h3 {
+            margin-bottom: 1.5rem;
+            color: var(--dark-green);
+        }
+        
+        .calculator input {
+            width: 100%;
+            padding: 1rem;
+            margin-bottom: 1.5rem;
+            border: 1px solid #ccc;
+            border-radius: 8px;
+            font-size: 1.1rem;
+        }
+        
+        .calculator button {
+            background-color: var(--primary-green);
+            color: white;
+            border: none;
+            padding: 1rem 2rem;
+            border-radius: 8px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: var(--transition);
+            width: 100%;
+        }
+        
+        .calculator button:hover {
+            background-color: var(--dark-green);
+        }
+        
+        .result {
+            margin-top: 1.5rem;
+            padding: 1.2rem;
+            background-color: white;
+            border-radius: 8px;
+            border-left: 4px solid var(--accent-blue);
+            display: none;
+        }
+        
+        /* Footer */
+        footer {
+            background-color: var(--dark-green);
+            color: white;
+            padding: 3rem 2rem 1.5rem;
+            margin-top: 4rem;
+        }
+        
+        .footer-container {
+            max-width: 1400px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 2.5rem;
+            margin-bottom: 2rem;
+        }
+        
+        .footer-section h3 {
+            margin-bottom: 1.5rem;
+            font-size: 1.3rem;
+            color: var(--accent-gold);
+        }
+        
+        .footer-section ul {
+            list-style: none;
+        }
+        
+        .footer-section ul li {
+            margin-bottom: 0.8rem;
+        }
+        
+        .footer-section a {
+            color: #ddd;
+            text-decoration: none;
+            transition: var(--transition);
+        }
+        
+        .footer-section a:hover {
+            color: var(--accent-gold);
+            padding-left: 5px;
+        }
+        
+        .social-icons {
+            display: flex;
+            gap: 1.2rem;
+            margin-top: 1.5rem;
+        }
+        
+        .social-icons a {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            width: 40px;
+            height: 40px;
+            background-color: rgba(255, 255, 255, 0.1);
+            border-radius: 50%;
+            transition: var(--transition);
+        }
+        
+        .social-icons a:hover {
+            background-color: var(--accent-gold);
+            color: var(--dark-green);
+            transform: translateY(-3px);
+        }
+        
+        .copyright {
+            text-align: center;
+            padding-top: 1.5rem;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+            font-size: 0.9rem;
+            opacity: 0.8;
+        }
+        
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            .header-container {
+                flex-direction: column;
+                gap: 1rem;
+            }
+            
+            nav ul {
+                flex-wrap: wrap;
+                justify-content: center;
+                gap: 1rem;
+            }
+            
+            .hero h1 {
+                font-size: 2.5rem;
+            }
+            
+            .hero p {
+                font-size: 1.1rem;
+            }
+            
+            .section-container {
+                grid-template-columns: 1fr;
+                gap: 1.5rem;
+            }
+            
+            .content-card {
+                padding: 1.8rem;
+            }
+            
+            .dashboard {
+                padding: 1.8rem;
+            }
+            
+            .stats-container {
+                grid-template-columns: 1fr 1fr;
+            }
+        }
+        
+        @media (max-width: 576px) {
+            .hero {
+                padding: 4rem 1.5rem;
+            }
+            
+            .hero h1 {
+                font-size: 2rem;
+            }
+            
+            .stats-container {
+                grid-template-columns: 1fr;
+            }
+            
+            .mobile-menu-btn {
+                display: block;
+            }
+            
+            nav {
+                display: none;
+                width: 100%;
+                margin-top: 1rem;
+            }
+            
+            nav.active {
+                display: block;
+            }
+            
+            nav ul {
+                flex-direction: column;
+                gap: 0.5rem;
+            }
+            
+            nav a {
+                display: block;
+                padding: 0.8rem;
+                text-align: center;
+                border: 1px solid rgba(255, 255, 255, 0.2);
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Header & Navigation -->
+    <header>
+        <div class="header-container">
+            <div class="logo">
+                <img src="logo.jpeg" alt="Oloolua Forest logo" class="logo-badge">
+                <span>Oloolua Forest Conservation</span>
+            </div>
+            
+            <button class="mobile-menu-btn" id="mobileMenuBtn">
+                <i class="fas fa-bars"></i>
+            </button>
+            
+            <nav id="mainNav">
+                <ul>
+                    <li><a href="#mission">Mission</a></li>
+                    <li><a href="#technology">Technology</a></li>
+                    <li><a href="#dashboard">Dashboard</a></li>
+                    <li><a href="#impact">Impact</a></li>
+                    <li><a href="#get-involved">Get Involved</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <!-- Hero Section -->
+    <section class="hero">
+        <h1>Oloolua Forest Conservation: Blockchain-Powered Ecosystem</h1>
+        <p>Youth-led reforestation leveraging Hedera blockchain, NFTs, and tokenization to create verifiable conservation impact and sustainable value.</p>
+        <a href="#get-involved" class="cta-button">Join Our Conservation Movement</a>
+    </section>
+
+    <main>
+        <!-- Mission Section -->
+        <section id="mission" class="section-container">
+            <div class="content-card">
+                <h2><i class="fas fa-seedling"></i> About Oloolua Forest & Our Mission</h2>
+                <p>Oloolua Forest, located in Kenya, is a vital ecosystem we're dedicated to protecting through reforestation, bamboo projects, and community involvement. As the Oloolua Youth Nursery, we focus on planting trees, empowering youth and women, and aligning with national initiatives like Jaza Miti to combat climate change.</p>
+                <p>Our technology stack, built on Hedera's distributed ledger technology (DLT), turns conservation actions into verifiable, rewarding assets. This guide explains how we use tools like Conservation NFTs, Hedera Guardian, Dovu, Evercity's DLT Earth, and RWA tokenization in our DApp to drive impact.</p>
+                <div class="example-box">
+                    <strong>Our Vision:</strong> Transforming conservation into a sustainable, prosperous endeavor through blockchain technology and community engagement.
+                </div>
+            </div>
+            
+            <div class="content-card">
+                <h2><i class="fas fa-leaf"></i> Our Core Technology Components</h2>
+                <p>We leverage a comprehensive blockchain ecosystem to create transparency, trust, and value in conservation efforts:</p>
+                <ul>
+                    <li><strong>Hedera Blockchain:</strong> Fast, energy-efficient, carbon-negative foundation</li>
+                    <li><strong>Conservation NFTs:</strong> Digital certificates representing real conservation assets</li>
+                    <li><strong>Hedera Guardian:</strong> Transparent verification of environmental impact</li>
+                    <li><strong>Dovu Protocol:</strong> Standardized carbon offset tokenization</li>
+                    <li><strong>Evercity DLT Earth:</strong> Scaling sustainable finance mechanisms</li>
+                    <li><strong>RWA Tokenization:</strong> Fractional ownership of real-world conservation assets</li>
+                </ul>
+            </div>
+        </section>
+
+        <!-- Interactive Dashboard -->
+        <section id="dashboard" class="dashboard">
+            <h2><i class="fas fa-chart-line"></i> Conservation Impact Dashboard</h2>
+            <div class="stats-container">
+                <div class="stat-card">
+                    <span class="stat-number" id="treesPlanted">12,847</span>
+                    <span class="stat-label">Trees Planted</span>
+                </div>
+                <div class="stat-card">
+                    <span class="stat-number" id="carbonOffset">328.5</span>
+                    <span class="stat-label">Tons of CO₂ Offset</span>
+                </div>
+                <div class="stat-card">
+                    <span class="stat-number" id="nftsMinted">245</span>
+                    <span class="stat-label">Conservation NFTs Minted</span>
+                </div>
+                <div class="stat-card">
+                    <span class="stat-number" id="youthEmployed">47</span>
+                    <span class="stat-label">Youth Employed</span>
+                </div>
+            </div>
+            
+            <div class="interactive-section">
+                <div class="tabs">
+                    <button class="tab-button active" data-tab="tab1">Tree Planting</button>
+                    <button class="tab-button" data-tab="tab2">Carbon Credits</button>
+                    <button class="tab-button" data-tab="tab3">NFT Marketplace</button>
+                </div>
+                
+                <div class="tab-content active" id="tab1">
+                    <h3>Real-Time Tree Planting Tracker</h3>
+                    <p>Each tree planted in Oloolua Forest is recorded on the Hedera blockchain, creating an immutable record of our conservation efforts.</p>
+                    <div class="calculator">
+                        <h3>Calculate Your Impact</h3>
+                        <p>How many trees would you like to plant?</p>
+                        <input type="range" id="treeSlider" min="1" max="1000" value="10">
+                        <div style="display: flex; justify-content: space-between; margin: 1rem 0;">
+                            <span id="treeCount">10 trees</span>
+                            <span id="carbonResult">≈ 0.25 tons CO₂ offset</span>
+                        </div>
+                        <button id="plantTreesBtn">Plant These Trees Now</button>
+                        <div class="result" id="plantResult">
+                            <strong>Success!</strong> Your transaction has been recorded on the Hedera blockchain. You will receive your Conservation NFT shortly.
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="tab-content" id="tab2">
+                    <h3>Carbon Credit Tokenization</h3>
+                    <p>Using Dovu's protocol, we tokenize carbon offsets from our reforestation projects, creating tradable assets that support our conservation work.</p>
+                    <div class="example-box">
+                        <strong>Example:</strong> A hectare of bamboo can generate approximately 20 carbon credits annually, each representing 1 ton of CO₂ removed from the atmosphere.
+                    </div>
+                </div>
+                
+                <div class="tab-content" id="tab3">
+                    <h3>Conservation NFT Marketplace</h3>
+                    <p>Our NFTs represent specific conservation assets - from individual trees to entire reforestation plots. Each NFT includes verifiable data about the environmental impact.</p>
+                    <div class="example-box">
+                        <strong>Featured NFT:</strong> "Oloolua Bamboo Grove #42" - Represents a 0.5 hectare bamboo plantation with verified carbon sequestration data.
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Technology Deep Dive -->
+        <section id="technology" class="section-container">
+            <div class="content-card">
+                <h2><i class="fas fa-link"></i> Hedera: Our Blockchain Foundation</h2>
+                <p>Hedera is our core platform—a fast, energy-efficient, carbon-negative blockchain ideal for eco-projects. It provides low-cost transactions and strong security, aligning with our ESG goals.</p>
+                <p>In our undertakings: We deploy our DApp on Hedera to mint tokens via Proof of Growth (PoG), where verified plantings trigger rewards. This creates a secure ledger for tracking everything from seedlings to carbon offsets.</p>
+                <div class="example-box">
+                    <strong>Key Advantage:</strong> Hedera's carbon-negative footprint means our technology infrastructure actually contributes to environmental restoration.
+                </div>
+            </div>
+            
+            <div class="content-card">
+                <h2><i class="fas fa-certificate"></i> Conservation NFTs: Digital Assets for Real Impact</h2>
+                <p>Conservation NFTs are unique digital certificates representing our forest efforts, like tree batches or CO₂ offsets.</p>
+                <p>How we leverage them: In our DApp, verified plantings mint NFTs on Hedera's Token Service. Members stake tokens to own them, turning art or memes into funding sources. Sales support nursery expansions, with royalties reinvested.</p>
+                <div class="example-box">
+                    <strong>Example:</strong> A hectare of bamboo becomes an NFT, tradable for carbon credits, with 10% of secondary sales automatically reinvested in Oloolua reforestation.
+                </div>
+            </div>
+        </section>
+
+        <!-- More Technology Sections -->
+        <section class="section-container">
+            <div class="content-card">
+                <h2><i class="fas fa-shield-alt"></i> Hedera Guardian: Transparent Verification</h2>
+                <p>Guardian is an open-source tool for ESG compliance, using dMRV to audit data.</p>
+                <p>In our conservation: Integrated into our DApp, it verifies plantings with sensors and AI, creating immutable records. This builds trust for donors and ensures accurate reporting for Jaza Miti alignments.</p>
+            </div>
+            
+            <div class="content-card">
+                <h2><i class="fas fa-coins"></i> Dovu: Standardizing Carbon Offsets</h2>
+                <p>Dovu, on Hedera, standardizes carbon credits for trading.</p>
+                <p>How we use it: Our DApp tokenizes offsets via Dovu APIs (e.g., 10 kg CO₂ per tree). This creates "Proof of Carbon" rewards, marketable to companies for ESG needs, generating income for our group.</p>
+            </div>
+        </section>
+
+        <!-- Get Involved Section -->
+        <section id="get-involved" class="interactive-section">
+            <h2><i class="fas fa-hands-helping"></i> Get Involved with Oloolua Conservation</h2>
+            <p>Join our movement to restore Oloolua Forest and create sustainable opportunities for local communities.</p>
+            
+            <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 1.5rem; margin-top: 2rem;">
+                <div class="content-card">
+                    <h3><i class="fas fa-tree"></i> Plant Trees</h3>
+                    <p>Sponsor tree planting and receive a Conservation NFT as proof of your contribution.</p>
+                    <button class="cta-button" style="margin-top: 1rem; padding: 0.8rem 1.5rem; width: 100%;">Plant a Tree</button>
+                </div>
+                
+                <div class="content-card">
+                    <h3><i class="fas fa-certificate"></i> Buy Conservation NFTs</h3>
+                    <p>Purchase NFTs that represent real conservation assets and support our work.</p>
+                    <button class="cta-button" style="margin-top: 1rem; padding: 0.8rem 1.5rem; width: 100%;">Browse Marketplace</button>
+                </div>
+                
+                <div class="content-card">
+                    <h3><i class="fas fa-users"></i> Volunteer</h3>
+                    <p>Join our youth-led team in on-ground conservation activities and digital initiatives.</p>
+                    <button class="cta-button" style="margin-top: 1rem; padding: 0.8rem 1.5rem; width: 100%;">Join Our Team</button>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <!-- Footer -->
+    <footer>
+        <div class="footer-container">
+            <div class="footer-section">
+                <h3>Oloolua Forest Conservation</h3>
+                <p>Youth-led blockchain-powered conservation creating verifiable environmental impact and sustainable opportunities.</p>
+                <div class="social-icons">
+                    <a href="#"><i class="fab fa-twitter"></i></a>
+                    <a href="#"><i class="fab fa-discord"></i></a>
+                    <a href="#"><i class="fab fa-telegram"></i></a>
+                    <a href="#"><i class="fab fa-github"></i></a>
+                </div>
+            </div>
+            
+            <div class="footer-section">
+                <h3>Our Technology Partners</h3>
+                <ul>
+                    <li><a href="#">Hedera Hashgraph</a></li>
+                    <li><a href="#">Hedera Guardian</a></li>
+                    <li><a href="#">Dovu Protocol</a></li>
+                    <li><a href="#">Evercity DLT Earth</a></li>
+                </ul>
+            </div>
+            
+            <div class="footer-section">
+                <h3>Quick Links</h3>
+                <ul>
+                    <li><a href="#mission">Our Mission</a></li>
+                    <li><a href="#technology">Technology</a></li>
+                    <li><a href="#dashboard">Impact Dashboard</a></li>
+                    <li><a href="#get-involved">Get Involved</a></li>
+                </ul>
+            </div>
+            
+            <div class="footer-section">
+                <h3>Contact Us</h3>
+                <p>Oloolua Youth Nursery</p>
+                <p>Oloolua Forest, Kenya</p>
+                <p>contact@ololuaconservation.org</p>
+                <p>+254 700 000 000</p>
+            </div>
+        </div>
+        
+        <div class="copyright">
+            <p>&copy; 2025 Oloolua Youth Nursery. All rights reserved. | Leveraging blockchain for sustainable conservation.</p>
+        </div>
+    </footer>
+
+    <script>
+        // Mobile Menu Toggle
+        document.getElementById('mobileMenuBtn').addEventListener('click', function() {
+            const nav = document.getElementById('mainNav');
+            nav.classList.toggle('active');
+        });
+
+        // Tab Functionality
+        const tabButtons = document.querySelectorAll('.tab-button');
+        const tabContents = document.querySelectorAll('.tab-content');
+        
+        tabButtons.forEach(button => {
+            button.addEventListener('click', () => {
+                // Remove active class from all tabs
+                tabButtons.forEach(btn => btn.classList.remove('active'));
+                tabContents.forEach(content => content.classList.remove('active'));
+                
+                // Add active class to clicked tab
+                button.classList.add('active');
+                const tabId = button.getAttribute('data-tab');
+                document.getElementById(tabId).classList.add('active');
+            });
+        });
+
+        // Tree Calculator
+        const treeSlider = document.getElementById('treeSlider');
+        const treeCount = document.getElementById('treeCount');
+        const carbonResult = document.getElementById('carbonResult');
+        const plantTreesBtn = document.getElementById('plantTreesBtn');
+        const plantResult = document.getElementById('plantResult');
+        
+        treeSlider.addEventListener('input', function() {
+            const trees = parseInt(this.value);
+            treeCount.textContent = `${trees} tree${trees !== 1 ? 's' : ''}`;
+            const carbon = (trees * 0.025).toFixed(2);
+            carbonResult.textContent = `≈ ${carbon} tons CO₂ offset`;
+        });
+        
+        plantTreesBtn.addEventListener('click', function() {
+            // Simulate planting transaction
+            plantResult.style.display = 'block';
+            
+            // Update dashboard stats
+            const currentTrees = parseInt(document.getElementById('treesPlanted').textContent.replace(',', ''));
+            const newTrees = parseInt(treeSlider.value);
+            const totalTrees = currentTrees + newTrees;
+            document.getElementById('treesPlanted').textContent = totalTrees.toLocaleString();
+            
+            const currentCarbon = parseFloat(document.getElementById('carbonOffset').textContent);
+            const newCarbon = newTrees * 0.025;
+            const totalCarbon = (currentCarbon + newCarbon).toFixed(1);
+            document.getElementById('carbonOffset').textContent = totalCarbon;
+            
+            const currentNFTs = parseInt(document.getElementById('nftsMinted').textContent);
+            document.getElementById('nftsMinted').textContent = currentNFTs + 1;
+            
+            // Reset slider
+            treeSlider.value = 10;
+            treeCount.textContent = "10 trees";
+            carbonResult.textContent = "≈ 0.25 tons CO₂ offset";
+            
+            // Show success message
+            setTimeout(() => {
+                alert(`Success! You've planted ${newTrees} trees. Your Conservation NFT will be minted on the Hedera blockchain.`);
+            }, 500);
+        });
+
+        // Animated counter for stats
+        function animateCounter(elementId, targetValue, duration = 2000) {
+            const element = document.getElementById(elementId);
+            const startValue = parseInt(element.textContent.replace(',', ''));
+            const increment = targetValue > startValue ? 1 : -1;
+            const stepTime = Math.abs(Math.floor(duration / (targetValue - startValue)));
+            let currentValue = startValue;
+            
+            const timer = setInterval(() => {
+                currentValue += increment;
+                element.textContent = currentValue.toLocaleString();
+                
+                if (currentValue === targetValue) {
+                    clearInterval(timer);
+                }
+            }, stepTime);
+        }
+
+        // Initialize with some random growth (simulating real-time updates)
+        setTimeout(() => {
+            animateCounter('treesPlanted', 13250);
+            animateCounter('carbonOffset', 335.2);
+            animateCounter('nftsMinted', 258);
+            animateCounter('youthEmployed', 52);
+        }, 3000);
+
+        // Smooth scrolling for navigation links
+        document.querySelectorAll('nav a').forEach(anchor => {
+            anchor.addEventListener('click', function(e) {
+                e.preventDefault();
+                const targetId = this.getAttribute('href');
+                const targetElement = document.querySelector(targetId);
+                
+                window.scrollTo({
+                    top: targetElement.offsetTop - 80,
+                    behavior: 'smooth'
+                });
+                
+                // Close mobile menu if open
+                const nav = document.getElementById('mainNav');
+                if (nav.classList.contains('active')) {
+                    nav.classList.remove('active');
+                }
+            });
+        });
+    </script>
+</body>
+</html>
