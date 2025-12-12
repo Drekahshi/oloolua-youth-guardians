@@ -1,62 +1,197 @@
-import { createClient } from 'https://esm.sh/@supabase/supabase-js@2';
+// Mock Data for Initial Setup
+const INITIAL_CATEGORIES = [
+    { id: '1', name: 'Indigenous Trees' },
+    { id: '2', name: 'Fruit Trees' },
+    { id: '3', name: 'Medicinal Plants' },
+    { id: '4', name: 'Ornamental' }
+];
 
-const supabaseUrl = import.meta.env.VITE_SUPABASE_URL;
-const supabaseAnonKey = import.meta.env.VITE_SUPABASE_ANON_KEY;
-const supabase = createClient(supabaseUrl, supabaseAnonKey);
+const INITIAL_INVENTORY = [
+    {
+        id: '1',
+        quantity_available: 150,
+        quantity_reserved: 20,
+        location: 'Zone A - Shade Net',
+        batch_number: 'BATCH-2024-001',
+        created_at: new Date().toISOString(),
+        seedling: {
+            id: 's1',
+            common_name: 'Croton',
+            scientific_name: 'Croton megalocarpus',
+            local_name: 'Mukinduri',
+            category_id: '1',
+            growth_rate: 'Fast',
+            sunlight_requirements: 'Full Sun',
+            price_per_seedling: 50.00,
+            image_url: 'croton.jpeg',
+            category: { name: 'Indigenous Trees' }
+        }
+    },
+    {
+        id: '2',
+        quantity_available: 45,
+        quantity_reserved: 5,
+        location: 'Zone B - Open Field',
+        batch_number: 'BATCH-2024-002',
+        created_at: new Date(Date.now() - 86400000).toISOString(),
+        seedling: {
+            id: 's2',
+            common_name: 'Yellow Fever Tree',
+            scientific_name: 'Vachellia xanthophloea',
+            local_name: 'Naivasha Thorn',
+            category_id: '1',
+            growth_rate: 'Fast',
+            sunlight_requirements: 'Full Sun',
+            price_per_seedling: 80.00,
+            image_url: 'acacia.jpeg',
+            category: { name: 'Indigenous Trees' }
+        }
+    },
+    {
+        id: '3',
+        quantity_available: 0,
+        quantity_reserved: 10,
+        location: 'Zone C',
+        batch_number: 'BATCH-2024-003',
+        created_at: new Date(Date.now() - 172800000).toISOString(),
+        seedling: {
+            id: 's3',
+            common_name: 'African Olive',
+            scientific_name: 'Olea europaea subsp. cuspidata',
+            local_name: 'Mutamaiyu',
+            category_id: '1',
+            growth_rate: 'Slow',
+            sunlight_requirements: 'Partial Shade',
+            price_per_seedling: 100.00,
+            image_url: 'olea.jpeg',
+            category: { name: 'Indigenous Trees' }
+        }
+    }
+];
 
-let allInventoryData = [];
-let categories = [];
+class InventoryService {
+    constructor() {
+        this.init();
+    }
 
-async function loadCategories() {
-    try {
-        const { data, error } = await supabase
-            .from('seedling_categories')
-            .select('*')
-            .order('name');
+    init() {
+        if (!localStorage.getItem('inventory_categories')) {
+            localStorage.setItem('inventory_categories', JSON.stringify(INITIAL_CATEGORIES));
+        }
+        if (!localStorage.getItem('inventory_data')) {
+            localStorage.setItem('inventory_data', JSON.stringify(INITIAL_INVENTORY));
+        }
+        if (!localStorage.getItem('inventory_activities')) {
+            localStorage.setItem('inventory_activities', JSON.stringify([]));
+        }
+    }
 
-        if (error) throw error;
+    getCategories() {
+        return JSON.parse(localStorage.getItem('inventory_categories') || '[]');
+    }
 
-        categories = data;
-        populateCategoryFilter();
-    } catch (error) {
-        console.error('Error loading categories:', error);
+    getInventory() {
+        return JSON.parse(localStorage.getItem('inventory_data') || '[]');
+    }
+
+    getActivities() {
+        return JSON.parse(localStorage.getItem('inventory_activities') || '[]');
+    }
+
+    addSeedling(data) {
+        const inventory = this.getInventory();
+        const categories = this.getCategories();
+        const category = categories.find(c => c.id === data.category_id);
+
+        const newId = Date.now().toString();
+        const newItem = {
+            id: newId,
+            quantity_available: parseInt(data.quantity),
+            quantity_reserved: 0,
+            location: data.location,
+            batch_number: `BATCH-${new Date().getFullYear()}-${Math.floor(Math.random() * 1000)}`,
+            created_at: new Date().toISOString(),
+            seedling: {
+                id: `s${newId}`,
+                common_name: data.common_name,
+                scientific_name: data.scientific_name,
+                local_name: data.local_name,
+                category_id: data.category_id,
+                growth_rate: data.growth_rate,
+                sunlight_requirements: data.sunlight,
+                price_per_seedling: parseFloat(data.price),
+                image_url: 'forest2.jpeg', // Default image
+                category: { name: category ? category.name : 'Unknown' }
+            }
+        };
+
+        inventory.unshift(newItem);
+        localStorage.setItem('inventory_data', JSON.stringify(inventory));
+        
+        this.logActivity({
+            type: 'New Stock',
+            notes: `Added ${data.quantity} ${data.common_name} seedlings`,
+            seedling_name: data.common_name
+        });
+
+        return newItem;
+    }
+
+    logActivity(activity) {
+        const activities = this.getActivities();
+        const newActivity = {
+            id: Date.now().toString(),
+            activity_type: activity.type,
+            activity_date: new Date().toISOString(),
+            notes: activity.notes,
+            seedling: { common_name: activity.seedling_name }
+        };
+        activities.unshift(newActivity);
+        // Keep only last 50 activities
+        if (activities.length > 50) activities.pop();
+        localStorage.setItem('inventory_activities', JSON.stringify(activities));
     }
 }
 
-function populateCategoryFilter() {
+const inventoryService = new InventoryService();
+let allInventoryData = [];
+
+// UI Functions
+function loadCategories() {
+    const categories = inventoryService.getCategories();
     const categoryFilter = document.getElementById('categoryFilter');
+    const modalCategory = document.getElementById('seedlingCategory');
+    
+    // Clear existing options except first
+    while (categoryFilter.options.length > 1) {
+        categoryFilter.remove(1);
+    }
+    
+    if (modalCategory) {
+        modalCategory.innerHTML = '<option value="">Select Category</option>';
+    }
+
     categories.forEach(category => {
+        // Filter dropdown
         const option = document.createElement('option');
         option.value = category.id;
         option.textContent = category.name;
         categoryFilter.appendChild(option);
+
+        // Modal dropdown
+        if (modalCategory) {
+            const modalOption = document.createElement('option');
+            modalOption.value = category.id;
+            modalOption.textContent = category.name;
+            modalCategory.appendChild(modalOption);
+        }
     });
 }
 
-async function loadInventory() {
-    try {
-        const { data, error } = await supabase
-            .from('inventory')
-            .select(`
-                *,
-                seedling:seedlings (
-                    *,
-                    category:seedling_categories (
-                        name
-                    )
-                )
-            `)
-            .order('created_at', { ascending: false });
-
-        if (error) throw error;
-
-        allInventoryData = data;
-        displayInventory(data);
-        updateDashboardStats(data);
-    } catch (error) {
-        console.error('Error loading inventory:', error);
-        showError('Failed to load inventory. Please refresh the page.');
-    }
+function loadInventory() {
+    allInventoryData = inventoryService.getInventory();
+    displayInventory(allInventoryData);
+    updateDashboardStats(allInventoryData);
 }
 
 function displayInventory(inventoryData) {
@@ -128,13 +263,6 @@ function displayInventory(inventoryData) {
                     <div class="price-tag">
                         KES ${parseFloat(seedling.price_per_seedling).toFixed(2)} / seedling
                     </div>
-
-                    ${item.ready_for_sale_date ? `
-                        <div class="detail-item" style="margin-top: 1rem;">
-                            <i class="fas fa-calendar-check"></i>
-                            <span>Ready: ${formatDate(item.ready_for_sale_date)}</span>
-                        </div>
-                    ` : ''}
                 </div>
             </div>
         `;
@@ -168,8 +296,8 @@ function updateDashboardStats(inventoryData) {
     let totalValue = 0;
 
     inventoryData.forEach(item => {
-        const available = item.quantity_available || 0;
-        const reserved = item.quantity_reserved || 0;
+        const available = parseInt(item.quantity_available || 0);
+        const reserved = parseInt(item.quantity_reserved || 0);
         const price = parseFloat(item.seedling?.price_per_seedling || 0);
 
         totalSeedlings += available + reserved;
@@ -177,7 +305,7 @@ function updateDashboardStats(inventoryData) {
         totalValue += (available + reserved) * price;
     });
 
-    const uniqueSpecies = new Set(inventoryData.map(item => item.seedling_id)).size;
+    const uniqueSpecies = new Set(inventoryData.map(item => item.seedling?.id)).size;
 
     document.getElementById('totalSeedlings').textContent = totalSeedlings.toLocaleString();
     document.getElementById('totalSpecies').textContent = uniqueSpecies;
@@ -197,25 +325,9 @@ function animateNumbers() {
     });
 }
 
-async function loadRecentActivities() {
-    try {
-        const { data, error } = await supabase
-            .from('activities')
-            .select(`
-                *,
-                seedling:seedlings (
-                    common_name
-                )
-            `)
-            .order('activity_date', { ascending: false })
-            .limit(10);
-
-        if (error) throw error;
-
-        displayActivities(data);
-    } catch (error) {
-        console.error('Error loading activities:', error);
-    }
+function loadRecentActivities() {
+    const activities = inventoryService.getActivities();
+    displayActivities(activities);
 }
 
 function displayActivities(activities) {
@@ -238,8 +350,6 @@ function displayActivities(activities) {
             <div class="activity-details">
                 ${activity.seedling?.common_name ? `<strong>${activity.seedling.common_name}</strong> - ` : ''}
                 ${activity.notes || 'No details provided'}
-                ${activity.quantity_affected ? ` (${activity.quantity_affected} seedlings)` : ''}
-                ${activity.performed_by ? ` - by ${activity.performed_by}` : ''}
             </div>
         </div>
     `).join('');
@@ -253,7 +363,8 @@ function getActivityIcon(activityType) {
         'Watering': 'tint',
         'Fertilizing': 'flask',
         'Pest Control': 'bug',
-        'Quality Check': 'check-circle'
+        'Quality Check': 'check-circle',
+        'New Stock': 'plus-circle'
     };
     return iconMap[activityType] || 'clipboard-list';
 }
@@ -280,7 +391,7 @@ function filterInventory() {
         const matchesSearch = !searchTerm ||
             seedling.common_name.toLowerCase().includes(searchTerm) ||
             seedling.scientific_name.toLowerCase().includes(searchTerm) ||
-            seedling.local_name.toLowerCase().includes(searchTerm);
+            (seedling.local_name && seedling.local_name.toLowerCase().includes(searchTerm));
 
         const matchesCategory = !categoryId || seedling.category_id === categoryId;
 
@@ -293,37 +404,65 @@ function filterInventory() {
     displayInventory(filteredData);
 }
 
-function showError(message) {
-    const inventoryGrid = document.getElementById('inventoryGrid');
-    inventoryGrid.innerHTML = `
-        <div class="empty-state">
-            <i class="fas fa-exclamation-triangle"></i>
-            <p>${message}</p>
-        </div>
-    `;
+// Modal Functions
+function setupModal() {
+    const modal = document.getElementById('addSeedlingModal');
+    const btn = document.getElementById('addSeedlingBtn');
+    const span = document.getElementsByClassName('close-modal')[0];
+    const form = document.getElementById('addSeedlingForm');
+
+    if (!modal || !btn || !span) return;
+
+    btn.onclick = function() {
+        modal.style.display = "block";
+    }
+
+    span.onclick = function() {
+        modal.style.display = "none";
+    }
+
+    window.onclick = function(event) {
+        if (event.target == modal) {
+            modal.style.display = "none";
+        }
+    }
+
+    form.onsubmit = function(e) {
+        e.preventDefault();
+        
+        const formData = {
+            common_name: document.getElementById('commonName').value,
+            scientific_name: document.getElementById('scientificName').value,
+            local_name: document.getElementById('localName').value,
+            category_id: document.getElementById('seedlingCategory').value,
+            growth_rate: document.getElementById('growthRate').value,
+            sunlight: document.getElementById('sunlight').value,
+            price: document.getElementById('price').value,
+            quantity: document.getElementById('quantity').value,
+            location: document.getElementById('location').value
+        };
+
+        inventoryService.addSeedling(formData);
+        
+        // Refresh UI
+        loadInventory();
+        loadRecentActivities();
+        
+        // Close and reset
+        modal.style.display = "none";
+        form.reset();
+        
+        // Show success message (simple alert for now)
+        alert('Seedling added successfully!');
+    }
 }
 
-async function initialize() {
-    await loadCategories();
-    await loadInventory();
-    await loadRecentActivities();
+function initialize() {
+    loadCategories();
+    loadInventory();
+    loadRecentActivities();
     setupFilters();
-
-    const inventoryChannel = supabase
-        .channel('inventory-changes')
-        .on('postgres_changes',
-            { event: '*', schema: 'public', table: 'inventory' },
-            () => {
-                loadInventory();
-            }
-        )
-        .on('postgres_changes',
-            { event: '*', schema: 'public', table: 'activities' },
-            () => {
-                loadRecentActivities();
-            }
-        )
-        .subscribe();
+    setupModal();
 }
 
 document.addEventListener('DOMContentLoaded', initialize);

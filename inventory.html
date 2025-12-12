@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -9,11 +10,12 @@
     <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
 </head>
+
 <body>
     <nav class="navbar">
         <div class="container">
             <a href="index.html" class="logo">
-                <i class="fas fa-tree"></i>
+                <img src="logo.jpeg" alt="Oloolua Forest logo" class="logo-image">
                 Oloolua Forest Youth Nursery Group
             </a>
             <div class="nav-toggle">
@@ -91,6 +93,76 @@
                     <option value="low-stock">Low Stock</option>
                     <option value="out-of-stock">Out of Stock</option>
                 </select>
+                <button id="addSeedlingBtn" class="btn-primary">
+                    <i class="fas fa-plus"></i> Add Seedling
+                </button>
+            </div>
+        </div>
+
+        <!-- Add Seedling Modal -->
+        <div id="addSeedlingModal" class="modal">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h2>Add New Seedling</h2>
+                    <span class="close-modal">&times;</span>
+                </div>
+                <form id="addSeedlingForm">
+                    <div class="form-group">
+                        <label for="commonName">Common Name</label>
+                        <input type="text" id="commonName" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="scientificName">Scientific Name</label>
+                        <input type="text" id="scientificName" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="localName">Local Name (Optional)</label>
+                        <input type="text" id="localName">
+                    </div>
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label for="seedlingCategory">Category</label>
+                            <select id="seedlingCategory" required>
+                                <option value="">Select Category</option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label for="growthRate">Growth Rate</label>
+                            <select id="growthRate" required>
+                                <option value="Fast">Fast</option>
+                                <option value="Moderate">Moderate</option>
+                                <option value="Slow">Slow</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label for="sunlight">Sunlight Requirements</label>
+                            <select id="sunlight" required>
+                                <option value="Full Sun">Full Sun</option>
+                                <option value="Partial Shade">Partial Shade</option>
+                                <option value="Full Shade">Full Shade</option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label for="location">Location</label>
+                            <input type="text" id="location" required placeholder="e.g., Zone A">
+                        </div>
+                    </div>
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label for="quantity">Quantity Available</label>
+                            <input type="number" id="quantity" min="0" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="price">Price per Seedling (KES)</label>
+                            <input type="number" id="price" min="0" step="0.01" required>
+                        </div>
+                    </div>
+                    <div class="form-actions">
+                        <button type="submit" class="btn-submit">Add Seedling</button>
+                    </div>
+                </form>
             </div>
         </div>
 
@@ -132,4 +204,5 @@
 
     <script type="module" src="inventory.js"></script>
 </body>
+
 </html>

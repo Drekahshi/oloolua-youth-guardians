@@ -1,0 +1,128 @@
+
+// Basic Carousel Logic
+document.addEventListener('DOMContentLoaded', function() {
+    const track = document.querySelector('.carousel-track');
+    
+    // Only run if carousel exists on the page
+    if (!track) return;
+    
+    const slides = Array.from(track.children);
+    const nextButton = document.querySelector('.next-btn');
+    const prevButton = document.querySelector('.prev-btn');
+    const dotsNav = document.querySelector('.carousel-nav');
+    
+    // Create dots
+    slides.forEach((_, index) => {
+        const dot = document.createElement('button');
+        dot.classList.add('carousel-indicator');
+        if (index === 0) dot.classList.add('current-slide');
+        dotsNav.appendChild(dot);
+    });
+    
+    const dots = Array.from(dotsNav.children);
+    
+    // Arrange slides next to one another
+    const slideWidth = slides[0].getBoundingClientRect().width;
+    
+    const setSlidePosition = (slide, index) => {
+        slide.style.left = slideWidth * index + 'px';
+    };
+    slides.forEach(setSlidePosition);
+    
+    const moveToSlide = (track, currentSlide, targetSlide) => {
+        track.style.transform = 'translateX(-' + targetSlide.style.left + ')';
+        currentSlide.classList.remove('current-slide');
+        targetSlide.classList.add('current-slide');
+    };
+    
+    const updateDots = (currentDot, targetDot) => {
+        currentDot.classList.remove('current-slide');
+        targetDot.classList.add('current-slide');
+    };
+    
+    const hideShowArrows = (slides, prevButton, nextButton, targetIndex) => {
+         if (targetIndex === 0) {
+             prevButton.classList.add('is-hidden');
+             nextButton.classList.remove('is-hidden');
+         } else if (targetIndex === slides.length - 1) {
+             prevButton.classList.remove('is-hidden');
+             nextButton.classList.add('is-hidden');
+         } else {
+             prevButton.classList.remove('is-hidden');
+             nextButton.classList.remove('is-hidden');
+         }
+    };
+    
+    // Initialize arrows
+    // hideShowArrows(slides, prevButton, nextButton, 0); // Optional: hide prev on start
+
+    // When I click left, move slides to the left
+    prevButton.addEventListener('click', e => {
+        const currentSlide = track.querySelector('.current-slide');
+        const prevSlide = currentSlide.previousElementSibling;
+        const currentDot = dotsNav.querySelector('.current-slide');
+        const prevDot = currentDot.previousElementSibling;
+        const prevIndex = slides.findIndex(slide => slide === prevSlide);
+        
+        if (prevSlide) {
+            moveToSlide(track, currentSlide, prevSlide);
+            updateDots(currentDot, prevDot);
+            // hideShowArrows(slides, prevButton, nextButton, prevIndex);
+        } else {
+            // Loop to last
+            const lastSlide = slides[slides.length - 1];
+            const lastDot = dots[dots.length -1];
+            moveToSlide(track, currentSlide, lastSlide);
+            updateDots(currentDot, lastDot);
+        }
+    });
+    
+    // When I click right, move slides to the right
+    nextButton.addEventListener('click', e => {
+        const currentSlide = track.querySelector('.current-slide');
+        const nextSlide = currentSlide.nextElementSibling;
+        const currentDot = dotsNav.querySelector('.current-slide');
+        const nextDot = currentDot.nextElementSibling;
+        const nextIndex = slides.findIndex(slide => slide === nextSlide);
+        
+        if (nextSlide) {
+            moveToSlide(track, currentSlide, nextSlide);
+            updateDots(currentDot, nextDot);
+            // hideShowArrows(slides, prevButton, nextButton, nextIndex);
+        } else {
+             // Loop to first
+            const firstSlide = slides[0];
+            const firstDot = dots[0];
+            moveToSlide(track, currentSlide, firstSlide);
+            updateDots(currentDot, firstDot);
+        }
+    });
+    
+    // When I click the nav indicators, move to that slide
+    dotsNav.addEventListener('click', e => {
+        // what indicator was clicked on?
+        const targetDot = e.target.closest('button');
+        
+        if (!targetDot) return;
+        
+        const currentSlide = track.querySelector('.current-slide');
+        const currentDot = dotsNav.querySelector('.current-slide');
+        const targetIndex = dots.findIndex(dot => dot === targetDot);
+        const targetSlide = slides[targetIndex];
+        
+        moveToSlide(track, currentSlide, targetSlide);
+        updateDots(currentDot, targetDot);
+        // hideShowArrows(slides, prevButton, nextButton, targetIndex);
+    });
+    
+    // Resize handling to reset positions
+    window.addEventListener('resize', () => {
+         const newSlideWidth = slides[0].getBoundingClientRect().width;
+         slides.forEach((slide, index) => {
+            slide.style.left = newSlideWidth * index + 'px';
+         });
+         const currentSlide = track.querySelector('.current-slide');
+         // re-center
+         track.style.transform = 'translateX(-' + currentSlide.style.left + ')';
+    });
+});

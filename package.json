@@ -1,0 +1,25 @@
+{
+  "name": "dre-oloolua-website",
+  "version": "1.0.0",
+  "description": "",
+  "main": "auth.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Drekahshi/dre-Oloolua-website.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/Drekahshi/dre-Oloolua-website/issues"
+  },
+  "homepage": "https://github.com/Drekahshi/dre-Oloolua-website#readme",
+  "dependencies": {
+    "@hashgraph/sdk": "^2.78.0",
+    "axios": "^1.13.2",
+    "dotenv": "^17.2.3"
+  }
+}

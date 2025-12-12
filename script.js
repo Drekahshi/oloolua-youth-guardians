@@ -2,18 +2,33 @@
 const navToggle = document.querySelector('.nav-toggle');
 const navLinks = document.querySelector('.nav-links');
 
-if (navToggle) {
+if (navToggle && navLinks) {
+    // open/close mobile menu
     navToggle.addEventListener('click', () => {
-        navLinks.classList.toggle('active');
+        const isOpen = navLinks.classList.toggle('active');
         const icon = navToggle.querySelector('i');
-        icon.classList.toggle('fa-bars');
-        icon.classList.toggle('fa-times');
+        icon.classList.toggle('fa-bars', !isOpen);
+        icon.classList.toggle('fa-times', isOpen);
+        navToggle.setAttribute('aria-expanded', String(isOpen));
+    });
+
+    // close menu after selecting a link (mobile)
+    navLinks.querySelectorAll('a').forEach(link => {
+        link.addEventListener('click', () => {
+            if (navLinks.classList.contains('active')) {
+                navLinks.classList.remove('active');
+                const icon = navToggle.querySelector('i');
+                icon.classList.add('fa-bars');
+                icon.classList.remove('fa-times');
+                navToggle.setAttribute('aria-expanded', 'false');
+            }
+        });
     });
 }
 
 // Smooth Scroll for Anchor Links
 document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-    anchor.addEventListener('click', function(e) {
+    anchor.addEventListener('click', function (e) {
         e.preventDefault();
         const target = document.querySelector(this.getAttribute('href'));
         if (target) {
@@ -131,25 +146,25 @@ if (scrollIndicator) {
 
 // Gallery Item Hover Effect Enhancement
 document.querySelectorAll('.gallery-item').forEach(item => {
-    item.addEventListener('mouseenter', function() {
+    item.addEventListener('mouseenter', function () {
         this.querySelector('img').style.transform = 'scale(1.1)';
         this.querySelector('img').style.transition = 'transform 0.5s ease';
     });
 
-    item.addEventListener('mouseleave', function() {
+    item.addEventListener('mouseleave', function () {
         this.querySelector('img').style.transform = 'scale(1)';
     });
 });
 
 // Activity Cards Hover Animation
 document.querySelectorAll('.activity-card').forEach(card => {
-    card.addEventListener('mouseenter', function() {
+    card.addEventListener('mouseenter', function () {
         this.style.transform = 'translateY(-10px) scale(1.02)';
         this.style.transition = 'all 0.3s ease';
         this.style.boxShadow = '0 10px 30px rgba(0,0,0,0.2)';
     });
 
-    card.addEventListener('mouseleave', function() {
+    card.addEventListener('mouseleave', function () {
         this.style.transform = 'translateY(0) scale(1)';
         this.style.boxShadow = '0 4px 6px rgba(0,0,0,0.1)';
     });
@@ -246,7 +261,7 @@ document.querySelectorAll('.nav-links a').forEach(link => {
 
 // Button Ripple Effect
 document.querySelectorAll('button, .cta-button').forEach(button => {
-    button.addEventListener('click', function(e) {
+    button.addEventListener('click', function (e) {
         const ripple = document.createElement('span');
         ripple.classList.add('ripple');
         this.appendChild(ripple);
@@ -266,12 +281,12 @@ document.querySelectorAll('button, .cta-button').forEach(button => {
 
 // Social Links Hover Animation
 document.querySelectorAll('.social-links a').forEach(link => {
-    link.addEventListener('mouseenter', function() {
+    link.addEventListener('mouseenter', function () {
         this.style.transform = 'translateY(-5px) rotate(10deg)';
         this.style.transition = 'all 0.3s ease';
     });
 
-    link.addEventListener('mouseleave', function() {
+    link.addEventListener('mouseleave', function () {
         this.style.transform = 'translateY(0) rotate(0)';
     });
 });
@@ -354,11 +369,11 @@ backToTopBtn.addEventListener('click', () => {
     });
 });
 
-backToTopBtn.addEventListener('mouseenter', function() {
+backToTopBtn.addEventListener('mouseenter', function () {
     this.style.transform = 'scale(1.1) rotate(10deg)';
 });
 
-backToTopBtn.addEventListener('mouseleave', function() {
+backToTopBtn.addEventListener('mouseleave', function () {
     this.style.transform = 'scale(1) rotate(0)';
 });
 
@@ -381,7 +396,7 @@ document.querySelectorAll('img').forEach(img => {
     img.style.opacity = '0';
     img.style.transition = 'opacity 0.5s ease';
 
-    img.addEventListener('load', function() {
+    img.addEventListener('load', function () {
         this.style.opacity = '1';
     });
 
@@ -404,4 +419,110 @@ document.addEventListener('DOMContentLoaded', () => {
     setTimeout(() => {
         document.body.classList.add('loaded');
     }, 100);
+});
+
+// Carousel Logic
+document.addEventListener('DOMContentLoaded', function () {
+    const track = document.querySelector('.carousel-track');
+
+    // Only run if carousel exists on the page
+    if (!track) return;
+
+    const slides = Array.from(track.children);
+    const nextButton = document.querySelector('.next-btn');
+    const prevButton = document.querySelector('.prev-btn');
+    const dotsNav = document.querySelector('.carousel-nav');
+
+    // Create dots
+    slides.forEach((_, index) => {
+        const dot = document.createElement('button');
+        dot.classList.add('carousel-indicator');
+        if (index === 0) dot.classList.add('current-slide');
+        dotsNav.appendChild(dot);
+    });
+
+    const dots = Array.from(dotsNav.children);
+
+    // Arrange slides next to one another
+    const slideWidth = slides[0].getBoundingClientRect().width;
+
+    const setSlidePosition = (slide, index) => {
+        slide.style.left = slideWidth * index + 'px';
+    };
+    slides.forEach(setSlidePosition);
+
+    const moveToSlide = (track, currentSlide, targetSlide) => {
+        track.style.transform = 'translateX(-' + targetSlide.style.left + ')';
+        currentSlide.classList.remove('current-slide');
+        targetSlide.classList.add('current-slide');
+    };
+
+    const updateDots = (currentDot, targetDot) => {
+        currentDot.classList.remove('current-slide');
+        targetDot.classList.add('current-slide');
+    };
+
+    // When I click left, move slides to the left
+    prevButton.addEventListener('click', e => {
+        const currentSlide = track.querySelector('.current-slide');
+        const prevSlide = currentSlide.previousElementSibling;
+        const currentDot = dotsNav.querySelector('.current-slide');
+        const prevDot = currentDot.previousElementSibling;
+
+        if (prevSlide) {
+            moveToSlide(track, currentSlide, prevSlide);
+            updateDots(currentDot, prevDot);
+        } else {
+            // Loop to last
+            const lastSlide = slides[slides.length - 1];
+            const lastDot = dots[dots.length - 1];
+            moveToSlide(track, currentSlide, lastSlide);
+            updateDots(currentDot, lastDot);
+        }
+    });
+
+    // When I click right, move slides to the right
+    nextButton.addEventListener('click', e => {
+        const currentSlide = track.querySelector('.current-slide');
+        const nextSlide = currentSlide.nextElementSibling;
+        const currentDot = dotsNav.querySelector('.current-slide');
+        const nextDot = currentDot.nextElementSibling;
+
+        if (nextSlide) {
+            moveToSlide(track, currentSlide, nextSlide);
+            updateDots(currentDot, nextDot);
+        } else {
+            // Loop to first
+            const firstSlide = slides[0];
+            const firstDot = dots[0];
+            moveToSlide(track, currentSlide, firstSlide);
+            updateDots(currentDot, firstDot);
+        }
+    });
+
+    // When I click the nav indicators, move to that slide
+    dotsNav.addEventListener('click', e => {
+        const targetDot = e.target.closest('button');
+
+        if (!targetDot) return;
+
+        const currentSlide = track.querySelector('.current-slide');
+        const currentDot = dotsNav.querySelector('.current-slide');
+        const targetIndex = dots.findIndex(dot => dot === targetDot);
+        const targetSlide = slides[targetIndex];
+
+        moveToSlide(track, currentSlide, targetSlide);
+        updateDots(currentDot, targetDot);
+    });
+
+    // Resize handling to reset positions
+    window.addEventListener('resize', () => {
+        const newSlideWidth = slides[0].getBoundingClientRect().width;
+        slides.forEach((slide, index) => {
+            slide.style.left = newSlideWidth * index + 'px';
+        });
+        const currentSlide = track.querySelector('.current-slide');
+        // re-center
+        track.style.transform = 'translateX(-' + currentSlide.style.left + ')';
+    });
 });
