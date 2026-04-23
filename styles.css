@@ -1,4 +1,4 @@
-﻿/* General Styles */
+/* General Styles */
 * {
     margin: 0;
     padding: 0;
@@ -573,8 +573,9 @@ body.loaded {
     display: flex;
     justify-content: center;
     padding: 20px 0;
-    gap: 15px;
-    /* Increased gap for easier clicking */
+    gap: 10px;
+    flex-wrap: wrap;
+    /* Added wrap for many images */
 }
 
 .carousel-indicator {

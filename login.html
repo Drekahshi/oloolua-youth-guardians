@@ -135,16 +135,17 @@
         </a>
     </div>
 
-    <script src="auth.js"></script>
-    <script>
-        document.getElementById('loginForm').addEventListener('submit', function (e) {
+    <script type="module">
+        import AuthService from './auth.js';
+
+        document.getElementById('loginForm').addEventListener('submit', async function (e) {
             e.preventDefault();
 
-            const username = document.getElementById('username').value;
+            const email = document.getElementById('username').value;
             const password = document.getElementById('password').value;
             const errorMsg = document.getElementById('errorMessage');
 
-            const user = AuthService.login(username, password);
+            const user = await AuthService.login(email, password);
 
             if (user) {
                 // Redirect to dashboard on success
@@ -160,9 +161,11 @@
         });
 
         // Check if already logged in
-        if (AuthService.getCurrentUser()) {
-            window.location.href = 'member-dashboard.html';
-        }
+        (async () => {
+            if (await AuthService.getCurrentUser()) {
+                window.location.href = 'member-dashboard.html';
+            }
+        })();
     </script>
     <style>
         @keyframes shake {
