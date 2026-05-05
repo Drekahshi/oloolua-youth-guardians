@@ -1,0 +1,476 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Photo Stream - Oloolua Youth Guardians</title>
+    <link rel="stylesheet" href="styles.css">
+    <link rel="icon" href="favicon.ico" type="image/x-icon">
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    <style>
+        body, html {
+            margin: 0;
+            padding: 0;
+            height: 100%;
+            width: 100%;
+            overflow: hidden;
+            background: #000;
+        }
+
+        .stream-container {
+            height: 100vh;
+            width: 100vw;
+            overflow-x: auto;
+            overflow-y: hidden;
+            display: flex;
+            scroll-snap-type: x mandatory;
+            scroll-behavior: smooth;
+            -webkit-overflow-scrolling: touch;
+        }
+
+        /* Hide scrollbar but keep functionality */
+        .stream-container::-webkit-scrollbar {
+            display: none;
+        }
+        .stream-container {
+            -ms-overflow-style: none;
+            scrollbar-width: none;
+        }
+
+        .stream-slide {
+            flex: 0 0 100vw;
+            height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            scroll-snap-align: center;
+            position: relative;
+        }
+
+        .stream-slide img {
+            max-width: 95%;
+            max-height: 90vh;
+            width: auto;
+            height: auto;
+            object-fit: contain;
+            box-shadow: 0 0 50px rgba(0,0,0,0.5);
+            border-radius: 8px;
+            background: #111; /* Dark placeholder */
+        }
+
+        .nav-controls {
+            position: fixed;
+            top: 50%;
+            width: 100%;
+            display: flex;
+            justify-content: space-between;
+            padding: 0 20px;
+            pointer-events: none;
+            z-index: 1000;
+            transform: translateY(-50%);
+        }
+
+        .nav-btn {
+            pointer-events: auto;
+            color: rgba(255, 255, 255, 0.6);
+            font-size: 3rem;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            background: rgba(0,0,0,0.2);
+            border-radius: 50%;
+            width: 60px;
+            height: 60px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .nav-btn:hover {
+            color: #27ae60;
+            background: rgba(0,0,0,0.5);
+        }
+
+        .stream-info {
+            position: fixed;
+            bottom: 30px;
+            left: 50%;
+            transform: translateX(-50%);
+            color: white;
+            z-index: 1000;
+            background: rgba(0,0,0,0.6);
+            padding: 8px 20px;
+            border-radius: 30px;
+            backdrop-filter: blur(5px);
+            font-family: 'Roboto', sans-serif;
+        }
+
+        .back-btn {
+            position: fixed;
+            top: 30px;
+            left: 30px;
+            z-index: 1001;
+            color: white;
+            text-decoration: none;
+            background: rgba(0,0,0,0.6);
+            padding: 10px 20px;
+            border-radius: 30px;
+            font-weight: bold;
+            transition: all 0.3s;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .back-btn:hover {
+            background: #27ae60;
+        }
+
+        @media (max-width: 768px) {
+            .nav-controls {
+                display: none;
+            }
+            .stream-slide img {
+                max-width: 100%;
+                max-height: 85vh;
+                border-radius: 0;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <a href="index.html" class="back-btn"><i class="fas fa-arrow-left"></i> Back to Home</a>
+
+    <div class="nav-controls">
+        <div class="nav-btn" id="prevBtn"><i class="fas fa-chevron-left"></i></div>
+        <div class="nav-btn" id="nextBtn"><i class="fas fa-chevron-right"></i></div>
+    </div>
+
+    <div class="stream-container" id="streamContainer">
+        <!-- Images will be inserted here -->
+    </div>
+
+    <div class="stream-info">
+        <span id="currentIndex">1</span> / <span id="totalImages">0</span>
+    </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const container = document.getElementById('streamContainer');
+            const currentEl = document.getElementById('currentIndex');
+            const totalEl = document.getElementById('totalImages');
+            const nextBtn = document.getElementById('nextBtn');
+            const prevBtn = document.getElementById('prevBtn');
+
+            const imagePaths = [
+                
+                  "activitespics/act0.jpeg",
+                  "activitespics/act1.jpeg",
+                  "activitespics/act10.jpeg",
+                  "activitespics/act11.jpeg",
+                  "activitespics/act12.jpeg",
+                  "activitespics/act13.jpeg",
+                  "activitespics/act14.jpeg",
+                  "activitespics/act15.jpeg",
+                  "activitespics/act16.jpeg",
+                  "activitespics/act2.jpeg",
+                  "activitespics/act20.jpeg",
+                  "activitespics/act21.jpeg",
+                  "activitespics/act22.jpeg",
+                  "activitespics/act23.jpeg",
+                  "activitespics/act24.jpeg",
+                  "activitespics/act25.jpeg",
+                  "activitespics/act26.jpeg",
+                  "activitespics/act27.jpeg",
+                  "activitespics/act28.jpeg",
+                  "activitespics/act3.jpeg",
+                  "activitespics/act30.jpeg",
+                  "activitespics/act31.jpeg",
+                  "activitespics/act34.jpeg",
+                  "activitespics/act35.jpeg",
+                  "activitespics/act36.jpeg",
+                  "activitespics/act37.jpeg",
+                  "activitespics/act38.jpeg",
+                  "activitespics/act39.jpeg",
+                  "activitespics/act4.jpeg",
+                  "activitespics/act40.jpeg",
+                  "activitespics/act41.jpeg",
+                  "activitespics/act42.jpeg",
+                  "activitespics/act44.jpeg",
+                  "activitespics/act45.jpeg",
+                  "activitespics/act5.jpeg",
+                  "activitespics/act6.jpeg",
+                  "activitespics/act7.jpeg",
+                  "activitespics/act8.jpeg",
+                  "activitespics/act9.jpeg",
+                  "TURACO/tur1.jpeg",
+                  "TURACO/tur10.jpeg",
+                  "TURACO/tur11.jpeg",
+                  "TURACO/tur12.jpeg",
+                  "TURACO/tur13.jpeg",
+                  "TURACO/tur15.jpeg",
+                  "TURACO/tur16.jpeg",
+                  "TURACO/tur17.jpeg",
+                  "TURACO/tur18.jpeg",
+                  "TURACO/tur19.jpeg",
+                  "TURACO/tur2.jpeg",
+                  "TURACO/tur20.jpeg",
+                  "TURACO/tur21.jpeg",
+                  "TURACO/tur22.jpeg",
+                  "TURACO/tur23.jpeg",
+                  "TURACO/tur24.jpeg",
+                  "TURACO/tur25.jpeg",
+                  "TURACO/tur26.jpeg",
+                  "TURACO/tur27.jpeg",
+                  "TURACO/tur28.jpeg",
+                  "TURACO/tur29.jpeg",
+                  "TURACO/tur3.jpeg",
+                  "TURACO/tur30.jpeg",
+                  "TURACO/tur31.jpeg",
+                  "TURACO/tur32.jpeg",
+                  "TURACO/tur33.jpeg",
+                  "TURACO/tur34.jpeg",
+                  "TURACO/tur35.jpeg",
+                  "TURACO/tur36.jpeg",
+                  "TURACO/tur37.jpeg",
+                  "TURACO/tur39.jpeg",
+                  "TURACO/tur4.jpeg",
+                  "TURACO/tur40.jpeg",
+                  "TURACO/tur41.jpeg",
+                  "TURACO/tur42.jpeg",
+                  "TURACO/tur43.jpeg",
+                  "TURACO/tur44.jpeg",
+                  "TURACO/tur45.jpeg",
+                  "TURACO/tur46.jpeg",
+                  "TURACO/tur47.jpeg",
+                  "TURACO/tur48.jpeg",
+                  "TURACO/tur49.jpeg",
+                  "TURACO/tur5.jpeg",
+                  "TURACO/tur50.jpeg",
+                  "TURACO/tur51.jpeg",
+                  "TURACO/tur53.jpeg",
+                  "TURACO/tur54.jpeg",
+                  "TURACO/tur55.jpeg",
+                  "TURACO/tur56.jpeg",
+                  "TURACO/tur57.jpeg",
+                  "TURACO/tur58.jpeg",
+                  "TURACO/tur59.jpeg",
+                  "TURACO/tur6.jpeg",
+                  "TURACO/tur60.jpeg",
+                  "TURACO/tur61.jpeg",
+                  "TURACO/tur62.jpeg",
+                  "TURACO/tur64.jpeg",
+                  "TURACO/tur65.jpeg",
+                  "TURACO/tur66.jpeg",
+                  "TURACO/tur67.jpeg",
+                  "TURACO/tur68.jpeg",
+                  "TURACO/tur69.jpeg",
+                  "TURACO/tur7.jpeg",
+                  "TURACO/tur70.jpeg",
+                  "TURACO/tur71.jpeg",
+                  "TURACO/tur72.jpeg",
+                  "TURACO/tur73.jpeg",
+                  "TURACO/tur75.jpeg",
+                  "TURACO/tur76.jpeg",
+                  "TURACO/tur79.jpeg",
+                  "TURACO/tur8.jpeg",
+                  "TURACO/tur80.jpeg",
+                  "TURACO/tur82.jpeg",
+                  "TURACO/tur9.jpeg",
+                  "photogallary2/fin1.jpeg",
+                  "photogallary2/fin10.jpeg",
+                  "photogallary2/fin11.jpeg",
+                  "photogallary2/fin12.jpeg",
+                  "photogallary2/fin13.jpeg",
+                  "photogallary2/fin14.jpeg",
+                  "photogallary2/fin15.jpeg",
+                  "photogallary2/fin16.jpeg",
+                  "photogallary2/fin17.jpeg",
+                  "photogallary2/fin18.jpeg",
+                  "photogallary2/fin2.jpeg",
+                  "photogallary2/fin20.jpeg",
+                  "photogallary2/fin21.jpeg",
+                  "photogallary2/fin22.jpeg",
+                  "photogallary2/fin23.jpeg",
+                  "photogallary2/fin24.jpeg",
+                  "photogallary2/fin25.jpeg",
+                  "photogallary2/fin26.jpeg",
+                  "photogallary2/fin27.jpeg",
+                  "photogallary2/fin28.jpeg",
+                  "photogallary2/fin29.jpeg",
+                  "photogallary2/fin3.jpeg",
+                  "photogallary2/fin30.jpeg",
+                  "photogallary2/fin31.jpeg",
+                  "photogallary2/fin32.jpeg",
+                  "photogallary2/fin33.jpeg",
+                  "photogallary2/fin34.jpeg",
+                  "photogallary2/fin36.jpeg",
+                  "photogallary2/fin37.jpeg",
+                  "photogallary2/fin38.jpeg",
+                  "photogallary2/fin4.jpeg",
+                  "photogallary2/fin40.jpeg",
+                  "photogallary2/fin5.jpeg",
+                  "photogallary2/fin6.jpeg",
+                  "photogallary2/fin7.jpeg",
+                  "photogallary2/fin8.jpeg",
+                  "photogallary2/fin9.jpeg",
+                  "photogallary2/gal1.jpeg",
+                  "photogallary2/gal10.jpeg",
+                  "photogallary2/gal12.jpeg",
+                  "photogallary2/gal13.jpeg",
+                  "photogallary2/gal14.jpeg",
+                  "photogallary2/gal15.jpeg",
+                  "photogallary2/gal16.jpeg",
+                  "photogallary2/gal17.jpeg",
+                  "photogallary2/gal18.jpeg",
+                  "photogallary2/gal19.jpeg",
+                  "photogallary2/gal2.jpeg",
+                  "photogallary2/gal20.jpeg",
+                  "photogallary2/gal21.jpeg",
+                  "photogallary2/gal22.jpeg",
+                  "photogallary2/gal23.jpeg",
+                  "photogallary2/gal24.jpeg",
+                  "photogallary2/gal25.jpeg",
+                  "photogallary2/gal26.jpeg",
+                  "photogallary2/gal27.jpeg",
+                  "photogallary2/gal28.jpeg",
+                  "photogallary2/gal29.jpeg",
+                  "photogallary2/gal3.jpeg",
+                  "photogallary2/gal31.jpeg",
+                  "photogallary2/gal33.jpeg",
+                  "photogallary2/gal34.jpeg",
+                  "photogallary2/gal36.jpeg",
+                  "photogallary2/gal37.jpeg",
+                  "photogallary2/gal38.jpeg",
+                  "photogallary2/gal4.jpeg",
+                  "photogallary2/gal41.jpeg",
+                  "photogallary2/gal42.jpeg",
+                  "photogallary2/gal43.jpeg",
+                  "photogallary2/gal44.jpeg",
+                  "photogallary2/gal45.jpeg",
+                  "photogallary2/gal46.jpeg",
+                  "photogallary2/gal47.jpeg",
+                  "photogallary2/gal48.jpeg",
+                  "photogallary2/gal49.jpeg",
+                  "photogallary2/gal50.jpeg",
+                  "photogallary2/gal51.jpeg",
+                  "photogallary2/gal52.jpeg",
+                  "photogallary2/gal53.jpeg",
+                  "photogallary2/gal54.jpeg",
+                  "photogallary2/gal55.jpeg",
+                  "photogallary2/gal56.jpeg",
+                  "photogallary2/gal57.jpeg",
+                  "photogallary2/gal58.jpeg",
+                  "photogallary2/gal59.jpeg",
+                  "photogallary2/gal6.jpeg",
+                  "photogallary2/gal60.jpeg",
+                  "photogallary2/gal61.jpeg",
+                  "photogallary2/gal62.jpeg",
+                  "photogallary2/gal64.jpeg",
+                  "photogallary2/gal65.jpeg",
+                  "photogallary2/gal66.jpeg",
+                  "photogallary2/gal67.jpeg",
+                  "photogallary2/gal68.jpeg",
+                  "photogallary2/gal69.jpeg",
+                  "photogallary2/gal70.jpeg",
+                  "photogallary2/gal71.jpeg",
+                  "photogallary2/gal72.jpeg",
+                  "photogallary2/gal73.jpeg",
+                  "photogallary2/gal74.jpeg",
+                  "photogallary2/gal75.jpeg",
+                  "photogallary2/gal76.jpeg",
+                  "photogallary2/gal77.jpeg",
+                  "photogallary2/gal78.jpeg",
+                  "photogallary2/gal8.jpeg",
+                  "photogallary2/gal80.jpeg",
+                  "photogallary2/gal81.jpeg",
+                  "photogallary2/gal82.jpeg",
+                  "photogallary2/gal83.jpeg",
+                  "photogallary2/gal84.jpeg",
+                  "photogallary2/gal85.jpeg",
+                  "photogallary2/gal86.jpeg",
+                  "photogallary2/gal87.jpeg",
+                  "photogallary2/gal88.jpeg",
+                  "photogallary2/gal89.jpeg",
+                  "photogallary2/gal90.jpeg",
+                  "photogallary2/gal91.jpeg",
+                  "photogallary2/gal92.jpeg",
+                  "photogallary2/gal93.jpeg",
+                  "photogallary2/gal94.jpeg",
+                  "photogallary2/gal95.jpeg",
+                  "photogallary2/gal96.jpeg",
+                  "seedling_real/acacia.jpg",
+                  "seedling_real/african_cherry.jpg",
+                  "seedling_real/avocado.JPG",
+                  "seedling_real/chestnut.jpg",
+                  "seedling_real/croton_megalocarpus.jpg",
+                  "seedling_real/drypetes.jpg",
+                  "seedling_real/jackfruit.jpg",
+                  "seedling_real/makhamia.jpg",
+                  "seedling_real/matomoko.jpg",
+                  "seedling_real/pepper_bark.jpg",
+                  "seedling_real/silver_oak.jpg",
+                  "seedling_real/sisal.jpg",
+                  "seedling_real/teclea.jpg",
+                  "seedling_real/thika_palm.jpg",
+                  "seedling_real/toothbrush_tree.jpg",
+                  "future/future1.jpeg",
+                  "future/future11.jpeg",
+                  "future/future12.jpeg",
+                  "future/future13.jpeg",
+                  "future/future14.jpeg",
+                  "future/future15.jpeg",
+                  "future/future16.jpeg",
+                  "future/future2.jpeg",
+                  "future/future4.jpeg",
+                  "future/future5.jpeg",
+                  "future/future6.jpeg",
+                  "future/future7.jpeg",
+                  "future/future8.jpeg",
+                  "future/future9.jpeg"
+                
+            ];
+
+            function init() {
+                totalEl.textContent = imagePaths.length;
+                
+                imagePaths.forEach((path, index) => {
+                    const slide = document.createElement('div');
+                    slide.className = 'stream-slide';
+                    const img = document.createElement('img');
+                    img.src = path;
+                    img.alt = 'Oloolua Photo';
+                    img.loading = 'lazy';
+                    slide.appendChild(img);
+                    container.appendChild(slide);
+                });
+
+                // Update counter on scroll
+                container.addEventListener('scroll', () => {
+                    const index = Math.round(container.scrollLeft / window.innerWidth);
+                    currentEl.textContent = index + 1;
+                });
+            }
+
+            nextBtn.addEventListener('click', () => {
+                container.scrollBy({ left: window.innerWidth, behavior: 'smooth' });
+            });
+
+            prevBtn.addEventListener('click', () => {
+                container.scrollBy({ left: -window.innerWidth, behavior: 'smooth' });
+            });
+
+            // Keyboard Support
+            document.addEventListener('keydown', e => {
+                if (e.key === 'ArrowRight') nextBtn.click();
+                if (e.key === 'ArrowLeft') prevBtn.click();
+            });
+
+            init();
+        });
+    </script>
+</body>
+
+</html>

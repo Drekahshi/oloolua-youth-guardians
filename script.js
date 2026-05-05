@@ -1,30 +1,53 @@
 // Mobile Navigation Toggle
 const navToggle = document.querySelector('.nav-toggle');
 const navLinks = document.querySelector('.nav-links');
+const navbar = document.querySelector('.navbar');
 
 if (navToggle && navLinks) {
-    // open/close mobile menu
-    navToggle.addEventListener('click', () => {
+    navToggle.addEventListener('click', (e) => {
+        e.stopPropagation();
         const isOpen = navLinks.classList.toggle('active');
         const icon = navToggle.querySelector('i');
         icon.classList.toggle('fa-bars', !isOpen);
         icon.classList.toggle('fa-times', isOpen);
-        navToggle.setAttribute('aria-expanded', String(isOpen));
+        document.body.style.overflow = isOpen ? 'hidden' : 'auto';
     });
 
-    // close menu after selecting a link (mobile)
+    // Close menu when clicking outside
+    document.addEventListener('click', (e) => {
+        if (navLinks.classList.contains('active') && !navLinks.contains(e.target) && !navToggle.contains(e.target)) {
+            navToggle.click();
+        }
+    });
+
     navLinks.querySelectorAll('a').forEach(link => {
         link.addEventListener('click', () => {
             if (navLinks.classList.contains('active')) {
-                navLinks.classList.remove('active');
-                const icon = navToggle.querySelector('i');
-                icon.classList.add('fa-bars');
-                icon.classList.remove('fa-times');
-                navToggle.setAttribute('aria-expanded', 'false');
+                navToggle.click();
             }
         });
     });
 }
+
+// Sticky Navbar & Back to Top
+const backToTop = document.createElement('button');
+backToTop.innerHTML = '<i class="fas fa-arrow-up"></i>';
+backToTop.className = 'back-to-top';
+document.body.appendChild(backToTop);
+
+window.addEventListener('scroll', () => {
+    if (window.scrollY > 300) {
+        navbar.classList.add('scrolled');
+        backToTop.classList.add('visible');
+    } else {
+        navbar.classList.remove('scrolled');
+        backToTop.classList.remove('visible');
+    }
+});
+
+backToTop.addEventListener('click', () => {
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+});
 
 // Smooth Scroll for Anchor Links
 document.querySelectorAll('a[href^="#"]').forEach(anchor => {
@@ -462,6 +485,28 @@ document.addEventListener('DOMContentLoaded', function () {
         targetDot.classList.add('current-slide');
     };
 
+    // Touch Support for Mobile
+    let startX = 0;
+    let isDragging = false;
+
+    track.addEventListener('touchstart', e => {
+        startX = e.touches[0].clientX;
+        isDragging = true;
+    }, { passive: true });
+
+    track.addEventListener('touchend', e => {
+        if (!isDragging) return;
+        const endX = e.changedTouches[0].clientX;
+        const diff = startX - endX;
+
+        if (diff > 50) {
+            nextButton.click();
+        } else if (diff < -50) {
+            prevButton.click();
+        }
+        isDragging = false;
+    });
+
     // When I click left, move slides to the left
     prevButton.addEventListener('click', e => {
         const currentSlide = track.querySelector('.current-slide');
@@ -526,3 +571,25 @@ document.addEventListener('DOMContentLoaded', function () {
         track.style.transform = 'translateX(-' + currentSlide.style.left + ')';
     });
 });
+
+// Copy Equity Paybill details to clipboard
+function copyEquityDetails() {
+    const text = 'Equity Paybill: 247247 | Account: 813367';
+    if (navigator.clipboard) {
+        navigator.clipboard.writeText(text).then(() => {
+            showNotification('Paybill details copied! ✅', 'success');
+        }).catch(() => alert(text));
+    } else {
+        alert(text);
+    }
+}
+
+// Pledge form handler
+function handleInvestPledge(e) {
+    e.preventDefault();
+    const name = document.getElementById('investName').value;
+    const email = document.getElementById('investEmail').value;
+    const amount = document.getElementById('investAmount').value;
+    showNotification(`Thank you, ${name}! We'll contact you at ${email} about your $${amount} pledge. 🌳`, 'success');
+    e.target.reset();
+}
