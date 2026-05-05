@@ -127,7 +127,6 @@ revealElements.forEach(element => {
 
 // Navbar Background Change on Scroll
 let lastScroll = 0;
-const navbar = document.querySelector('.navbar');
 
 window.addEventListener('scroll', () => {
     const currentScroll = window.pageYOffset;
