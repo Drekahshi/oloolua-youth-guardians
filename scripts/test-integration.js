@@ -1,6 +1,6 @@
-const hederaClient = require('./services/hedera-client');
-const guardianService = require('./services/guardian-service');
-const dovuService = require('./services/dovu-service');
+const hederaClient = require('../services/hedera-client');
+const guardianService = require('../services/guardian-service');
+const dovuService = require('../services/dovu-service');
 
 async function testIntegration() {
     console.log("🚀 Starting Integration Test\n");

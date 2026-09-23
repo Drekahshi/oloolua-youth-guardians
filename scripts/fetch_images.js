@@ -20,7 +20,7 @@ const speciesList = [
     { name: 'sisal', title: 'Agave_sisalana' }
 ];
 
-const imgDir = path.join(__dirname, 'seedling_real');
+const imgDir = path.join(__dirname, '..', 'assets', 'images', 'tree-species');
 if (!fs.existsSync(imgDir)) {
     fs.mkdirSync(imgDir);
 }

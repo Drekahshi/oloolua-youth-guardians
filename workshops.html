@@ -5,7 +5,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Community Workshops - Oloolua Youth Guardians</title>
-    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="assets/css/styles.css">
     <link rel="icon" href="favicon.ico" type="image/x-icon">
     <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
@@ -50,7 +50,7 @@
     <nav class="navbar">
         <div class="container">
             <a href="index.html" class="logo">
-                <img src="logo.jpeg" alt="Oloolua Youth Guardians logo" class="logo-image">
+                <img src="assets/images/logo.jpeg" alt="Oloolua Youth Guardians logo" class="logo-image">
                 Oloolua Youth Guardians
             </a>
             <div class="nav-toggle">
@@ -67,7 +67,7 @@
     </nav>
 
     <!-- Page Header -->
-    <header class="page-header" style="background: linear-gradient(rgba(27, 67, 50, 0.8), rgba(27, 67, 50, 0.8)), url('workshop.jpg') center/cover;">
+    <header class="page-header" style="background: linear-gradient(rgba(27, 67, 50, 0.8), rgba(27, 67, 50, 0.8)), url('assets/images/workshop.jpg') center/cover;">
         <div class="container">
             <h1>Community Workshops</h1>
             <p>Empowering the local community through environmental education and hands-on training</p>
@@ -118,7 +118,7 @@
             </div>
         </div>
     </footer>
-    <script src="script.js"></script>
+    <script src="assets/js/script.js"></script>
 
     <script>
         document.addEventListener('DOMContentLoaded', () => {
@@ -150,7 +150,7 @@
                 div.className = 'workshops-item';
                 
                 const img = document.createElement('img');
-                img.src = `workshops/${imgName}`;
+                img.src = `assets/images/${imgName}`;
                 img.alt = "Community Workshop Photo";
                 img.loading = "lazy";
                 
