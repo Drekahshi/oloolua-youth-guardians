@@ -157,14 +157,30 @@
 </head>
 
 <body>
+    <!-- KAI Nuvari Ecosystem Integration Bar -->
+    <div style="background: #0B1C14; color: #F6F2E7; font-size: 12px; padding: 7px 20px; border-bottom: 1px solid rgba(200, 155, 60, 0.25); display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 8px; font-family: 'Roboto', sans-serif;">
+        <div style="display: flex; align-items: center; gap: 8px;">
+            <span style="color: #E4C878; font-weight: 700; text-transform: uppercase; letter-spacing: 0.5px;">KAI Nuvari Ecosystem</span>
+            <span style="opacity: 0.4;">·</span>
+            <span>Pilot Community Forest Association (CFA) Operational System</span>
+        </div>
+        <div style="display: flex; align-items: center; gap: 14px;">
+            <a href="http://localhost:3000/conservation" target="_blank" style="color: #E4C878; text-decoration: none; font-weight: 600;">Conservation / CFA Hub →</a>
+            <a href="http://localhost:3000/hub" target="_blank" style="color: #A0C4B4; text-decoration: none;">SIHU Media Hub</a>
+            <a href="http://localhost:3000/cfa" target="_blank" style="color: #A0C4B4; text-decoration: none;">KAI CFA Dashboard</a>
+            <a href="index.html" style="background: #27ae60; color: white; padding: 2px 10px; border-radius: 4px; text-decoration: none; font-weight: bold;">Main Site</a>
+        </div>
+    </div>
+
     <!-- Navigation -->
     <nav class="navbar">
         <div class="container">
             <a href="index.html" class="logo">
                 <i class="fas fa-tree"></i>
-                Oloolua Forest
+                Oloolua Youth Guardians CFA
             </a>
             <div class="nav-links">
+                <a href="seedlings.html">Seedlings Catalog</a>
                 <a href="index.html">View Site</a>
             </div>
         </div>
@@ -174,11 +190,11 @@
         <div class="dashboard-header">
             <div class="user-info">
                 <div class="user-avatar">
-                    <i class="fas fa-user"></i>
+                    <i class="fas fa-user-shield"></i>
                 </div>
                 <div>
-                    <h2 id="userName">Welcome, Member</h2>
-                    <span id="userRole" style="color: #666; font-size: 0.9rem;">Role</span>
+                    <h2 id="userName">Welcome, Guardian</h2>
+                    <span id="userRole" style="color: #27ae60; font-weight: 600; font-size: 0.9rem;">CFA Field Guardian · Jaza Miti Logger</span>
                 </div>
             </div>
             <button class="logout-btn" onclick="AuthService.logout()">
@@ -323,7 +339,7 @@
 
                     if (dbError) throw dbError;
 
-                    alert('Photo uploaded successfully to Supabase!');
+                    alert('Photo uploaded successfully to CFA Field Gallery!');
                     this.reset();
                     photoPreview.style.display = 'none';
                     loadRecentUploads();
@@ -333,7 +349,7 @@
             }
         });
 
-        // Handle Activity Add to Supabase
+        // Handle Activity Add
         document.getElementById('addActivityForm').addEventListener('submit', async function (e) {
             e.preventDefault();
             const title = document.getElementById('activityTitle').value;
@@ -342,7 +358,7 @@
             const imageInput = document.getElementById('activityImage');
 
             try {
-                let imageUrl = 'placeholder.jpg';
+                let imageUrl = 'assets/images/treeplanting1.jpg';
 
                 if (imageInput.files[0]) {
                     const file = imageInput.files[0];
@@ -374,7 +390,7 @@
 
                 if (dbError) throw dbError;
 
-                alert('Activity published successfully to Supabase!');
+                alert('Activity logged successfully to Jaza Miti CFA Registry!');
                 this.reset();
             } catch (error) {
                 alert('Error: ' + error.message);

@@ -1,18 +1,19 @@
 import { supabase } from '../../services/supabase.js';
 
 /**
- * Authentication Service
- * Handles user login, logout, and session management using Supabase.
+ * Authentication Service for Oloolua Youth Guardians
+ * Uses self-contained local authentication aligned with KAI Nuvari CFA permissions.
  */
 
 const AuthService = {
     /**
-     * Attempt to log in a user
+     * Attempt to log in a guardian/member
      * @param {string} email 
      * @param {string} password 
-     * @returns {Promise<object|null>} User object if successful, null otherwise
+     * @returns {Promise<object|null>} User object if successful
      */
     login: async function (email, password) {
+<<<<<<< HEAD
         this.lastError = null;
         let data, error;
         try {
@@ -28,10 +29,24 @@ const AuthService = {
             console.error('Login error:', error.message);
             // A network failure means the login service is unreachable, not a wrong password.
             this.lastError = /fetch|network/i.test(error.message || '') || error.status === 0 ? 'offline' : 'invalid';
+=======
+        try {
+            const { data, error } = await supabase.auth.signInWithPassword({
+                email: email,
+                password: password,
+            });
+
+            if (error) {
+                console.error('Login error:', error);
+                return null;
+            }
+            
+            return data.user;
+        } catch (err) {
+            console.error('Auth error:', err);
+>>>>>>> 9d2f43e (feat: complete Next.js conversion with Neon DB integration, faithful HTML routes, accurate botanical catalogue, and photo galleries)
             return null;
         }
-        
-        return data.user;
     },
 
     /**
@@ -67,40 +82,7 @@ const AuthService = {
             return false;
         }
         return true;
-    },
-
-    /**
-     * Initialize auth state on page load
-     */
-    init: async function () {
-        const user = await this.getCurrentUser();
-        const loginLink = document.getElementById('loginLink');
-        const logoutLink = document.getElementById('logoutLink');
-        const memberLink = document.getElementById('memberLink');
-
-        if (user) {
-            if (loginLink) loginLink.style.display = 'none';
-            if (logoutLink) {
-                logoutLink.style.display = 'block';
-                logoutLink.addEventListener('click', (e) => {
-                    e.preventDefault();
-                    this.logout();
-                });
-            }
-            if (memberLink) memberLink.style.display = 'block';
-        } else {
-            if (loginLink) loginLink.style.display = 'block';
-            if (logoutLink) logoutLink.style.display = 'none';
-            if (memberLink) memberLink.style.display = 'none';
-        }
     }
 };
 
-// Export for use in other modules
 export default AuthService;
-
-// Initialize on load if not imported as module in some cases
-// But we should use it via module imports mostly
-document.addEventListener('DOMContentLoaded', () => {
-    AuthService.init();
-});
