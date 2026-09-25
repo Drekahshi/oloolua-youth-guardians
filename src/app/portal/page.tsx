@@ -270,15 +270,9 @@ export default function KaiHubPage() {
 
                 {/* Quick Action Panel (PRD Section 14) */}
                 <div className="p-6 rounded-2xl bg-[#122b1f] border border-[#e4c878]/20 space-y-4">
-                  <div className="flex justify-between items-center">
+                  <div>
                     <h3 className="text-lg font-bold text-white">Operational Action Panel</h3>
-                    <button
-                      onClick={() => setIsActivityModalOpen(true)}
-                      className="px-4 py-2 rounded-xl text-xs font-bold bg-[#e4c878] hover:bg-amber-300 text-neutral-950 transition-colors flex items-center gap-2"
-                    >
-                      <PlusCircle className="w-4 h-4" />
-                      <span>+ Record Activity</span>
-                    </button>
+                    <p className="text-xs text-gray-400">Quick shortcuts to CFA seedling ledgers, verification queues, and data export.</p>
                   </div>
 
                   <div className="grid grid-cols-1 sm:grid-cols-4 gap-3">
