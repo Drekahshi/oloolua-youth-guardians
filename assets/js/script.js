@@ -254,7 +254,8 @@ window.addEventListener('scroll', () => {
     const hero = document.querySelector('.hero');
     if (hero) {
         const scrolled = window.pageYOffset;
-        hero.style.transform = `translateY(${scrolled * 0.5}px)`;
+        // The slideshow photos drift gently instead of moving the whole hero.
+        hero.style.setProperty('--hero-shift', `${Math.min(scrolled, 900) * 0.25}px`);
     }
 });
 
@@ -576,7 +577,7 @@ function copyEquityDetails() {
     const text = 'Equity Paybill: 247247 | Account: 813367';
     if (navigator.clipboard) {
         navigator.clipboard.writeText(text).then(() => {
-            showNotification('Paybill details copied! ✅', 'success');
+            showNotification('Paybill details copied!', 'success');
         }).catch(() => alert(text));
     } else {
         alert(text);
@@ -589,6 +590,6 @@ function handleInvestPledge(e) {
     const name = document.getElementById('investName').value;
     const email = document.getElementById('investEmail').value;
     const amount = document.getElementById('investAmount').value;
-    showNotification(`Thank you, ${name}! We'll contact you at ${email} about your $${amount} pledge. 🌳`, 'success');
+    showNotification(`Thank you, ${name}! We'll contact you at ${email} about your $${amount} pledge.`, 'success');
     e.target.reset();
 }

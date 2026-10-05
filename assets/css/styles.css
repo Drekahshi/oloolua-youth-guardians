@@ -1361,7 +1361,7 @@ section {
 }
 
 /* ═══════════════════════════════════════════
-   CLICKABLE STAT CARD — Projects link
+   CLICKABLE STAT CARD - Projects link
 ═══════════════════════════════════════════ */
 a.stat-item--link {
     color: inherit;
@@ -1424,13 +1424,13 @@ a.stat-item--link::after {
         align-items: center;
     }
 
-    /* Nursery / planted grid — 2 columns on tablet */
+    /* Nursery / planted grid - 2 columns on tablet */
     .planted-grid {
         grid-template-columns: repeat(2, 1fr) !important;
         gap: 1rem !important;
     }
 
-    /* Stats grid — 2×2 on tablet */
+    /* Stats grid - 2×2 on tablet */
     .stats-grid {
         grid-template-columns: repeat(2, 1fr) !important;
         gap: 1rem !important;
@@ -1487,12 +1487,12 @@ a.stat-item--link::after {
         grid-template-columns: 1fr !important;
     }
 
-    /* Navbar logo — smaller on phones */
+    /* Navbar logo - smaller on phones */
     .navbar .logo {
         font-size: 1.1rem !important;
     }
 
-    /* Nav links — bigger tap areas when menu opens */
+    /* Nav links - bigger tap areas when menu opens */
     .nav-links li a {
         padding: 0.9rem 1.2rem !important;
         font-size: 1.05rem !important;
@@ -1504,7 +1504,7 @@ a.stat-item--link::after {
         font-size: 1.4rem !important;
     }
 
-    /* Seedlings species table — horizontal scroll */
+    /* Seedlings species table - horizontal scroll */
     table {
         display: block;
         overflow-x: auto;
@@ -1512,7 +1512,7 @@ a.stat-item--link::after {
         white-space: nowrap;
     }
 
-    /* Projects page pipeline — stack vertically */
+    /* Projects page pipeline - stack vertically */
     .pipeline {
         flex-direction: column !important;
         align-items: center !important;

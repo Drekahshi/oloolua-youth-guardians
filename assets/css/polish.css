@@ -1,0 +1,43 @@
+/* Shared touches for every page: fade-in on scroll, photo viewer, focus ring. */
+
+.rv { opacity: 0; transform: translateY(26px); transition: opacity 0.7s ease, transform 0.7s ease; }
+.rv.rv-in { opacity: 1; transform: none; }
+
+:focus-visible { outline: 3px solid #e8c96a; outline-offset: 3px; border-radius: 6px; }
+
+img.zoomable { cursor: zoom-in; }
+
+.lb {
+    position: fixed; inset: 0; z-index: 3000;
+    display: flex; align-items: center; justify-content: center;
+    padding: 4rem 1rem;
+    background: rgba(5, 18, 9, 0.92);
+    -webkit-backdrop-filter: blur(6px); backdrop-filter: blur(6px);
+    opacity: 0; pointer-events: none; transition: opacity 0.3s ease;
+}
+.lb.lb-open { opacity: 1; pointer-events: auto; }
+.lb img {
+    max-width: min(1100px, 100%); max-height: 100%;
+    border-radius: 14px; box-shadow: 0 30px 80px rgba(0, 0, 0, 0.5);
+    transform: scale(0.96); transition: transform 0.3s ease;
+}
+.lb.lb-open img { transform: none; }
+.lb-cap {
+    position: absolute; left: 0; right: 0; bottom: 1.2rem;
+    text-align: center; color: rgba(255, 255, 255, 0.85);
+    font: 500 0.95rem 'DM Sans', sans-serif;
+}
+.lb button {
+    position: absolute; width: 48px; height: 48px; border-radius: 50%;
+    border: 1px solid rgba(255, 255, 255, 0.3); background: rgba(255, 255, 255, 0.08);
+    color: #fff; font-size: 1.1rem; cursor: pointer;
+}
+.lb button:hover { background: rgba(255, 255, 255, 0.18); }
+.lb-close { top: 1rem; right: 1rem; }
+.lb-prev { left: 1rem; top: 50%; transform: translateY(-50%); }
+.lb-next { right: 1rem; top: 50%; transform: translateY(-50%); }
+
+@media (prefers-reduced-motion: reduce) {
+    .rv { opacity: 1; transform: none; transition: none; }
+    .hero-slide, .hero-slide.is-on { animation: none !important; transition: none !important; }
+}

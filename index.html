@@ -8,9 +8,11 @@
         content="Oloolua Forest Community Forest Association Seedling User Group - Protecting and preserving natural heritage through conservation and community engagement.">
     <title>OLOOLUA YOUTH GUARDIANS </title>
     <link rel="stylesheet" href="assets/css/styles.css">
-    <link rel="icon" href="favicon.ico" type="image/x-icon">
+    <link rel="stylesheet" href="assets/css/fresh.css">
+    <link rel="icon" href="assets/images/logo.jpeg" type="image/jpeg">
     <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    <link rel="stylesheet" href="assets/css/polish.css">
 </head>
 
 <body>
@@ -36,14 +38,25 @@
     </nav>
 
     <!-- Hero Section -->
-    <section class="hero">
-        <div class="hero-bg" aria-hidden="true"></div>
-        <div class="hero-content">
-            <h1><em><strong>Conservation Rock Mural & Art in Nature </strong></em></h1>
-            <p>Join us in conserving and protecting our natural heritage </p>
-            <a href="activities.html#activities-gallery" class="cta-button">Explore Our photo gallery</a>
+    <section class="hero hero--slides">
+        <div class="hero-slides" aria-hidden="true">
+            <div class="hero-slide is-on" style="background-image:url('assets/images/act28.jpeg')"></div>
+            <div class="hero-slide" style="background-image:url('assets/images/fin13.jpeg')"></div>
+            <div class="hero-slide" style="background-image:url('assets/images/act21.jpeg')"></div>
+            <div class="hero-slide" style="background-image:url('assets/images/fin30.jpeg')"></div>
+            <div class="hero-slide" style="background-image:url('assets/images/forest2.jpeg')"></div>
         </div>
-        <div class="scroll-indicator">
+        <div class="hero-content">
+            <span class="hero-eyebrow"><i class="fas fa-leaf" aria-hidden="true"></i> Oloolua Forest, Nairobi</span>
+            <h1>Conservation Rock Mural &amp; Art in Nature</h1>
+            <p>Join us in conserving and protecting our natural heritage</p>
+            <div class="hero-actions">
+                <a href="activities.html#activities-gallery" class="cta-button">Explore our photo gallery</a>
+                <a href="#donate" class="cta-button cta-button--ghost">Support our work</a>
+            </div>
+        </div>
+        <div class="hero-dots" role="tablist" aria-label="Choose a photo"></div>
+        <div class="scroll-indicator" aria-label="Scroll down">
             <i class="fas fa-chevron-down"></i>
         </div>
     </section>
@@ -65,7 +78,7 @@
                     <i class="fas fa-hand-holding-heart"></i>
                     <h3>3+</h3>
                     <p>Conservation Projects</p>
-                    <span style="display:block;font-size:0.75rem;margin-top:0.4rem;opacity:0.75;letter-spacing:1px;">TAP TO EXPLORE →</span>
+                    <span class="stat-more">Tap to explore <i class="fas fa-arrow-right" aria-hidden="true"></i></span>
                 </a>
                 <div class="stat-item">
                     <i class="fas fa-globe-africa"></i>
@@ -87,10 +100,20 @@
                 <h2>Discover Oloolua's Beauty</h2>
                 <p>Journey through our entire collection of conservation work, wildlife, and native flora.</p>
             </div>
-            <div style="text-align: center; margin-top: 3rem; padding: 4rem; background: rgba(39, 174, 96, 0.1); border-radius: 20px; border: 2px dashed #27ae60;">
-                <i class="fas fa-images" style="font-size: 4rem; color: #27ae60; margin-bottom: 2rem; display: block;"></i>
-                <a href="photogallery.html" class="cta-button" style="font-size: 1.5rem; padding: 1.5rem 3.5rem;">Explore Full Photo Stream</a>
-            </div>
+            <a href="photogallery.html" class="stream-cta">
+                <span class="stream-cta-pics" aria-hidden="true">
+                    <span style="background-image:url('assets/images/act0.jpeg')"></span>
+                    <span style="background-image:url('assets/images/fin30.jpeg')"></span>
+                    <span style="background-image:url('assets/images/act23.jpeg')"></span>
+                    <span style="background-image:url('assets/images/fin31.jpeg')"></span>
+                    <span style="background-image:url('assets/images/act38.jpeg')"></span>
+                </span>
+                <span class="stream-cta-text">
+                    <i class="fas fa-images" aria-hidden="true"></i>
+                    <strong>Explore the full photo stream</strong>
+                    <small>Hundreds of photos from the forest, the nursery and our events</small>
+                </span>
+            </a>
         </div>
     </section>
 
@@ -136,7 +159,7 @@
         <div class="container">
             <div class="section-header">
                 <span class="subtitle">Support Our Mission</span>
-                <h2>💚 Invest in Oloolua Forest</h2>
+                <h2><i class="fa-solid fa-heart" aria-hidden="true"></i> Invest in Oloolua Forest</h2>
                 <p class="section-desc">Your contribution plants trees, pays youth guardians, and protects Kenya's natural heritage.</p>
             </div>
 
@@ -144,7 +167,7 @@
             <div class="equity-paybill-wrap">
                 <div class="equity-paybill-card">
                     <div class="equity-paybill-logo">
-                        <span class="equity-icon">🏦</span>
+                        <span class="equity-icon"><i class="fa-solid fa-building-columns" aria-hidden="true"></i></span>
                         <div>
                             <div class="equity-bank-name">Equity Bank</div>
                             <div class="equity-bank-sub">M‑Pesa Paybill</div>
@@ -161,7 +184,7 @@
                             <span class="equity-detail-value" id="equityAccount">813367</span>
                         </div>
                     </div>
-                    <button class="equity-copy-btn" onclick="copyEquityDetails()">📋 Copy Details</button>
+                    <button class="equity-copy-btn" onclick="copyEquityDetails()"><i class="fa-solid fa-copy" aria-hidden="true"></i> Copy Details</button>
                     <p class="equity-steps">M‑Pesa → Lipa na M‑Pesa → Paybill → Enter details above</p>
                 </div>
             </div>
@@ -184,7 +207,7 @@
                         <label for="investMsg">Your Message (optional)</label>
                         <input type="text" id="investMsg" placeholder="E.g., in memory of someone, dedicate to a school…">
                     </div>
-                    <button type="submit" class="invest-submit">Send Commitment 🌳</button>
+                    <button type="submit" class="invest-submit">Send Commitment <i class="fa-solid fa-tree" aria-hidden="true"></i></button>
                 </form>
                 <p class="invest-note">We'll acknowledge your support and keep you updated on the impact of your contribution.</p>
             </div>
@@ -310,8 +333,8 @@
         <div class="container">
             <div class="section-header">
                 <span class="subtitle">What We're Building Next</span>
-                <h2>🚀 Our Future Plans</h2>
-                <p class="section-desc">A glimpse into the projects and spaces we intend to develop with your support — from eco-tourism to science, art, and green enterprise.</p>
+                <h2><i class="fa-solid fa-rocket" aria-hidden="true"></i> Our Future Plans</h2>
+                <p class="section-desc">A glimpse into the projects and spaces we intend to develop with your support, from eco-tourism to science, art, and green enterprise.</p>
             </div>
             <div class="future-plans-grid">
                 <div class="fp-card">
@@ -352,7 +375,7 @@
                 </div>
             </div>
             <div class="fp-cta">
-                <a href="#donate" class="future-invest-btn">Support Our Future 🌳</a>
+                <a href="#donate" class="future-invest-btn">Support Our Future <i class="fa-solid fa-tree" aria-hidden="true"></i></a>
             </div>
         </div>
     </section>
@@ -429,6 +452,7 @@
     </footer>
 
     <script src="assets/js/script.js"></script>
+<script src="assets/js/polish.js"></script>
 </body>
 
 </html>
