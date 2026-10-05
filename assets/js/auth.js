@@ -13,13 +13,21 @@ const AuthService = {
      * @returns {Promise<object|null>} User object if successful, null otherwise
      */
     login: async function (email, password) {
-        const { data, error } = await supabase.auth.signInWithPassword({
-            email: email,
-            password: password,
-        });
+        this.lastError = null;
+        let data, error;
+        try {
+            ({ data, error } = await supabase.auth.signInWithPassword({
+                email: email,
+                password: password,
+            }));
+        } catch (e) {
+            error = e;
+        }
 
         if (error) {
             console.error('Login error:', error.message);
+            // A network failure means the login service is unreachable, not a wrong password.
+            this.lastError = /fetch|network/i.test(error.message || '') || error.status === 0 ? 'offline' : 'invalid';
             return null;
         }
         
@@ -39,8 +47,12 @@ const AuthService = {
      * @returns {Promise<object|null>}
      */
     getCurrentUser: async function () {
-        const { data: { user } } = await supabase.auth.getUser();
-        return user;
+        try {
+            const { data } = await supabase.auth.getUser();
+            return data?.user ?? null;
+        } catch (e) {
+            return null;
+        }
     },
 
     /**

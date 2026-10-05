@@ -203,9 +203,10 @@ if (contactForm) {
         const message = document.getElementById('message').value;
 
         if (name && email && message) {
-            // Show success message
-            showNotification('Thank you! Your message has been sent successfully.', 'success');
-            contactForm.reset();
+            // The site has no mail server: open the visitor's email app with
+            // the message ready to send to the team.
+            sendToTeam('Message from ' + name, message + '\n\nFrom: ' + name + ' (' + email + ')');
+            showNotification('Your email app is opening with your message. Press send to reach us.', 'success');
         } else {
             showNotification('Please fill in all fields.', 'error');
         }
@@ -220,8 +221,8 @@ if (newsletterForm) {
         const email = newsletterForm.querySelector('input[type="email"]').value;
 
         if (email) {
-            showNotification('Thank you for subscribing to our newsletter!', 'success');
-            newsletterForm.reset();
+            sendToTeam('Please add me to your updates', 'Please send updates on Oloolua Forest to: ' + email);
+            showNotification('Your email app is opening. Press send to join our updates.', 'success');
         }
     });
 }
@@ -587,9 +588,17 @@ function copyEquityDetails() {
 // Pledge form handler
 function handleInvestPledge(e) {
     e.preventDefault();
-    const name = document.getElementById('investName').value;
-    const email = document.getElementById('investEmail').value;
-    const amount = document.getElementById('investAmount').value;
-    showNotification(`Thank you, ${name}! We'll contact you at ${email} about your $${amount} pledge.`, 'success');
-    e.target.reset();
+    const name = document.getElementById('investName').value.trim();
+    const contact = document.getElementById('investEmail').value.trim();
+    const note = (document.getElementById('investMsg') || {}).value || '';
+    sendToTeam('Support commitment from ' + name,
+        'Name: ' + name + '\nEmail or phone: ' + contact + (note ? '\nMessage: ' + note : ''));
+    showNotification('Thank you, ' + name + '! Your email app is opening. Press send and we will contact you.', 'success');
+}
+
+// Open the visitor's email app with a message to the team.
+const TEAM_EMAIL = 'austinnamuye@gmail.com';
+function sendToTeam(subject, body) {
+    window.location.href = 'mailto:' + TEAM_EMAIL +
+        '?subject=' + encodeURIComponent(subject) + '&body=' + encodeURIComponent(body);
 }

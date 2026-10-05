@@ -5,6 +5,16 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Member Login - Oloolua Forest</title>
+    <meta name="description" content="Member login for Oloolua Youth Guardians.">
+    <meta name="theme-color" content="#0b2e14">
+    <meta property="og:type" content="website">
+    <meta property="og:site_name" content="Oloolua Youth Guardians">
+    <meta property="og:title" content="Member Login - Oloolua Forest">
+    <meta property="og:description" content="Member login for Oloolua Youth Guardians.">
+    <meta property="og:url" content="https://oloolua-youth-guardians.vercel.app/login.html">
+    <meta property="og:image" content="https://oloolua-youth-guardians.vercel.app/assets/images/act28.jpeg">
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="robots" content="noindex">
     <link rel="stylesheet" href="assets/css/styles.css">
     <link rel="stylesheet" href="assets/css/fresh.css">
     <link rel="icon" href="assets/images/logo.jpeg" type="image/jpeg">
@@ -115,17 +125,17 @@
         </div>
 
         <div id="errorMessage" class="error-message">
-            <i class="fas fa-exclamation-circle"></i> Invalid username or password
+            <i class="fas fa-exclamation-circle"></i> <span id="errorText">Wrong email or password</span>
         </div>
 
         <form id="loginForm">
             <div class="form-group">
-                <label for="username">Username</label>
-                <input type="text" id="username" required placeholder="Enter your username">
+                <label for="username">Email</label>
+                <input type="email" id="username" required autocomplete="email" placeholder="you@example.com">
             </div>
             <div class="form-group">
                 <label for="password">Password</label>
-                <input type="password" id="password" required placeholder="Enter your password">
+                <input type="password" id="password" required autocomplete="current-password" placeholder="Enter your password">
             </div>
             <button type="submit" class="login-btn">
                 <i class="fas fa-sign-in-alt"></i> Login
@@ -146,14 +156,23 @@
             const email = document.getElementById('username').value;
             const password = document.getElementById('password').value;
             const errorMsg = document.getElementById('errorMessage');
+            const button = this.querySelector('.login-btn');
+            errorMsg.style.display = 'none';
+            button.disabled = true;
+            button.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Signing in...';
 
             const user = await AuthService.login(email, password);
+            button.disabled = false;
+            button.innerHTML = '<i class="fas fa-sign-in-alt"></i> Login';
 
             if (user) {
                 // Redirect to dashboard on success
                 window.location.href = 'member-dashboard.html';
             } else {
-                // Show error
+                // Show error: a wrong password, or the login service cannot be reached
+                document.getElementById('errorText').textContent = AuthService.lastError === 'offline'
+                    ? 'Member login is not available right now. Please try again later.'
+                    : 'Wrong email or password';
                 errorMsg.style.display = 'block';
                 // Shake animation
                 const container = document.querySelector('.login-container');
@@ -164,7 +183,7 @@
 
         // Check if already logged in
         (async () => {
-            if (await AuthService.getCurrentUser()) {
+            if (await AuthService.getCurrentUser().catch(() => null)) {
                 window.location.href = 'member-dashboard.html';
             }
         })();

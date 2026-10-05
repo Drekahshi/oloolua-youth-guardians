@@ -4,6 +4,16 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
     <title>Oloolua Projects | Digital Conservation Ecosystem</title>
+    <link rel="icon" href="assets/images/logo.jpeg" type="image/jpeg">
+    <meta name="description" content="Our conservation projects: data-driven, verified forest restoration in Oloolua Forest, Nairobi.">
+    <meta name="theme-color" content="#0b2e14">
+    <meta property="og:type" content="website">
+    <meta property="og:site_name" content="Oloolua Youth Guardians">
+    <meta property="og:title" content="Oloolua Projects | Digital Conservation Ecosystem">
+    <meta property="og:description" content="Our conservation projects: data-driven, verified forest restoration in Oloolua Forest, Nairobi.">
+    <meta property="og:url" content="https://oloolua-youth-guardians.vercel.app/projects.html">
+    <meta property="og:image" content="https://oloolua-youth-guardians.vercel.app/assets/images/act28.jpeg">
+    <meta name="twitter:card" content="summary_large_image">
     <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,700;1,400&family=DM+Sans:opsz,wght@9..40,300;9..40,400;9..40,500;9..40,600&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
     <style>
@@ -385,7 +395,9 @@
             .hero { padding: 8rem 1rem 4rem; }
             .hero h1 { font-size: 2.2rem; }
             .pipeline { flex-direction: column; }
-            .nav-links { display: none; } /* Add hamburger logic if needed */
+            .navbar { flex-wrap: wrap; row-gap: 0.6rem; padding: 0.9rem 1.2rem; }
+            .nav-links { width: 100%; gap: 1.2rem; overflow-x: auto; scrollbar-width: none; padding-bottom: 0.2rem; }
+            .nav-links a { white-space: nowrap; }
         }
     </style>
     <link rel="stylesheet" href="assets/css/polish.css">
@@ -398,9 +410,12 @@
         </a>
         <ul class="nav-links">
             <li><a href="index.html">Home</a></li>
+            <li><a href="about.html">About</a></li>
+            <li><a href="mission.html">Mission</a></li>
             <li><a href="activities.html">Activities</a></li>
-                        <li><a href="seedlings.html">Nursery</a></li>
-            <li><a href="projects.html" class="active">Projects</a></li>
+            <li><a href="seedlings.html">Nursery</a></li>
+            <li><a href="projects.html" class="active" aria-current="page">Projects</a></li>
+            <li><a href="photogallery.html">Gallery</a></li>
         </ul>
     </nav>
 

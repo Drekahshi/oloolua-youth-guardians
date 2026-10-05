@@ -41,3 +41,20 @@ img.zoomable { cursor: zoom-in; }
     .rv { opacity: 1; transform: none; transition: none; }
     .hero-slide, .hero-slide.is-on { animation: none !important; transition: none !important; }
 }
+
+.lb-count { opacity: 0.65; margin-left: 0.5rem; }
+
+.carousel-nav.carousel-nav--count { display: none !important; }
+.carousel-count {
+    text-align: center; margin: 1rem 0 0;
+    color: rgba(255, 255, 255, 0.8); font: 600 0.95rem 'DM Sans', sans-serif; letter-spacing: 0.04em;
+}
+
+/* Phones: arrows sit under the photo (swiping also works). */
+@media (max-width: 600px) {
+    .lb { padding: 4.5rem 0.75rem 7rem; }
+    .lb-prev, .lb-next { top: auto; bottom: 3.2rem; transform: none; }
+    .lb-prev { left: calc(50% - 60px); }
+    .lb-next { right: calc(50% - 60px); }
+    .lb-cap { bottom: 0.9rem; padding: 0 1rem; }
+}
