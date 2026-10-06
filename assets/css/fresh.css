@@ -826,3 +826,16 @@ body .login-btn:disabled { opacity: 0.7; cursor: progress; }
 body .back-link { color: var(--muted); }
 
 body .back-link:hover { color: var(--pine); }
+
+/* Nine menu items: keep each on one line and fit them on laptop screens. */
+.navbar .nav-links a { white-space: nowrap; }
+@media (min-width: 769px) and (max-width: 1360px) {
+    .navbar .logo { font-size: 1.05rem; }
+    .navbar .nav-links { gap: 0.95rem; }
+    .navbar .nav-links a { font-size: 0.9rem; }
+    .navbar .nav-links a.nav-cta { padding: 0.45rem 0.9rem; }
+}
+@media (min-width: 769px) and (max-width: 1140px) {
+    .navbar .logo { font-size: 0; gap: 0; }
+    .navbar .nav-links { gap: 0.7rem; }
+}

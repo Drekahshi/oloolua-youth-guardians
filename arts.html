@@ -1,0 +1,244 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Arts in Nature - Oloolua Youth Guardians</title>
+    <meta name="description" content="Conservation-inspired murals and portraits from Oloolua Forest, each with its artist, story and the verified conservation work behind it.">
+    <meta name="theme-color" content="#0b2e14">
+    <meta property="og:type" content="website">
+    <meta property="og:site_name" content="Oloolua Youth Guardians">
+    <meta property="og:title" content="Arts in Nature - Oloolua Youth Guardians">
+    <meta property="og:description" content="Conservation-inspired murals and portraits from Oloolua Forest, each with its artist, story and the verified conservation work behind it.">
+    <meta property="og:url" content="https://oloolua-youth-guardians.vercel.app/arts.html">
+    <meta property="og:image" content="https://oloolua-youth-guardians.vercel.app/assets/images/act28.jpeg">
+    <meta name="twitter:card" content="summary_large_image">
+    <link rel="stylesheet" href="assets/css/styles.css">
+    <link rel="stylesheet" href="assets/css/fresh.css">
+    <link rel="icon" href="assets/images/logo.jpeg" type="image/jpeg">
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    <link rel="stylesheet" href="assets/css/polish.css">
+    <style>
+        .arts-intro { display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 1rem; margin: 0 0 3rem; }
+        .arts-intro div { background: #fff; border: 1px solid var(--line); border-radius: 16px; padding: 1.2rem 1.3rem; }
+        .arts-intro i { color: var(--gold); font-size: 1.2rem; }
+        .arts-intro h3 { font-size: 1.05rem; margin: .6rem 0 .3rem; color: var(--pine); }
+        .arts-intro p { margin: 0; color: var(--muted); font-size: .95rem; line-height: 1.55; }
+        .arts-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); gap: 1.5rem; }
+        .art-card { background: #fff; border: 1px solid var(--line); border-radius: 18px; overflow: hidden; cursor: pointer; text-align: left; padding: 0; font: inherit; color: inherit; transition: transform .3s ease, box-shadow .3s ease; display: flex; flex-direction: column; }
+        .art-card:hover { transform: translateY(-6px); box-shadow: var(--shadow-lift); }
+        .art-card .pic { aspect-ratio: 4 / 3; background: #e9efe5 center / cover no-repeat; position: relative; }
+        .art-card .tag { position: absolute; top: .8rem; left: .8rem; background: rgba(255,255,255,.95); color: var(--pine); font-size: .78rem; font-weight: 700; padding: .3rem .7rem; border-radius: 999px; }
+        .art-card .body { padding: 1.1rem 1.2rem 1.3rem; display: flex; flex-direction: column; gap: .35rem; flex: 1; }
+        .art-card h3 { font-size: 1.2rem; color: var(--pine); margin: 0; }
+        .art-card .by { color: var(--ink-2); font-size: .95rem; }
+        .art-card .meta { color: var(--muted); font-size: .85rem; display: flex; gap: 1rem; flex-wrap: wrap; margin-top: auto; padding-top: .7rem; }
+        .art-card .meta i { color: var(--leaf); margin-right: .3rem; }
+        .arts-empty { background: #fff; border: 1px dashed rgba(201,162,39,.6); border-radius: 18px; padding: 2.5rem 1.5rem; text-align: center; }
+        .arts-empty h3 { color: var(--pine); margin: 0 0 .5rem; }
+        .arts-empty p { color: var(--muted); margin: 0 auto 1.2rem; max-width: 520px; }
+        .art-view { position: fixed; inset: 0; z-index: 3000; background: rgba(5,18,9,.75); display: none; align-items: flex-start; justify-content: center; padding: 2rem 1rem; overflow-y: auto; }
+        .art-view.open { display: flex; }
+        .art-view .panel { background: var(--cream); border-radius: 22px; max-width: 880px; width: 100%; overflow: hidden; position: relative; }
+        .art-view .close { position: absolute; top: .8rem; right: .8rem; width: 44px; height: 44px; border-radius: 50%; border: 0; background: rgba(255,255,255,.92); cursor: pointer; font-size: 1.1rem; z-index: 2; }
+        .art-view .hero-pic { width: 100%; max-height: 520px; object-fit: contain; background: #0b2e14; display: block; }
+        .art-view .inner { padding: 1.6rem 1.8rem 2rem; }
+        .art-view h2 { color: var(--pine); margin: 0; font-size: clamp(1.6rem, 3vw, 2.2rem); }
+        .art-view .facts { display: grid; grid-template-columns: repeat(auto-fit, minmax(170px, 1fr)); gap: .8rem; margin: 1.2rem 0; }
+        .art-view .facts div { background: #fff; border: 1px solid var(--line); border-radius: 14px; padding: .8rem 1rem; }
+        .art-view .facts small { display: block; color: var(--muted); font-size: .78rem; font-weight: 600; text-transform: uppercase; letter-spacing: .06em; }
+        .art-view .facts b { color: var(--ink); font-size: .98rem; }
+        .art-view h3 { color: var(--pine); margin: 1.6rem 0 .6rem; font-size: 1.2rem; }
+        .art-view .story { color: var(--ink-2); line-height: 1.75; white-space: pre-line; }
+        .art-view .rec { background: #fff; border: 1px solid var(--line); border-radius: 14px; padding: .9rem 1rem; margin-bottom: .6rem; }
+        .art-view .rec b { color: var(--ink); }
+        .art-view .rec small { display: block; color: var(--muted); margin-top: .25rem; }
+        .art-view .ok { color: #2f7d46; font-weight: 700; }
+        .art-view .warn { color: #a16207; font-weight: 700; }
+        .art-view .hash { font-family: ui-monospace, monospace; font-size: .8rem; word-break: break-all; color: var(--muted); }
+        .art-view .actions { display: flex; flex-wrap: wrap; gap: .7rem; margin-top: 1.6rem; }
+        @media (max-width: 600px) { .art-view { padding: 0; } .art-view .panel { border-radius: 0; min-height: 100%; } .art-view .inner { padding: 1.3rem 1.1rem 2rem; } }
+    </style>
+</head>
+
+<body>
+    <!-- Navigation -->
+    <nav class="navbar">
+        <div class="container">
+            <a href="index.html" class="logo">
+                <img src="assets/images/logo.jpeg" alt="Oloolua Youth Guardians logo" class="logo-image">
+                Oloolua Youth Guardians
+            </a>
+            <div class="nav-toggle">
+                <i class="fas fa-bars"></i>
+            </div>
+            <ul class="nav-links">
+                <li><a href="index.html">Home</a></li>
+                <li><a href="about.html">About</a></li>
+                <li><a href="mission.html">Mission</a></li>
+                <li><a href="activities.html">Activities</a></li>
+                <li><a href="arts.html" class="active" aria-current="page">Arts in Nature</a></li>
+                <li><a href="seedlings.html">Nursery</a></li>
+                <li><a href="projects.html">Projects</a></li>
+                <li><a href="photogallery.html">Gallery</a></li>
+                <li><a href="index.html#donate" class="nav-cta">Support us</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <!-- Page Header -->
+    <header class="page-header" style="background-image:url('assets/images/act28.jpeg')">
+        <div class="container">
+            <h1>Arts in Nature</h1>
+            <p>Murals, portraits and other art inspired by Oloolua Forest, each linked to the real conservation work behind it</p>
+        </div>
+    </header>
+
+    <section class="content-section">
+        <div class="container">
+            <div class="arts-intro">
+                <div><i class="fas fa-palette" aria-hidden="true"></i><h3>Conservation-inspired art</h3><p>Murals, portraits and other works by local artists, made from life in the forest.</p></div>
+                <div><i class="fas fa-book-open" aria-hidden="true"></i><h3>A story behind each piece</h3><p>Who made it, where and when, and the conservation story it tells.</p></div>
+                <div><i class="fas fa-seedling" aria-hidden="true"></i><h3>Linked to real work</h3><p>Each artwork is tied to verified tree planting and nursery records from our CFA.</p></div>
+                <div><i class="fas fa-shield-halved" aria-hidden="true"></i><h3>Proof you can check</h3><p>A digital fingerprint shows the records were never changed after the art was made.</p></div>
+            </div>
+
+            <div class="section-header" style="text-align:left;margin-bottom:1.5rem">
+                <span class="subtitle">The collection</span>
+                <h2 style="color:var(--pine)">Artworks</h2>
+            </div>
+            <div id="artsGrid" class="arts-grid" aria-live="polite">
+                <p style="color:var(--muted)">Loading the artworks...</p>
+            </div>
+        </div>
+    </section>
+
+    <div id="artView" class="art-view" role="dialog" aria-modal="true" aria-label="Artwork">
+        <div class="panel">
+            <button class="close" type="button" aria-label="Close"><i class="fas fa-xmark"></i></button>
+            <div id="artViewBody"></div>
+        </div>
+    </div>
+
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-grid">
+                <div class="footer-info">
+                    <h3><i class="fas fa-tree"></i> Oloolua Youth Guardians</h3>
+                    <p>Pioneering green conservation finance through community, art, and decentralized trust.</p>
+                    <div class="contact-info">
+                        <p><i class="fas fa-phone"></i> 0112583681</p>
+                        <p><i class="fas fa-phone"></i> 0742004641</p>
+                        <p><i class="fas fa-phone"></i> 0725772240</p>
+                        <p><i class="fas fa-envelope"></i> austinnamuye@gmail.com</p>
+                    </div>
+                </div>
+                <div class="footer-links">
+                    <h3>Quick Links</h3>
+                    <ul>
+                        <li><a href="about.html">About Us</a></li>
+                        <li><a href="mission.html">Mission</a></li>
+                        <li><a href="vision.html">Vision</a></li>
+                        <li><a href="activities.html">Activities</a></li>
+                        <li><a href="index.html#contact">Contact</a></li>
+                    </ul>
+                </div>
+                <div class="footer-social">
+                    <h3>Connect With Us</h3>
+                    <div class="social-links">
+                        <a href="https://www.instagram.com/oloolua_forest_youth_guardians?igsh=MXBkaXpyd2tuMTQ1Mw==" aria-label="Instagram"><i class="fab fa-instagram"></i></a>
+                    </div>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2026 Oloolua Youth Guardians. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+        <script>
+        // Artworks come from the KAI conservation platform, where the CFA
+        // adds each piece and links it to verified conservation records.
+        (function () {
+            var KAI = 'https://avax-frontend-seven.vercel.app';
+            var grid = document.getElementById('artsGrid');
+            var view = document.getElementById('artView');
+            var viewBody = document.getElementById('artViewBody');
+            var esc = function (t) { var d = document.createElement('div'); d.textContent = t == null ? '' : String(t); return d.innerHTML; };
+            var day = function (iso) { return iso ? new Date(iso).toLocaleDateString('en-KE', { day: 'numeric', month: 'long', year: 'numeric' }) : ''; };
+            var pic = function (a) { return a.hasImage ? KAI + '/api/murals/' + encodeURIComponent(a.slug) + '/image' : 'assets/images/act28.jpeg'; };
+            var RECORD = { NURSERY_INVENTORY: 'Seedlings received', PLANTING: 'Trees planted', SURVIVAL: 'Survival check', NURSERY_ACTIVITY: 'Nursery work' };
+
+            function empty() {
+                grid.innerHTML = '<div class="arts-empty" style="grid-column:1/-1">' +
+                    '<h3>The first artworks are on their way</h3>' +
+                    '<p>Our artists are preparing conservation murals and portraits. Each one will appear here with its story, its artist and the verified conservation work behind it.</p>' +
+                    '<a class="cta-button" href="index.html#contact">Commission or suggest an artwork</a></div>';
+            }
+
+            function card(a) {
+                var b = document.createElement('button');
+                b.type = 'button';
+                b.className = 'art-card';
+                b.innerHTML = '<div class="pic" style="background-image:url(\'' + pic(a) + '\')">' +
+                    (a.status === 'sold' ? '<span class="tag">In a collection</span>' : a.status === 'reserved' ? '<span class="tag">Reserved</span>' : '<span class="tag">Available</span>') + '</div>' +
+                    '<div class="body"><h3>' + esc(a.title) + '</h3><span class="by">by ' + esc(a.artist) + '</span>' +
+                    '<span class="meta"><span><i class="fas fa-calendar"></i>' + esc(day(a.createdAt)) + '</span>' +
+                    '<span><i class="fas fa-seedling"></i>' + a.recordCount + ' verified ' + (a.recordCount === 1 ? 'record' : 'records') + '</span></span></div>';
+                b.addEventListener('click', function () { open(a.slug); });
+                return b;
+            }
+
+            function open(slug) {
+                viewBody.innerHTML = '<div class="inner"><p>Loading...</p></div>';
+                view.classList.add('open');
+                document.body.style.overflow = 'hidden';
+                fetch(KAI + '/api/murals/' + encodeURIComponent(slug)).then(function (r) { return r.json(); }).then(function (d) {
+                    var m = d.mural;
+                    if (!m) { viewBody.innerHTML = '<div class="inner"><p>This artwork could not be loaded.</p></div>'; return; }
+                    var recs = (m.records || []).map(function (r) {
+                        return '<div class="rec"><b>' + esc(RECORD[r.recordType] || r.recordType) + '</b>: ' + esc(r.description || '') +
+                            '<small>' + (r.submittedBy ? 'Recorded by ' + esc(r.submittedBy) + ' · ' : '') + esc(day(r.recordedAt)) +
+                            (r.verifiedBy ? ' · Verified by ' + esc(r.verifiedBy) : '') +
+                            (r.avalancheTxHash ? ' · <a href="https://testnet.snowtrace.io/tx/' + esc(r.avalancheTxHash) + '" target="_blank" rel="noopener">Timestamp on Avalanche</a>' : '') + '</small></div>';
+                    }).join('');
+                    viewBody.innerHTML = '<img class="hero-pic" src="' + pic(m) + '" alt="' + esc(m.title) + '">' +
+                        '<div class="inner"><h2>' + esc(m.title) + '</h2>' +
+                        '<div class="facts">' +
+                        '<div><small>Artist</small><b>' + esc(m.artist) + '</b></div>' +
+                        '<div><small>Community</small><b>' + esc((m.cfa && m.cfa.name) || 'Oloolua CFA') + '</b></div>' +
+                        '<div><small>Date</small><b>' + esc(day(m.createdAt)) + '</b></div>' +
+                        '<div><small>Location</small><b>Oloolua Forest, Nairobi</b></div>' +
+                        (m.sizeLabel ? '<div><small>Size</small><b>' + esc(m.sizeLabel) + '</b></div>' : '') +
+                        '</div>' +
+                        '<h3>The story behind the piece</h3><p class="story">' + esc(m.description || 'The artist\'s story for this piece will be added soon.') + '</p>' +
+                        (m.planters && m.planters.length ? '<h3>The people behind the work</h3><p class="story">' + esc(m.planters.join(', ')) + '</p>' : '') +
+                        '<h3>Conservation work linked to this art</h3>' + (recs || '<p class="story">No records linked yet.</p>') +
+                        '<h3>Proof</h3><p class="' + (m.provenance && m.provenance.matches ? 'ok' : 'warn') + '">' +
+                        (m.provenance && m.provenance.matches ? '<i class="fas fa-circle-check"></i> The linked records are unchanged since the artwork was made.' : '<i class="fas fa-triangle-exclamation"></i> A linked record changed after the artwork was made.') + '</p>' +
+                        (m.provenance && m.provenance.hash ? '<p class="hash">Fingerprint: ' + esc(m.provenance.hash) + '</p>' : '') +
+                        '<div class="actions"><a class="cta-button" href="' + KAI + '/murals/' + encodeURIComponent(m.slug) + '" target="_blank" rel="noopener">See full proof and buy</a>' +
+                        '<a class="cta-button cta-button--ghost" style="color:var(--pine);border-color:var(--line)" href="index.html#contact">Ask about this piece</a></div></div>';
+                }).catch(function () { viewBody.innerHTML = '<div class="inner"><p>No connection. Please try again.</p></div>'; });
+            }
+
+            function close() { view.classList.remove('open'); document.body.style.overflow = ''; }
+            view.querySelector('.close').addEventListener('click', close);
+            view.addEventListener('click', function (e) { if (e.target === view) close(); });
+            document.addEventListener('keydown', function (e) { if (e.key === 'Escape') close(); });
+
+            fetch(KAI + '/api/murals').then(function (r) { return r.json(); }).then(function (d) {
+                var list = (d && d.murals) || [];
+                if (!list.length) { empty(); return; }
+                grid.innerHTML = '';
+                list.forEach(function (a) { grid.appendChild(card(a)); });
+            }).catch(empty);
+        })();
+    </script>
+    <script src="assets/js/script.js"></script>
+<script src="assets/js/polish.js"></script>
+</body>
+
+</html>
