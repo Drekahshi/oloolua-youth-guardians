@@ -10,6 +10,7 @@ const NAV_LINKS = [
   { label: 'Mission',       href: '/mission' },
   { label: 'Vision',        href: '/vision' },
   { label: 'Activities',    href: '/activities' },
+  { label: 'Arts in Nature', href: '/arts' },
   { label: 'Projects',      href: '/projects' },
   { label: 'Seedlings & Nursery', href: '/seedlings' },
   { label: 'Community',     href: '/workshops' },
@@ -31,7 +32,7 @@ function SiteNav() {
 
         {/* Mobile toggle */}
         <button onClick={() => setMenuOpen(!menuOpen)} style={{ display: 'none', background: 'none', border: 'none', color: '#f6f2e7', fontSize: '1.5rem', cursor: 'pointer' }} className="nav-mobile-btn">
-          ☰
+          
         </button>
 
         <ul style={{ display: 'flex', listStyle: 'none', margin: 0, padding: 0, gap: '0.25rem', flexWrap: 'wrap' }}>
@@ -92,13 +93,13 @@ function SiteFooter() {
     <footer style={{ background: '#060f0a', borderTop: '1px solid rgba(228,200,120,0.15)', padding: '3rem 1.5rem 1.5rem' }}>
       <div style={{ maxWidth: 1200, margin: '0 auto', display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(200px, 1fr))', gap: '2rem' }}>
         <div>
-          <h3 style={{ color: '#f6f2e7', marginBottom: '0.75rem', display: 'flex', alignItems: 'center', gap: 8 }}>🌳 Oloolua Youth Guardians</h3>
+          <h3 style={{ color: '#f6f2e7', marginBottom: '0.75rem', display: 'flex', alignItems: 'center', gap: 8 }}>Oloolua Youth Guardians</h3>
           <p style={{ color: '#a0c4b4', fontSize: '0.85rem', lineHeight: 1.6 }}>Pioneering green conservation finance through community, art, and decentralized trust.</p>
           <div style={{ marginTop: '1rem', color: '#888', fontSize: '0.8rem', lineHeight: 2 }}>
-            <div>📞 0112583681</div>
-            <div>📞 0742004641</div>
-            <div>📞 0725772240</div>
-            <div>✉️ austinnamuye@gmail.com</div>
+            <div>0112583681</div>
+            <div>0742004641</div>
+            <div>0725772240</div>
+            <div>austinnamuye@gmail.com</div>
           </div>
         </div>
         <div>
@@ -120,7 +121,7 @@ function SiteFooter() {
             target="_blank" rel="noopener noreferrer"
             style={{ display: 'inline-flex', alignItems: 'center', gap: 8, background: 'linear-gradient(135deg,#833ab4,#fd1d1d,#fcb045)', color: '#fff', padding: '0.5rem 1rem', borderRadius: 8, textDecoration: 'none', fontWeight: 600, fontSize: '0.85rem' }}
           >
-            📷 Instagram
+            Instagram
           </a>
         </div>
       </div>

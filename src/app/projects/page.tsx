@@ -6,8 +6,8 @@ const PROJECTS = [
     title: 'Jaza Miti: Tokenized Tree Planting',
     desc: 'Jaza Miti goes beyond traditional tree planting by creating measurable, verifiable, and monetizable environmental impact. We solve the lack of transparency in traditional reforestation by assigning local youth as guardians and geo-tagging every sapling.',
     features: [
-      { icon: '🛰️', title: 'Data Capture', desc: 'We log GPS coordinates, species types, growth metrics, and survival rates into structured datasets.' },
-      { icon: '🪙', title: 'Tokenization', desc: 'Each living tree is minted as a Conservation NFT on Hedera, serving as a transparent digital asset representing real-world ecological impact.' },
+      { icon: '', title: 'Data Capture', desc: 'We log GPS coordinates, species types, growth metrics, and survival rates into structured datasets.' },
+      { icon: '', title: 'Tokenization', desc: 'Each living tree is minted as a Conservation NFT on Hedera, serving as a transparent digital asset representing real-world ecological impact.' },
     ],
     img: '/assets/images/forest5.jpeg',
   },
@@ -15,22 +15,22 @@ const PROJECTS = [
 
 const ICRAF_CARDS = [
   {
-    icon: '🌱', title: 'Agroforestry Models',
+    icon: '', title: 'Agroforestry Models',
     items: ['Climate-resilient species selection', 'Advanced soil restoration strategies', 'Biodiversity enhancement planning'],
   },
   {
-    icon: '🗄️', title: 'Data Integration',
+    icon: '', title: 'Data Integration',
     items: ['Predictive tree growth models', 'Accurate carbon sequestration estimates', 'Comprehensive land-use data processing'],
   },
   {
-    icon: '📈', title: 'Value Creation',
+    icon: '', title: 'Value Creation',
     items: ['Scientific Data + Field Data', '= Verified Impact Assets', 'Attracting ESG and Impact Investors'],
   },
 ];
 
 const REGEN_CARDS = [
   {
-    icon: '🍯', title: 'Beekeeping Initiative', color: '#fca311',
+    icon: '', title: 'Beekeeping Initiative', color: '#fca311',
     desc: 'Integrated with reforestation to create a self-reinforcing ecological system. "Helping bees help us."',
     items: [
       { label: 'Ecosystem', val: 'Enhances pollination and forest regeneration.' },
@@ -39,7 +39,7 @@ const REGEN_CARDS = [
     ],
   },
   {
-    icon: '🎨', title: 'Arts in Nature', color: '#9b5de5',
+    icon: '', title: 'Arts in Nature', color: '#9b5de5',
     desc: 'Transforming conservation into a cultural experience. Artists become storytellers of the ecosystem.',
     items: [
       { label: 'Creative', val: 'Forest murals and sculpture installations.' },
@@ -50,11 +50,11 @@ const REGEN_CARDS = [
 ];
 
 const PIPELINE = [
-  { icon: '🌱', label: '1. Plant' },
-  { icon: '📱', label: '2. Data' },
-  { icon: '🔬', label: '3. Science' },
-  { icon: '🔗', label: '4. Verify' },
-  { icon: '💰', label: '5. Value' },
+  { icon: '', label: '1. Plant' },
+  { icon: '', label: '2. Data' },
+  { icon: '', label: '3. Science' },
+  { icon: '', label: '4. Verify' },
+  { icon: '', label: '5. Value' },
 ];
 
 export default function ProjectsPage() {
@@ -79,7 +79,7 @@ export default function ProjectsPage() {
 
       {/* Framework Bar */}
       <div style={{ background: '#174823', padding: '2rem', display: 'flex', justifyContent: 'center', gap: '4rem', flexWrap: 'wrap', borderTop: '1px solid rgba(255,255,255,0.1)' }}>
-        {[['🌐', 'ESG Aligned'], ['🎯', 'SDG Goals'], ['🔗', 'Hedera Guardian'], ['🔬', 'Science-Backed']].map(([icon, label]) => (
+        {[['', 'ESG Aligned'], ['', 'SDG Goals'], ['', 'Hedera Guardian'], ['', 'Science-Backed']].map(([icon, label]) => (
           <div key={label} style={{ textAlign: 'center', color: 'white' }}>
             <div style={{ fontSize: '1.8rem', marginBottom: '0.5rem' }}>{icon}</div>
             <span style={{ fontSize: '0.85rem', textTransform: 'uppercase', letterSpacing: 1, opacity: 0.8 }}>{label}</span>
@@ -98,8 +98,8 @@ export default function ProjectsPage() {
             </p>
             <ul style={{ listStyle: 'none', padding: 0 }}>
               {[
-                { icon: '🛰️', title: 'Data Capture', desc: 'We log GPS coordinates, species types, growth metrics, and survival rates into structured datasets.' },
-                { icon: '🪙', title: 'Tokenization', desc: 'Each living tree is minted as a Conservation NFT on Hedera, serving as a transparent digital asset representing real-world ecological impact.' },
+                { icon: '', title: 'Data Capture', desc: 'We log GPS coordinates, species types, growth metrics, and survival rates into structured datasets.' },
+                { icon: '', title: 'Tokenization', desc: 'Each living tree is minted as a Conservation NFT on Hedera, serving as a transparent digital asset representing real-world ecological impact.' },
               ].map(({ icon, title, desc }) => (
                 <li key={title} style={{ display: 'flex', alignItems: 'flex-start', gap: '1rem', marginBottom: '1.2rem', background: 'white', padding: '1.2rem', borderRadius: 12, boxShadow: '0 4px 15px rgba(0,0,0,0.05)', border: '1px solid #daebd9' }}>
                   <span style={{ fontSize: '1.5rem' }}>{icon}</span>
@@ -170,8 +170,8 @@ export default function ProjectsPage() {
             </p>
             <ul style={{ listStyle: 'none', padding: 0 }}>
               {[
-                { icon: '🛡️', title: 'MRV System', desc: 'Measurement, Reporting, and Verification that is standardized, auditable, and completely transparent.' },
-                { icon: '📋', title: 'Policy Driven', desc: 'Automated rules for tree validation, data integrity, and ESG compliance ensure that every minted asset has real-world backing.' },
+                { icon: '', title: 'MRV System', desc: 'Measurement, Reporting, and Verification that is standardized, auditable, and completely transparent.' },
+                { icon: '', title: 'Policy Driven', desc: 'Automated rules for tree validation, data integrity, and ESG compliance ensure that every minted asset has real-world backing.' },
               ].map(({ icon, title, desc }) => (
                 <li key={title} style={{ display: 'flex', alignItems: 'flex-start', gap: '1rem', marginBottom: '1.2rem', background: 'white', padding: '1.2rem', borderRadius: 12, boxShadow: '0 4px 15px rgba(0,0,0,0.05)', border: '1px solid #daebd9' }}>
                   <span style={{ fontSize: '1.5rem' }}>{icon}</span>

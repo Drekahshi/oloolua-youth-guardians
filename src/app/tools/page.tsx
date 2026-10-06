@@ -421,15 +421,15 @@ export default function ToolsHubPage() {
                       onChange={e => setRecordForm({ ...recordForm, eventType: e.target.value })}
                       className="w-full bg-[#0b1c14] border border-white/15 rounded-xl px-3.5 py-2.5 text-xs text-white focus:border-[#e4c878] focus:outline-none"
                     >
-                      <option value="PROPAGATION">🌱 PROPAGATION (New Batch Sown)</option>
-                      <option value="SOWING">🌾 SOWING (Seedbed Sowing)</option>
-                      <option value="POTTING">🪴 POTTING (Transplanted to Tube)</option>
-                      <option value="WEEDING">🌿 WEEDING (Nursery Maintenance)</option>
-                      <option value="WATERING">💧 WATERING (Irrigation Session)</option>
-                      <option value="PLANTING">🌳 PLANTING (Outplanted in Forest)</option>
-                      <option value="SALE">💰 SALE (Seedlings Distributed)</option>
-                      <option value="DONATION">🎁 DONATION (Community Grant)</option>
-                      <option value="MORTALITY">⚠️ MORTALITY (Loss Recorded)</option>
+                      <option value="PROPAGATION">PROPAGATION (New Batch Sown)</option>
+                      <option value="SOWING">SOWING (Seedbed Sowing)</option>
+                      <option value="POTTING">POTTING (Transplanted to Tube)</option>
+                      <option value="WEEDING">WEEDING (Nursery Maintenance)</option>
+                      <option value="WATERING">WATERING (Irrigation Session)</option>
+                      <option value="PLANTING">PLANTING (Outplanted in Forest)</option>
+                      <option value="SALE">SALE (Seedlings Distributed)</option>
+                      <option value="DONATION">DONATION (Community Grant)</option>
+                      <option value="MORTALITY">MORTALITY (Loss Recorded)</option>
                     </select>
                   </div>
 

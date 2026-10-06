@@ -25,15 +25,15 @@ export default function RecordActivityModal({ isOpen, onClose, speciesList, seed
   if (!isOpen) return null;
 
   const activityOptions: { type: ActivityType; label: string; icon: string }[] = [
-    { type: 'PROPAGATION', label: 'Propagation / Potting', icon: '🌱' },
-    { type: 'SOWING', label: 'Seed Sowing', icon: '🌾' },
-    { type: 'PRICKING_OUT', label: 'Pricking Out', icon: '🌿' },
-    { type: 'WATERING', label: 'Watering & Weeding', icon: '💧' },
-    { type: 'PLANTING', label: 'Planting Out', icon: '🌳' },
-    { type: 'SALE', label: 'Seedling Sale', icon: '💰' },
-    { type: 'DONATION', label: 'Donation', icon: '🎁' },
-    { type: 'TRANSFER', label: 'Transfer Bed/CFA', icon: '🔄' },
-    { type: 'MORTALITY', label: 'Loss / Mortality', icon: '🍂' },
+    { type: 'PROPAGATION', label: 'Propagation / Potting', icon: '' },
+    { type: 'SOWING', label: 'Seed Sowing', icon: '' },
+    { type: 'PRICKING_OUT', label: 'Pricking Out', icon: '' },
+    { type: 'WATERING', label: 'Watering & Weeding', icon: '' },
+    { type: 'PLANTING', label: 'Planting Out', icon: '' },
+    { type: 'SALE', label: 'Seedling Sale', icon: '' },
+    { type: 'DONATION', label: 'Donation', icon: '' },
+    { type: 'TRANSFER', label: 'Transfer Bed/CFA', icon: '' },
+    { type: 'MORTALITY', label: 'Loss / Mortality', icon: '' },
   ];
 
   const handleSubmit = async (status: 'DRAFT' | 'SUBMITTED') => {

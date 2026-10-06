@@ -31,7 +31,7 @@ export default function Footer() {
             <ul className="space-y-2 text-xs">
               <li><Link href="/" className="hover:text-white transition-colors">Home Page</Link></li>
               <li><Link href="/about" className="hover:text-white transition-colors">About Guardians CFA</Link></li>
-              <li><Link href="/tools" className="text-[#e4c878] font-bold hover:underline transition-colors flex items-center gap-1">🧰 Conservation Tools Hub</Link></li>
+              <li><Link href="/tools" className="text-[#e4c878] font-bold hover:underline transition-colors flex items-center gap-1">Conservation Tools Hub</Link></li>
               <li><Link href="/seedlings" className="hover:text-white transition-colors">Tree Nursery & Seedbeds</Link></li>
               <li><Link href="/activities" className="hover:text-white transition-colors">Conservation Activities</Link></li>
               <li><Link href="/projects" className="hover:text-white transition-colors">Art in Nature & Rock Mural</Link></li>

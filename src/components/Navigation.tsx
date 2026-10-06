@@ -16,6 +16,7 @@ export default function Navigation({ onOpenRecordActivity }: { onOpenRecordActiv
     { name: 'Mission', href: '/mission' },
     { name: 'Vision', href: '/vision' },
     { name: 'Activities', href: '/activities' },
+    { name: 'Arts in Nature', href: '/arts' },
     { name: 'Projects', href: '/projects' },
     { name: 'Seedlings & Nursery', href: '/seedlings' },
     { name: 'Beekeeping', href: '/beekeeping' },

@@ -44,7 +44,7 @@ export async function initDbSchema() {
     // Seed real baseline records if table is empty
     const checkCount = await sql`SELECT COUNT(*) as cnt FROM kai_activities`;
     if (Number(checkCount[0]?.cnt || 0) === 0) {
-      console.log('🌱 Seeding real baseline CFA operational records into Neon DB...');
+      console.log('Seeding real baseline CFA operational records into Neon DB...');
 
       const initialActivities = [
         {
@@ -148,11 +148,11 @@ export async function initDbSchema() {
           ) ON CONFLICT DO NOTHING;
         `;
       }
-      console.log('✅ Real operational dataset seeded into Neon DB.');
+      console.log('Real operational dataset seeded into Neon DB.');
     }
 
-    console.log('✅ Neon Postgres schema ready for Kai Oloolua Hub');
+    console.log('Neon Postgres schema ready for Kai Oloolua Hub');
   } catch (err) {
-    console.error('⚠️ Neon DB auto-schema init note:', err);
+    console.error('Neon DB auto-schema init note:', err);
   }
 }

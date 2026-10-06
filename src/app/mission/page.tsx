@@ -12,7 +12,7 @@ export default function MissionPage() {
 
           <h2 style={h2}>Conserving, Protecting, and Restoring Forest Ecosystems</h2>
           <p style={p}>
-            Forests are the lungs of the Earth — they stabilize our climate, shelter biodiversity, and sustain human wellbeing. Our mission is to conserve, protect, and restore these invaluable ecosystems, not only by planting indigenous and medicinal trees but also by creating healing green spaces, empowering communities with training and green jobs, and making every conservation action visible, trusted, and rewarding through decentralized technology.
+            Forests are the lungs of the Earth, they stabilize our climate, shelter biodiversity, and sustain human wellbeing. Our mission is to conserve, protect, and restore these invaluable ecosystems, not only by planting indigenous and medicinal trees but also by creating healing green spaces, empowering communities with training and green jobs, and making every conservation action visible, trusted, and rewarding through decentralized technology.
           </p>
 
           <h3 style={h3}>Planting Indigenous and Medicinal Trees</h3>
@@ -55,7 +55,7 @@ export default function MissionPage() {
             <li>Eco‑tourism, green enterprise, and how to turn conservation data into income.</li>
           </ul>
 
-          <h3 style={h3}>Trust Through Technology – Hedera &amp; Web3</h3>
+          <h3 style={h3}>Trust Through Technology, Hedera &amp; Web3</h3>
           <p style={p}>
             One of the biggest barriers to conservation finance is trust. We solve this by using the Hedera public ledger and the Hedera Guardian to create immutable, verifiable records of every activity we do.
           </p>
@@ -68,13 +68,13 @@ export default function MissionPage() {
 
           <h3 style={h3}>SDG Amplification &amp; Replicable Model</h3>
           <p style={p}>
-            Every action we take is aligned with the Sustainable Development Goals – especially Climate Action (SDG 13), Good Health (SDG 3), Decent Work (SDG 8), and Reduced Inequalities (SDG 10). We are building a methodology that any Community Forest Association (CFA) in Kenya can adopt, helping to achieve the initiative of 15 billion trees by 2032 and turning conservation into a vehicle for local economic growth and equity.
+            Every action we take is aligned with the Sustainable Development Goals, especially Climate Action (SDG 13), Good Health (SDG 3), Decent Work (SDG 8), and Reduced Inequalities (SDG 10). We are building a methodology that any Community Forest Association (CFA) in Kenya can adopt, helping to achieve the initiative of 15 billion trees by 2032 and turning conservation into a vehicle for local economic growth and equity.
           </p>
 
           <div style={ctaBox}>
             <h3 style={{ color: '#e4c878', marginBottom: '0.5rem' }}>Join Us in Our Mission</h3>
             <p>
-              Forest conservation is a shared responsibility – but it also must be a shared opportunity. Whether you are an individual, a community leader, an artist, or an organization, your participation can help us prove that protecting nature and improving lives go hand in hand. Together, we can create a future where forests flourish, biodiversity thrives, and every community benefits from the green economy.
+              Forest conservation is a shared responsibility, but it also must be a shared opportunity. Whether you are an individual, a community leader, an artist, or an organization, your participation can help us prove that protecting nature and improving lives go hand in hand. Together, we can create a future where forests flourish, biodiversity thrives, and every community benefits from the green economy.
             </p>
             <Link href="/#contact" style={ctaBtn}>Get Involved Today</Link>
           </div>
