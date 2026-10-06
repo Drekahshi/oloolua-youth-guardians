@@ -16,9 +16,12 @@ export default function KaiTopBar() {
         </span>
       </div>
       <div className="flex items-center gap-3 text-[11px]">
-        <Link href="/portal" className="text-[#E4C878] font-semibold hover:underline flex items-center gap-1">
+        <Link href="/tools" className="text-[#E4C878] font-bold hover:underline flex items-center gap-1">
+          <span>🧰 Tools Hub</span>
+        </Link>
+        <span className="opacity-30">|</span>
+        <Link href="/portal" className="text-gray-300 font-semibold hover:text-white flex items-center gap-1">
           <span>Conservation Ledger</span>
-          <span className="text-[10px]">→</span>
         </Link>
         <span className="opacity-30">|</span>
         <Link href="/portal?tab=dashboard" className="text-emerald-300 hover:text-white transition-colors">

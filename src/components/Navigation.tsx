@@ -3,7 +3,8 @@
 import React, { useState } from 'react';
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
-import { TreePine, Menu, X, Shield, PlusCircle } from 'lucide-react';
+import ToolsDropdown from '@/components/ToolsDropdown';
+import { TreePine, Menu, X, Shield, PlusCircle, Wrench, Globe } from 'lucide-react';
 
 export default function Navigation({ onOpenRecordActivity }: { onOpenRecordActivity?: () => void }) {
   const [isOpen, setIsOpen] = useState(false);
@@ -18,6 +19,7 @@ export default function Navigation({ onOpenRecordActivity }: { onOpenRecordActiv
     { name: 'Projects', href: '/projects' },
     { name: 'Seedlings & Nursery', href: '/seedlings' },
     { name: 'Beekeeping', href: '/beekeeping' },
+    { name: 'Tools', href: '/tools' },
     { name: 'Gallery', href: '/photogallery' },
   ];
 
@@ -42,14 +44,14 @@ export default function Navigation({ onOpenRecordActivity }: { onOpenRecordActiv
           </Link>
 
           {/* Desktop Nav Links */}
-          <div className="hidden lg:flex items-center gap-1.5">
+          <div className="hidden lg:flex items-center gap-1">
             {navLinks.map((link) => {
               const isActive = pathname === link.href;
               return (
                 <Link
                   key={link.href}
                   href={link.href}
-                  className={`px-3 py-1.5 rounded-lg text-xs font-medium transition-all ${
+                  className={`px-2.5 py-1.5 rounded-lg text-xs font-medium transition-all ${
                     isActive
                       ? 'bg-emerald-600/30 text-[#e4c878] border border-[#e4c878]/30 font-semibold'
                       : 'text-gray-200 hover:text-white hover:bg-white/5'
@@ -61,17 +63,10 @@ export default function Navigation({ onOpenRecordActivity }: { onOpenRecordActiv
             })}
           </div>
 
-          {/* Action CTAs */}
-          <div className="hidden sm:flex items-center gap-2.5">
-            {onOpenRecordActivity && (
-              <button
-                onClick={onOpenRecordActivity}
-                className="flex items-center gap-1.5 px-3 py-1.5 rounded-lg text-xs font-bold bg-[#e4c878] text-neutral-950 hover:bg-amber-300 transition-colors shadow-sm"
-              >
-                <PlusCircle className="w-4 h-4" />
-                <span>+ Record Activity</span>
-              </button>
-            )}
+          {/* Action CTAs & Tools */}
+          <div className="hidden sm:flex items-center gap-2">
+            {/* Unified Tools Dropdown */}
+            <ToolsDropdown onOpenRecordActivity={onOpenRecordActivity} />
 
             <Link
               href="/portal"
@@ -84,14 +79,13 @@ export default function Navigation({ onOpenRecordActivity }: { onOpenRecordActiv
 
           {/* Mobile Menu Button */}
           <div className="lg:hidden flex items-center gap-2">
-            {onOpenRecordActivity && (
-              <button
-                onClick={onOpenRecordActivity}
-                className="px-2.5 py-1 rounded text-xs font-bold bg-[#e4c878] text-neutral-950"
-              >
-                + Record
-              </button>
-            )}
+            <Link
+              href="/tools"
+              className="px-2.5 py-1 rounded text-xs font-bold bg-[#e4c878] text-neutral-950 flex items-center gap-1"
+            >
+              <Wrench className="w-3.5 h-3.5" />
+              <span>Tools</span>
+            </Link>
             <button
               onClick={() => setIsOpen(!isOpen)}
               className="p-2 rounded-lg text-gray-300 hover:text-white hover:bg-white/10"
@@ -124,6 +118,14 @@ export default function Navigation({ onOpenRecordActivity }: { onOpenRecordActiv
             );
           })}
           <div className="pt-3 border-t border-white/10 flex flex-col gap-2">
+            <Link
+              href="/tools"
+              onClick={() => setIsOpen(false)}
+              className="w-full text-center px-4 py-2 rounded-md font-bold text-sm bg-[#e4c878] text-neutral-950 flex items-center justify-center gap-2"
+            >
+              <Wrench className="w-4 h-4" />
+              <span>All Tools (Guardian, Record & External Hubs)</span>
+            </Link>
             <Link
               href="/portal"
               onClick={() => setIsOpen(false)}

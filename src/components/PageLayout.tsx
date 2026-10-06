@@ -13,6 +13,7 @@ const NAV_LINKS = [
   { label: 'Projects',      href: '/projects' },
   { label: 'Seedlings & Nursery', href: '/seedlings' },
   { label: 'Community',     href: '/workshops' },
+  { label: 'Tools',         href: '/tools' },
   { label: 'Guardian Portal', href: '/portal' },
 ];
 
