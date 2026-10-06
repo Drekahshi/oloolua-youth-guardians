@@ -1,13 +1,15 @@
 'use client';
 
 import React, { useState } from 'react';
-import Navigation from '@/components/Navigation';
+import { useRecordActivityRequest } from '@/components/Navigation';
 import RecordActivityModal from '@/components/RecordActivityModal';
 import { PlusCircle, Calendar, MapPin, CheckCircle, Leaf } from 'lucide-react';
 import { INITIAL_SPECIES, INITIAL_SEEDBEDS } from '@/services/kaiLedger';
 
 export default function ActivitiesPage() {
   const [isModalOpen, setIsModalOpen] = useState(false);
+  // The site menu's Record Activity opens this page's form.
+  useRecordActivityRequest(() => setIsModalOpen(true));
 
   const activities = [
     { title: 'Tree Nursery Sowing & Potting', date: '2024-09-20', location: 'Oloolua Forest Station', category: 'Propagation', status: 'VERIFIED' },
@@ -18,7 +20,6 @@ export default function ActivitiesPage() {
 
   return (
     <div className="min-h-screen bg-[#0b1c14] text-[#f6f2e7] flex flex-col">
-      <Navigation onOpenRecordActivity={() => setIsModalOpen(true)} />
 
       <section className="bg-[#122b1f] border-b border-[#e4c878]/20 py-12 px-4 sm:px-6 lg:px-8">
         <div className="max-w-5xl mx-auto flex flex-col md:flex-row justify-between items-start md:items-center gap-4">

@@ -2,7 +2,7 @@
 
 import React, { useState, useEffect } from 'react';
 import Link from 'next/link';
-import Navigation from '@/components/Navigation';
+import { useRecordActivityRequest } from '@/components/Navigation';
 import RecordActivityModal from '@/components/RecordActivityModal';
 import LiveActivityTracker from '@/components/LiveActivityTracker';
 import { 
@@ -54,6 +54,7 @@ export default function KaiHubPage() {
   const [speciesList, setSpeciesList] = useState<Species[]>(INITIAL_SPECIES);
 
   const [isActivityModalOpen, setIsActivityModalOpen] = useState<boolean>(false);
+  useRecordActivityRequest(() => setIsActivityModalOpen(true));
   const [isEditModalOpen, setIsEditModalOpen] = useState<boolean>(false);
   const [editRecordType, setEditRecordType] = useState<EditRecordType>('SEEDBED');
   const [editingRecord, setEditingRecord] = useState<any>(null);
@@ -143,7 +144,6 @@ export default function KaiHubPage() {
 
   return (
     <div className="min-h-screen bg-[#0b1c14] text-[#f6f2e7] flex flex-col">
-      <Navigation onOpenRecordActivity={() => setIsActivityModalOpen(true)} />
 
       {/* Header Banner & Hub Mode Selector */}
       <div className="bg-[#122b1f] border-b border-[#e4c878]/30 py-8 px-4 sm:px-6 lg:px-8">

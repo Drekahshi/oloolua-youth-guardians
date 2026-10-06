@@ -2,7 +2,7 @@
 
 import React, { useState } from 'react';
 import Link from 'next/link';
-import Navigation from '@/components/Navigation';
+import { useRecordActivityRequest } from '@/components/Navigation';
 import RecordActivityModal from '@/components/RecordActivityModal';
 import { PlusCircle, ArrowRight } from 'lucide-react';
 import { INITIAL_SPECIES, INITIAL_SEEDBEDS, INITIAL_TRANSACTIONS, calculateNurseryMetrics } from '@/services/kaiLedger';
@@ -207,6 +207,8 @@ const NURSERY_SPECIES_CATALOGUE = [
 
 export default function SeedlingsPage() {
   const [isModalOpen, setIsModalOpen] = useState(false);
+  // The site menu's Record Activity opens this page's form.
+  useRecordActivityRequest(() => setIsModalOpen(true));
   const [activeFilter, setActiveFilter] = useState('all');
   const metrics = calculateNurseryMetrics(INITIAL_TRANSACTIONS);
 
@@ -217,7 +219,6 @@ export default function SeedlingsPage() {
 
   return (
     <div className="min-h-screen bg-[#0b1c14] text-[#f6f2e7] flex flex-col">
-      <Navigation onOpenRecordActivity={() => setIsModalOpen(true)} />
 
       <section className="bg-[#122b1f] border-b border-[#e4c878]/20 py-12 px-4 sm:px-6 lg:px-8">
         <div className="max-w-6xl mx-auto flex flex-col md:flex-row justify-between items-start md:items-center gap-4">

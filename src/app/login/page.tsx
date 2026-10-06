@@ -2,7 +2,6 @@
 
 import React, { useState } from 'react';
 import Link from 'next/link';
-import Navigation from '@/components/Navigation';
 import { ShieldCheck, UserCheck, Lock, ArrowRight } from 'lucide-react';
 import { UserRole } from '@/types/kai';
 
@@ -26,7 +25,6 @@ export default function LoginPage() {
 
   return (
     <div className="min-h-screen bg-[#0b1c14] text-[#f6f2e7] flex flex-col">
-      <Navigation />
 
       <div className="flex-1 flex items-center justify-center p-4 sm:p-6 lg:p-8">
         <div className="bg-[#122b1f] border border-[#e4c878]/30 rounded-3xl max-w-xl w-full p-8 shadow-2xl space-y-6">

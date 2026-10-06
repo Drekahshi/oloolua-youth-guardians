@@ -3,7 +3,7 @@
 import React, { useState, useEffect, useRef } from 'react';
 import Link from 'next/link';
 import Image from 'next/image';
-import Navigation from '@/components/Navigation';
+import { useRecordActivityRequest } from '@/components/Navigation';
 import RecordActivityModal from '@/components/RecordActivityModal';
 import { 
   TreePine, Users, HeartHandshake, Globe, ArrowRight,
@@ -75,6 +75,8 @@ const GALLERY_STRIP = [
 
 export default function HomePage() {
   const [isModalOpen, setIsModalOpen] = useState(false);
+  // The site menu's Record Activity opens this page's form.
+  useRecordActivityRequest(() => setIsModalOpen(true));
   const [transactions, setTransactions] = useState(INITIAL_TRANSACTIONS);
   const [heroBg, setHeroBg] = useState(0);
   const metrics = calculateNurseryMetrics(transactions);
@@ -105,22 +107,6 @@ export default function HomePage() {
 
   return (
     <div className="min-h-screen bg-[#0b1c14] text-[#f6f2e7] flex flex-col">
-      <Navigation onOpenRecordActivity={() => setIsModalOpen(true)} />
-
-      {/* ── KAI Ecosystem Bar (from original HTML) ── */}
-      <div className="bg-[#060f0a] text-xs px-5 py-2 border-b border-[#e4c878]/20 flex flex-wrap justify-between items-center gap-2 font-medium">
-        <div className="flex items-center gap-2">
-          <span className="text-[#e4c878] font-bold uppercase tracking-wide">KAI Nuvari Ecosystem</span>
-          <span className="opacity-30">·</span>
-          <span className="text-gray-400">Pilot CFA Partner</span>
-        </div>
-        <div className="flex items-center gap-4">
-          <Link href="/portal" className="text-[#e4c878] hover:text-amber-300 font-semibold transition-colors">Conservation / CFA Hub →</Link>
-          <Link href="/portal" className="text-[#a0c4b4] hover:text-white transition-colors">SIHU Media Hub</Link>
-          <Link href="/portal" className="text-[#a0c4b4] hover:text-white transition-colors">KAI CFA Dashboard</Link>
-          <Link href="/portal" className="bg-emerald-600 hover:bg-emerald-500 text-white px-3 py-1 rounded font-bold transition-colors text-[11px]">Guardian Portal</Link>
-        </div>
-      </div>
 
       {/* ── HERO ── */}
       <section className="relative min-h-[92vh] flex items-center justify-center overflow-hidden">
@@ -136,8 +122,8 @@ export default function HomePage() {
           />
         ))}
         {/* Gradient overlay */}
-        <div className="absolute inset-0 bg-gradient-to-t from-[#0b1c14] via-[#0b1c14]/70 to-[#0b1c14]/30" />
-        <div className="absolute inset-0 bg-gradient-to-r from-[#0b1c14]/60 to-transparent" />
+        <div className="absolute inset-0 bg-gradient-to-t from-[#0b1c14] via-[#0b1c14]/55 to-[#0b1c14]/15" />
+        
 
         <div className="relative z-10 max-w-5xl mx-auto text-center px-4 space-y-7 pt-16 pb-20">
           <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-emerald-900/80 border border-[#e4c878]/40 text-xs font-bold text-[#e4c878] backdrop-blur-md shadow-lg uppercase tracking-widest">
@@ -431,73 +417,6 @@ export default function HomePage() {
         </form>
       </section>
 
-      {/* ── FOOTER (from HTML) ── */}
-      <footer className="bg-[#060f0a] border-t border-[#e4c878]/15 px-4 py-12">
-        <div className="max-w-6xl mx-auto grid grid-cols-1 md:grid-cols-3 gap-8">
-          {/* Info */}
-          <div className="space-y-4">
-            <div className="flex items-center gap-3">
-              <img src="/assets/images/logo.jpeg" alt="Logo" className="w-10 h-10 rounded-full object-cover border border-[#e4c878]/30" />
-              <h3 className="font-bold text-white">Oloolua Forest</h3>
-            </div>
-            <p className="text-xs text-gray-400 leading-relaxed">
-              Dedicated to forest conservation and community engagement through sustainable practices.
-            </p>
-            <div className="space-y-1 text-xs text-gray-400">
-              <div className="flex items-center gap-2"><Phone className="w-3.5 h-3.5 text-[#e4c878]" /> 0112583681</div>
-              <div className="flex items-center gap-2"><Phone className="w-3.5 h-3.5 text-[#e4c878]" /> 0742004641</div>
-              <div className="flex items-center gap-2"><Phone className="w-3.5 h-3.5 text-[#e4c878]" /> 0725772240</div>
-              <div className="flex items-center gap-2"><Mail className="w-3.5 h-3.5 text-[#e4c878]" /> austinnamuye@gmail.com</div>
-            </div>
-          </div>
-
-          {/* Quick Links */}
-          <div>
-            <h3 className="font-bold text-white mb-4">Quick Links</h3>
-            <ul className="space-y-2 text-sm text-gray-400">
-              {[['About', '/about'], ['Mission', '/mission'], ['Vision', '/vision'], ['Activities', '/activities'], ['Seedlings & Nursery', '/seedlings'], ['Guardian Portal', '/portal']].map(([label, href]) => (
-                <li key={label}>
-                  <Link href={href} className="hover:text-[#e4c878] transition-colors flex items-center gap-1.5">
-                    <ChevronRight className="w-3.5 h-3.5" /> {label}
-                  </Link>
-                </li>
-              ))}
-            </ul>
-          </div>
-
-          {/* Connect + Newsletter */}
-          <div className="space-y-5">
-            <div>
-              <h3 className="font-bold text-white mb-4">Connect With Us</h3>
-              <a
-                href="https://www.instagram.com/oloolua_forest_youth_guardians?igsh=MXBkaXpyd2tuMTQ1Mw=="
-                target="_blank"
-                rel="noopener noreferrer"
-                className="inline-flex items-center gap-2 px-4 py-2 rounded-lg bg-gradient-to-r from-purple-700 to-pink-600 text-white font-semibold text-sm hover:opacity-90 transition-opacity"
-              >
-                Instagram
-              </a>
-            </div>
-
-            <div>
-              <h3 className="font-bold text-white mb-3">Stay Updated</h3>
-              <form
-                onSubmit={(e) => { e.preventDefault(); alert('Subscribed!'); }}
-                className="flex gap-2"
-              >
-                <input type="email" placeholder="Your email" required className="flex-1 bg-[#0d2219] border border-white/10 rounded-lg px-3 py-2 text-xs text-white focus:outline-none focus:border-[#e4c878]/50 placeholder-gray-600" />
-                <button type="submit" className="px-4 py-2 rounded-lg bg-[#e4c878] hover:bg-amber-300 text-neutral-950 font-bold text-xs transition-colors whitespace-nowrap">
-                  Subscribe
-                </button>
-              </form>
-            </div>
-          </div>
-        </div>
-
-        <div className="mt-10 border-t border-white/5 pt-6 text-center text-xs text-gray-600">
-          © 2026 Oloolua Forest Youth Guardians. All rights reserved. · KAI Nuvari Ecosystem
-        </div>
-      </footer>
 
       <RecordActivityModal
         isOpen={isModalOpen}

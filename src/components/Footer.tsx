@@ -34,7 +34,7 @@ export default function Footer() {
               <li><Link href="/tools" className="text-[#e4c878] font-bold hover:underline transition-colors flex items-center gap-1">Conservation Tools Hub</Link></li>
               <li><Link href="/seedlings" className="hover:text-white transition-colors">Tree Nursery & Seedbeds</Link></li>
               <li><Link href="/activities" className="hover:text-white transition-colors">Conservation Activities</Link></li>
-              <li><Link href="/projects" className="hover:text-white transition-colors">Art in Nature & Rock Mural</Link></li>
+              <li><Link href="/arts" className="hover:text-white transition-colors">Arts in Nature</Link></li>
               <li><Link href="/beekeeping" className="hover:text-white transition-colors">Apiculture & Livelihoods</Link></li>
             </ul>
           </div>
@@ -60,11 +60,11 @@ export default function Footer() {
             </div>
             <div className="flex items-center gap-2 text-xs text-gray-300">
               <Mail className="w-4 h-4 text-emerald-400 shrink-0" />
-              <span>info@olooluayouthguardians.org</span>
+              <a href="mailto:austinnamuye@gmail.com" className="hover:text-white">austinnamuye@gmail.com</a>
             </div>
             <div className="flex items-center gap-2 text-xs text-gray-300">
               <Phone className="w-4 h-4 text-emerald-400 shrink-0" />
-              <span>+254 712 345 678</span>
+              <span className="flex flex-col"><a href="tel:+254112583681" className="hover:text-white">0112 583 681</a><a href="tel:+254742004641" className="hover:text-white">0742 004 641</a><a href="tel:+254725772240" className="hover:text-white">0725 772 240</a></span>
             </div>
           </div>
         </div>

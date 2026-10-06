@@ -2,7 +2,7 @@
 
 import React, { useState, useEffect } from 'react';
 import Link from 'next/link';
-import Navigation from '@/components/Navigation';
+import { useRecordActivityRequest } from '@/components/Navigation';
 import RecordActivityModal from '@/components/RecordActivityModal';
 import LiveActivityTracker from '@/components/LiveActivityTracker';
 import { 
@@ -38,6 +38,12 @@ import { ConservationActivity, InventoryTransaction, Species, Seedbed } from '@/
 export default function ToolsHubPage() {
   const [activeTool, setActiveTool] = useState<'guardian' | 'record'>('guardian');
   const [isActivityModalOpen, setIsActivityModalOpen] = useState(false);
+  // The site menu's Record Activity opens this page's form.
+  useRecordActivityRequest(() => setIsActivityModalOpen(true));
+  // Arriving from the menu's Record activity (/tools?record=1) opens the form.
+  useEffect(() => {
+    if (new URLSearchParams(window.location.search).get('record') === '1') setIsActivityModalOpen(true);
+  }, []);
   const [transactions, setTransactions] = useState<InventoryTransaction[]>(INITIAL_TRANSACTIONS);
   const [copiedLink, setCopiedLink] = useState(false);
 
@@ -139,7 +145,6 @@ export default function ToolsHubPage() {
 
   return (
     <div className="min-h-screen bg-[#0b1c14] text-[#f6f2e7] flex flex-col">
-      <Navigation onOpenRecordActivity={() => setIsActivityModalOpen(true)} />
 
       {/* Hero Header */}
       <section className="bg-gradient-to-b from-[#122b1f] via-[#0e2219] to-[#0b1c14] border-b border-[#e4c878]/20 py-10 px-4 sm:px-6 lg:px-8">

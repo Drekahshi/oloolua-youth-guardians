@@ -1,7 +1,7 @@
 import React from 'react';
 import type { Metadata } from 'next';
 import './globals.css';
-import KaiTopBar from '@/components/KaiTopBar';
+import Navigation from '@/components/Navigation';
 import Footer from '@/components/Footer';
 
 export const metadata: Metadata = {
@@ -17,7 +17,7 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body className="bg-[#0b1c14] text-[#f6f2e7] flex flex-col min-h-screen antialiased">
-        <KaiTopBar />
+        <Navigation />
         <main className="flex-1">{children}</main>
         <Footer />
       </body>
