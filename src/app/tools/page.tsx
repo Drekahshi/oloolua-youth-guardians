@@ -8,7 +8,6 @@ import LiveActivityTracker from '@/components/LiveActivityTracker';
 import { 
   Shield, 
   PlusCircle, 
-  Globe, 
   Layers, 
   BarChart3, 
   Sprout, 
@@ -22,9 +21,6 @@ import {
   Copy, 
   Sparkles, 
   Sliders, 
-  Download,
-  Flame,
-  Search,
   Activity,
   UserCheck,
   Send,
@@ -40,11 +36,10 @@ import {
 import { ConservationActivity, InventoryTransaction, Species, Seedbed } from '@/types/kai';
 
 export default function ToolsHubPage() {
-  const [activeTool, setActiveTool] = useState<'guardian' | 'record' | 'external'>('guardian');
+  const [activeTool, setActiveTool] = useState<'guardian' | 'record'>('guardian');
   const [isActivityModalOpen, setIsActivityModalOpen] = useState(false);
   const [transactions, setTransactions] = useState<InventoryTransaction[]>(INITIAL_TRANSACTIONS);
   const [copiedLink, setCopiedLink] = useState(false);
-  const [copiedPaybill, setCopiedPaybill] = useState(false);
 
   // In-line Quick Record Activity Form State
   const [recordForm, setRecordForm] = useState({
@@ -134,12 +129,6 @@ export default function ToolsHubPage() {
     }
   };
 
-  const copyPaybill = () => {
-    navigator.clipboard.writeText("Equity Bank M-Pesa Paybill: 247247, Account: 813367");
-    setCopiedPaybill(true);
-    setTimeout(() => setCopiedPaybill(false), 2000);
-  };
-
   const copyShareLink = () => {
     if (typeof window !== 'undefined') {
       navigator.clipboard.writeText(window.location.href);
@@ -160,13 +149,13 @@ export default function ToolsHubPage() {
               <Sliders className="w-3.5 h-3.5 text-[#e4c878]" />
               <span>Unified Conservation Toolset</span>
               <span className="opacity-40">·</span>
-              <span className="text-emerald-300 font-mono">v1.0 Modular Suite</span>
+              <span className="text-emerald-300 font-mono">Guardian & Logger Suite</span>
             </div>
             <h1 className="text-3xl sm:text-4xl font-extrabold text-white tracking-tight">
               Guardian Conservation <span className="text-[#e4c878]">Tools Suite</span>
             </h1>
             <p className="mt-2 text-sm text-gray-300 max-w-2xl leading-relaxed">
-              Your all-in-one console combining the <strong>Guardian Hub</strong>, <strong>Record Activity</strong> engine, and <strong>External Public Hub</strong> in a single modular interface.
+              Your consolidated conservation console uniting the <strong>Guardian Hub</strong> and <strong>Record Activity</strong> engine in one streamlined workspace.
             </p>
           </div>
 
@@ -190,8 +179,8 @@ export default function ToolsHubPage() {
           </div>
         </div>
 
-        {/* 3 Core Tools Master Selector */}
-        <div className="max-w-7xl mx-auto mt-8 grid grid-cols-1 md:grid-cols-3 gap-4">
+        {/* 2 Core Tools Master Selector */}
+        <div className="max-w-7xl mx-auto mt-8 grid grid-cols-1 md:grid-cols-2 gap-4">
           
           {/* Tool Card 1: Guardian Hub */}
           <button
@@ -250,36 +239,6 @@ export default function ToolsHubPage() {
             </h3>
             <p className="text-xs text-gray-300 leading-relaxed">
               Log tree planting, seeding, nursery maintenance, patrols, and seedling sales with instant DB sync and Hedera verification.
-            </p>
-          </button>
-
-          {/* Tool Card 3: External Hub */}
-          <button
-            onClick={() => setActiveTool('external')}
-            className={`p-5 rounded-2xl text-left transition-all border ${
-              activeTool === 'external'
-                ? 'bg-teal-950/40 border-[#e4c878] shadow-lg shadow-teal-950/50 ring-1 ring-[#e4c878]/50'
-                : 'bg-[#122b1f]/60 hover:bg-[#122b1f] border-white/10 hover:border-white/20'
-            }`}
-          >
-            <div className="flex items-center justify-between mb-3">
-              <div className={`w-10 h-10 rounded-xl flex items-center justify-center ${
-                activeTool === 'external' ? 'bg-teal-400 text-neutral-950' : 'bg-teal-950 text-teal-300 border border-teal-800'
-              }`}>
-                <Globe className="w-5 h-5 font-bold" />
-              </div>
-              <span className={`text-[11px] font-bold px-2 py-0.5 rounded-full ${
-                activeTool === 'external' ? 'bg-[#e4c878] text-neutral-950' : 'bg-white/10 text-gray-400'
-              }`}>
-                Public & Web3
-              </span>
-            </div>
-            <h3 className="text-base font-bold text-white mb-1 flex items-center gap-1.5">
-              <span>3. External Hub</span>
-              {activeTool === 'external' && <Sparkles className="w-4 h-4 text-[#e4c878]" />}
-            </h3>
-            <p className="text-xs text-gray-300 leading-relaxed">
-              Public conservation portal, Hedera HashScan verification, M-Pesa donations, SIHU News Hub, and ecosystem links.
             </p>
           </button>
 
@@ -587,148 +546,6 @@ export default function ToolsHubPage() {
                 <p className="text-gray-400 text-[11px] leading-relaxed">
                   Entries are compatible with Hedera Consensus Service (HCS) topic submission for tamper-proof Web3 transparency.
                 </p>
-              </div>
-            </div>
-
-          </div>
-        )}
-
-        {/* ========================================================================= */}
-        {/* TOOL 3: EXTERNAL PUBLIC HUB */}
-        {/* ========================================================================= */}
-        {activeTool === 'external' && (
-          <div className="space-y-8 animate-fadeIn">
-            
-            {/* Header Banner */}
-            <div className="bg-[#122b1f] p-6 rounded-2xl border border-teal-500/30 flex flex-col md:flex-row md:items-center justify-between gap-4">
-              <div>
-                <div className="flex items-center gap-2 mb-1">
-                  <Globe className="w-5 h-5 text-teal-300" />
-                  <h2 className="text-lg font-bold text-white">External Public Transparency Hub</h2>
-                </div>
-                <p className="text-xs text-gray-300">
-                  Public verification portal, Hedera HashScan explorer, partner bridges, and community donation portal.
-                </p>
-              </div>
-
-              <Link
-                href="/portal?mode=external"
-                className="px-4 py-2.5 rounded-xl bg-teal-500 text-neutral-950 font-bold text-xs hover:bg-teal-400 transition-all flex items-center gap-2 shadow-md shrink-0"
-              >
-                <span>View Public Visitor View</span>
-                <ArrowRight className="w-4 h-4" />
-              </Link>
-            </div>
-
-            {/* External Ecosystem Links */}
-            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-5">
-              
-              {/* External Link 1: SIHU News Hub */}
-              <div className="p-6 rounded-2xl bg-[#122b1f] border border-white/10 space-y-3 flex flex-col justify-between">
-                <div className="space-y-2">
-                  <div className="flex items-center justify-between">
-                    <span className="text-xs font-bold text-[#e4c878] uppercase tracking-wider">Sister Portal</span>
-                    <span className="text-[10px] px-2 py-0.5 rounded bg-amber-950 text-[#e4c878] font-mono">Port 3001</span>
-                  </div>
-                  <h3 className="text-base font-bold text-white">SIHU News Hub Portal</h3>
-                  <p className="text-xs text-gray-300 leading-relaxed">
-                    Decentralized community news, environmental reporting, and AI-curated journalism.
-                  </p>
-                </div>
-                <a
-                  href="http://localhost:3001"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="inline-flex items-center justify-center gap-2 px-4 py-2 rounded-xl bg-white/5 hover:bg-white/10 border border-white/10 text-xs font-bold text-white transition-colors mt-4"
-                >
-                  <span>Launch SIHU News Hub</span>
-                  <ExternalLink className="w-3.5 h-3.5 text-[#e4c878]" />
-                </a>
-              </div>
-
-              {/* External Link 2: KAI Nuvari Protocol */}
-              <div className="p-6 rounded-2xl bg-[#122b1f] border border-white/10 space-y-3 flex flex-col justify-between">
-                <div className="space-y-2">
-                  <div className="flex items-center justify-between">
-                    <span className="text-xs font-bold text-emerald-400 uppercase tracking-wider">Main Ecosystem</span>
-                    <span className="text-[10px] px-2 py-0.5 rounded bg-emerald-950 text-emerald-300 font-mono">Port 3000</span>
-                  </div>
-                  <h3 className="text-base font-bold text-white">KAI Nuvari Main Web App</h3>
-                  <p className="text-xs text-gray-300 leading-relaxed">
-                    The central dApp combining DeFi green yields, AI agents, and cross-hub switching.
-                  </p>
-                </div>
-                <a
-                  href="http://localhost:3000"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="inline-flex items-center justify-center gap-2 px-4 py-2 rounded-xl bg-white/5 hover:bg-white/10 border border-white/10 text-xs font-bold text-white transition-colors mt-4"
-                >
-                  <span>Open KAI Main App</span>
-                  <ExternalLink className="w-3.5 h-3.5 text-emerald-400" />
-                </a>
-              </div>
-
-              {/* External Link 3: Hedera HashScan */}
-              <div className="p-6 rounded-2xl bg-[#122b1f] border border-white/10 space-y-3 flex flex-col justify-between">
-                <div className="space-y-2">
-                  <div className="flex items-center justify-between">
-                    <span className="text-xs font-bold text-teal-300 uppercase tracking-wider">Public Web3 Ledger</span>
-                    <span className="text-[10px] px-2 py-0.5 rounded bg-teal-950 text-teal-300 font-mono">Testnet HCS</span>
-                  </div>
-                  <h3 className="text-base font-bold text-white">Hedera HashScan Explorer</h3>
-                  <p className="text-xs text-gray-300 leading-relaxed">
-                    Verify immutable consensus timestamps and cryptographic proofs for Oloolua tree batches.
-                  </p>
-                </div>
-                <a
-                  href="https://hashscan.io/testnet"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="inline-flex items-center justify-center gap-2 px-4 py-2 rounded-xl bg-white/5 hover:bg-white/10 border border-white/10 text-xs font-bold text-white transition-colors mt-4"
-                >
-                  <span>Explore HashScan</span>
-                  <ExternalLink className="w-3.5 h-3.5 text-teal-300" />
-                </a>
-              </div>
-
-            </div>
-
-            {/* Public Donation & CFA Support Tool */}
-            <div className="bg-[#122b1f] rounded-2xl border border-[#e4c878]/30 p-6 md:p-8 space-y-6">
-              <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 border-b border-white/10 pb-4">
-                <div>
-                  <h3 className="text-base font-bold text-white flex items-center gap-2">
-                    <TreePine className="w-5 h-5 text-[#e4c878]" />
-                    <span>Public Direct Tree Sponsorship & Paybill Tool</span>
-                  </h3>
-                  <p className="text-xs text-gray-300 mt-1">
-                    Direct public contribution channel funding indigenous seedlings at 50 KES (~$0.38) per tree.
-                  </p>
-                </div>
-
-                <button
-                  onClick={copyPaybill}
-                  className="flex items-center gap-1.5 px-3 py-1.5 rounded-lg bg-[#e4c878] text-neutral-950 text-xs font-bold hover:bg-amber-300 transition-colors shrink-0"
-                >
-                  {copiedPaybill ? <Check className="w-4 h-4" /> : <Copy className="w-4 h-4" />}
-                  <span>{copiedPaybill ? 'Copied Paybill' : 'Copy Paybill: 247247'}</span>
-                </button>
-              </div>
-
-              <div className="grid grid-cols-1 sm:grid-cols-3 gap-4 text-xs">
-                <div className="p-4 rounded-xl bg-[#0b1c14] border border-white/5">
-                  <div className="text-gray-400">Equity Bank Paybill</div>
-                  <div className="text-lg font-bold text-white mt-1">247247</div>
-                </div>
-                <div className="p-4 rounded-xl bg-[#0b1c14] border border-white/5">
-                  <div className="text-gray-400">Account Number</div>
-                  <div className="text-lg font-bold text-[#e4c878] mt-1">813367</div>
-                </div>
-                <div className="p-4 rounded-xl bg-[#0b1c14] border border-white/5">
-                  <div className="text-gray-400">Account Name</div>
-                  <div className="text-lg font-bold text-emerald-400 mt-1">Oloolua CFA Guardians</div>
-                </div>
               </div>
             </div>
 

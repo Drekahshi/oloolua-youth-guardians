@@ -6,7 +6,7 @@ This directory contains the standalone **Tools Section** for the **Oloolua Fores
 
 ## 🌟 What is Included in the Tools Suite?
 
-The Tools Suite unifies 3 core conservation capabilities into one modular console:
+The Tools Suite unifies 2 core conservation tools into one modular console:
 
 1. **🛡️ Guardian Hub Console**
    - Live nursery stock metrics (current seedlings in stock, dynamic calculations).
@@ -18,12 +18,6 @@ The Tools Suite unifies 3 core conservation capabilities into one modular consol
    - Quick in-line logger and modal logger.
    - Supported event types: `PROPAGATION`, `SOWING`, `POTTING`, `WEEDING`, `WATERING`, `PLANTING`, `SALE`, `DONATION`, `MORTALITY`.
    - Real-time stock balancing and Hedera Consensus Service (HCS) readiness.
-
-3. **🌐 External Transparency Hub**
-   - Public Visitor & Verification Portal.
-   - Hedera HashScan explorer integration for on-chain proof.
-   - Cross-hub bridges: **SIHU News Hub** (`http://localhost:3001`) and **KAI Nuvari Main App** (`http://localhost:3000`).
-   - Community direct Paybill donation widget (Equity Bank Paybill: `247247`, Account: `813367`).
 
 ---
 
@@ -59,7 +53,6 @@ npm run dev -- -p 3002
 Navigate to:
 - **Tools Suite**: [http://localhost:3002/tools](http://localhost:3002/tools)
 - **Guardian Portal**: [http://localhost:3002/portal](http://localhost:3002/portal)
-- **External Public Hub**: [http://localhost:3002/portal?mode=external](http://localhost:3002/portal?mode=external)
 
 ---
 
@@ -72,7 +65,7 @@ To commit and push just the Tools Section changes:
 git add src/app/tools/ src/components/ToolsDropdown.tsx src/components/Navigation.tsx src/components/Footer.tsx src/components/KaiTopBar.tsx TOOLS_SECTION.md
 
 # Commit the tools feature
-git commit -m "feat(tools): add unified tools suite with guardian hub, record activity, and external hub"
+git commit -m "feat(tools): streamline tools suite to Guardian Hub and Record Activity"
 
 # Push to your repository
 git push origin main

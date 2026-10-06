@@ -124,7 +124,7 @@ export default function Navigation({ onOpenRecordActivity }: { onOpenRecordActiv
               className="w-full text-center px-4 py-2 rounded-md font-bold text-sm bg-[#e4c878] text-neutral-950 flex items-center justify-center gap-2"
             >
               <Wrench className="w-4 h-4" />
-              <span>All Tools (Guardian, Record & External Hubs)</span>
+              <span>All Tools (Guardian Hub & Record Activity)</span>
             </Link>
             <Link
               href="/portal"

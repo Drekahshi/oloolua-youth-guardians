@@ -102,26 +102,6 @@ export default function ToolsDropdown({ onOpenRecordActivity }: ToolsDropdownPro
             </div>
           </button>
 
-          {/* Option 3: External Hub */}
-          <Link
-            href="/portal?mode=external"
-            onClick={() => setIsOpen(false)}
-            className="flex items-start gap-2.5 px-3.5 py-2.5 hover:bg-teal-950/40 transition-colors group"
-          >
-            <div className="w-7 h-7 rounded-lg bg-teal-950/60 border border-teal-500/40 flex items-center justify-center shrink-0 mt-0.5 text-teal-300">
-              <Globe className="w-3.5 h-3.5" />
-            </div>
-            <div>
-              <div className="text-xs font-bold text-white group-hover:text-teal-300 transition-colors flex items-center gap-1">
-                <span>External Hub</span>
-                <ExternalLink className="w-2.5 h-2.5 text-gray-400" />
-              </div>
-              <p className="text-[10px] text-gray-400 leading-tight">
-                Public portal, Hedera explorer & SIHU
-              </p>
-            </div>
-          </Link>
-
           {/* Footer of Dropdown */}
           <div className="mt-1 pt-1.5 border-t border-white/10 px-3 py-1">
             <Link
