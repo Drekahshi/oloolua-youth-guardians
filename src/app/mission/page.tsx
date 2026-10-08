@@ -29,7 +29,7 @@ export default function MissionPage() {
           <ul style={ul}>
             <li>Running community nurseries that propagate diverse native and medicinal seedlings.</li>
             <li>Organizing tree‑planting drives that restore degraded forest patches and expand green cover.</li>
-            <li>Recording every planted tree on the Hedera ledger, creating an unchangeable digital twin that tracks carbon sequestration over time.</li>
+            <li>Recording every planted tree on the Hedera and Avalanche ledgers, creating an unchangeable digital twin that tracks carbon sequestration over time.</li>
           </ul>
 
           <h3 style={h3}>Green Spaces for Mental and Physical Wellness</h3>
@@ -51,13 +51,13 @@ export default function MissionPage() {
           <ul style={ul}>
             <li>Seed collection, nursery management, and tree propagation techniques.</li>
             <li>Sustainability literacy, climate science, and ESG fundamentals.</li>
-            <li>Web3 tools (Hedera, Guardian) for data logging and digital asset creation.</li>
+            <li>Web3 tools (Hedera, Guardian MRV, and Avalanche smart contracts) for data logging, digital asset creation, and carbon tracking.</li>
             <li>Eco‑tourism, green enterprise, and how to turn conservation data into income.</li>
           </ul>
 
-          <h3 style={h3}>Trust Through Technology, Hedera &amp; Web3</h3>
+          <h3 style={h3}>Trust Through Technology, Hedera, Avalanche &amp; Web3</h3>
           <p style={p}>
-            One of the biggest barriers to conservation finance is trust. We solve this by using the Hedera public ledger and the Hedera Guardian to create immutable, verifiable records of every activity we do.
+            One of the biggest barriers to conservation finance is trust. We solve this by using the Hedera public ledger, the Hedera Guardian MRV policy framework, and Avalanche blockchain to create immutable, verifiable records of every activity we do.
           </p>
           <h4 style={h4}>How Technology Strengthens Our Mission:</h4>
           <ul style={ul}>

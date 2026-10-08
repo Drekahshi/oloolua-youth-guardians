@@ -7,7 +7,7 @@ const PROJECTS = [
     desc: 'Jaza Miti goes beyond traditional tree planting by creating measurable, verifiable, and monetizable environmental impact. We solve the lack of transparency in traditional reforestation by assigning local youth as guardians and geo-tagging every sapling.',
     features: [
       { icon: '', title: 'Data Capture', desc: 'We log GPS coordinates, species types, growth metrics, and survival rates into structured datasets.' },
-      { icon: '', title: 'Tokenization', desc: 'Each living tree is minted as a Conservation NFT on Hedera, serving as a transparent digital asset representing real-world ecological impact.' },
+      { icon: '', title: 'Tokenization', desc: 'Each living tree is minted as a Conservation NFT on Hedera and Avalanche, serving as a transparent digital asset representing real-world ecological impact.' },
     ],
     img: '/assets/images/forest5.jpeg',
   },
@@ -35,7 +35,7 @@ const REGEN_CARDS = [
     items: [
       { label: 'Ecosystem', val: 'Enhances pollination and forest regeneration.' },
       { label: 'Economy', val: 'Youth harvest honey and beeswax.' },
-      { label: 'Blockchain', val: 'Tokenizing honey batches to trace origins back to the specific forest zones.' },
+      { label: 'Blockchain', val: 'Tokenizing honey batches across Avalanche and Hedera to trace origins back to specific forest zones.' },
     ],
   },
   {
@@ -44,7 +44,7 @@ const REGEN_CARDS = [
     items: [
       { label: 'Creative', val: 'Forest murals and sculpture installations.' },
       { label: 'Data-Linked', val: 'Art connected to specific tree clusters.' },
-      { label: 'Blockchain', val: 'Minting Art NFTs embedded with real environmental metrics.' },
+      { label: 'Blockchain', val: 'Minting Art NFTs on Avalanche and Hedera embedded with real environmental metrics.' },
     ],
   },
 ];
@@ -73,13 +73,13 @@ export default function ProjectsPage() {
           <em style={{ color: '#e8c96a', fontStyle: 'italic' }}>Conservation</em>
         </h1>
         <p style={{ maxWidth: 800, margin: '0 auto', fontSize: '1.2rem', opacity: 0.9, fontWeight: 300 }}>
-          Transforming environmental stewardship into a transparent, scalable, and economically viable model. We convert conservation actions into verified data, tokenized assets, and true economic value.
+          Transforming environmental stewardship into a transparent, scalable, and economically viable model. We convert conservation actions into verified data, tokenized assets, and true economic value across Hedera and Avalanche networks.
         </p>
       </div>
 
       {/* Framework Bar */}
       <div style={{ background: '#174823', padding: '2rem', display: 'flex', justifyContent: 'center', gap: '4rem', flexWrap: 'wrap', borderTop: '1px solid rgba(255,255,255,0.1)' }}>
-        {[['', 'ESG Aligned'], ['', 'SDG Goals'], ['', 'Hedera Guardian'], ['', 'Science-Backed']].map(([icon, label]) => (
+        {[['', 'ESG Aligned'], ['', 'SDG Goals'], ['', 'Hedera & Avalanche Guardian MRV'], ['', 'Science-Backed']].map(([icon, label]) => (
           <div key={label} style={{ textAlign: 'center', color: 'white' }}>
             <div style={{ fontSize: '1.8rem', marginBottom: '0.5rem' }}>{icon}</div>
             <span style={{ fontSize: '0.85rem', textTransform: 'uppercase', letterSpacing: 1, opacity: 0.8 }}>{label}</span>
@@ -99,7 +99,7 @@ export default function ProjectsPage() {
             <ul style={{ listStyle: 'none', padding: 0 }}>
               {[
                 { icon: '', title: 'Data Capture', desc: 'We log GPS coordinates, species types, growth metrics, and survival rates into structured datasets.' },
-                { icon: '', title: 'Tokenization', desc: 'Each living tree is minted as a Conservation NFT on Hedera, serving as a transparent digital asset representing real-world ecological impact.' },
+                { icon: '', title: 'Tokenization', desc: 'Each living tree is minted as a Conservation NFT on Hedera and Avalanche, serving as a transparent digital asset representing real-world ecological impact.' },
               ].map(({ icon, title, desc }) => (
                 <li key={title} style={{ display: 'flex', alignItems: 'flex-start', gap: '1rem', marginBottom: '1.2rem', background: 'white', padding: '1.2rem', borderRadius: 12, boxShadow: '0 4px 15px rgba(0,0,0,0.05)', border: '1px solid #daebd9' }}>
                   <span style={{ fontSize: '1.5rem' }}>{icon}</span>
@@ -159,18 +159,18 @@ export default function ProjectsPage() {
         </div>
       </div>
 
-      {/* Hedera Guardian */}
+      {/* Hedera Guardian & Avalanche MRV */}
       <div style={{ maxWidth: 1200, margin: '0 auto', padding: '2rem 2rem 4rem' }}>
         <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(300px, 1fr))', gap: '3rem', alignItems: 'center' }}>
           <div>
             <span style={{ color: '#2a6040', fontWeight: 700, textTransform: 'uppercase', letterSpacing: 2, fontSize: '0.85rem' }}>Trust Infrastructure</span>
-            <h3 style={{ fontSize: '2rem', color: '#0b2e14', fontWeight: 700, margin: '0.75rem 0 1rem' }}>Hedera Guardian Model</h3>
+            <h3 style={{ fontSize: '2rem', color: '#0b2e14', fontWeight: 700, margin: '0.75rem 0 1rem' }}>Hedera Guardian &amp; Avalanche MRV Model</h3>
             <p style={{ color: '#334a34', marginBottom: '1.5rem', fontSize: '1.05rem', lineHeight: 1.7 }}>
-              Conservation has historically suffered from poor data verification and lack of trust. We use Hedera Guardian as a policy-driven, verifiable data system to solve this.
+              Conservation has historically suffered from poor data verification and lack of trust. We use Hedera Guardian and Avalanche as policy-driven, verifiable data systems and smart contract layers to solve this.
             </p>
             <ul style={{ listStyle: 'none', padding: 0 }}>
               {[
-                { icon: '', title: 'MRV System', desc: 'Measurement, Reporting, and Verification that is standardized, auditable, and completely transparent.' },
+                { icon: '', title: 'MRV System', desc: 'Measurement, Reporting, and Verification that is standardized, auditable, and completely transparent across Avalanche and Hedera.' },
                 { icon: '', title: 'Policy Driven', desc: 'Automated rules for tree validation, data integrity, and ESG compliance ensure that every minted asset has real-world backing.' },
               ].map(({ icon, title, desc }) => (
                 <li key={title} style={{ display: 'flex', alignItems: 'flex-start', gap: '1rem', marginBottom: '1.2rem', background: 'white', padding: '1.2rem', borderRadius: 12, boxShadow: '0 4px 15px rgba(0,0,0,0.05)', border: '1px solid #daebd9' }}>
@@ -185,7 +185,7 @@ export default function ProjectsPage() {
           </div>
           <div style={{ background: '#0b2e14', borderRadius: 20, padding: '3rem', color: 'white' }}>
             <h3 style={{ fontSize: '2rem', marginBottom: '1rem', fontWeight: 700 }}>The Strategic Advantage</h3>
-            <p style={{ opacity: 0.9, marginBottom: '1rem', lineHeight: 1.7 }}>By building on an immutable ledger, we provide absolute investor trust, create a highly scalable model, and align completely with global ESG frameworks.</p>
+            <p style={{ opacity: 0.9, marginBottom: '1rem', lineHeight: 1.7 }}>By building on immutable ledgers across Avalanche and Hedera, we provide absolute investor trust, create a highly scalable model, and align completely with global ESG frameworks.</p>
             <p style={{ opacity: 0.9, lineHeight: 1.7 }}><strong>Vision:</strong> To become the definitive source of truth for conservation in Africa.</p>
           </div>
         </div>

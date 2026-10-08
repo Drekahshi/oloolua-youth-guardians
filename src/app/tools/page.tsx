@@ -243,7 +243,7 @@ export default function ToolsHubPage() {
               {activeTool === 'record' && <Sparkles className="w-4 h-4 text-[#e4c878]" />}
             </h3>
             <p className="text-xs text-gray-300 leading-relaxed">
-              Log tree planting, seeding, nursery maintenance, patrols, and seedling sales with instant DB sync and Hedera verification.
+              Log tree planting, seeding, nursery maintenance, patrols, and seedling sales with instant DB sync, Hedera, and Avalanche verification.
             </p>
           </button>
 
@@ -402,7 +402,7 @@ export default function ToolsHubPage() {
                   <span>Quick-Log Event Console</span>
                 </h3>
                 <p className="text-xs text-gray-400 mt-1">
-                  Immediate entry tool. Submissions are instantly written to PostgreSQL and queued for Hedera Hashgraph anchoring.
+                  Immediate entry tool. Submissions are instantly written to PostgreSQL and queued for Hedera Hashgraph and Avalanche anchoring.
                 </p>
               </div>
 
@@ -546,10 +546,10 @@ export default function ToolsHubPage() {
               <div className="p-4 rounded-xl bg-[#122b1f] border border-white/10 space-y-1">
                 <div className="font-bold text-teal-300 flex items-center gap-1.5">
                   <Shield className="w-4 h-4" />
-                  <span>Hedera Ready</span>
+                  <span>Hedera &amp; Avalanche Ready</span>
                 </div>
                 <p className="text-gray-400 text-[11px] leading-relaxed">
-                  Entries are compatible with Hedera Consensus Service (HCS) topic submission for tamper-proof Web3 transparency.
+                  Entries are compatible with Hedera Consensus Service (HCS) topic submission and Avalanche C-Chain / Subnets for tamper-proof Web3 transparency.
                 </p>
               </div>
             </div>

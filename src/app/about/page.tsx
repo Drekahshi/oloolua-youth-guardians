@@ -75,7 +75,7 @@ export default function AboutPage() {
               { icon: '', title: 'Nature & Conservation', items: ['Plant and nurture indigenous and medicinal trees', 'Restore degraded forest areas', 'Expand and protect green spaces'] },
               { icon: '', title: 'Wellness & Community', items: ['Use green spaces for mental and physical wellbeing', 'Organize community activities, camping, and engagement', 'Create safe spaces for learning and connection'] },
               { icon: '', title: 'Training & Empowerment', items: ['Train communities on sustainability', 'Teach nursery management and tree propagation', 'Build skills for long-term environmental impact'] },
-              { icon: '', title: 'Technology & Transparency', items: ['Track conservation activities and impact', 'Use tools like Hedera to create trusted data', 'Make environmental work visible and accountable'] },
+              { icon: '', title: 'Technology & Transparency', items: ['Track conservation activities and impact', 'Use tools like Hedera, Guardian MRV, and Avalanche to create trusted data', 'Make environmental work visible and accountable'] },
               { icon: '', title: 'Art & Storytelling', items: ['Turn conservation into meaningful art', 'Empower local artists', 'Share stories that inspire action'] },
               { icon: '', title: 'Green Economy', items: ['Create job opportunities for youth', 'Support community-based environmental enterprises', 'Enable value creation from conservation'] },
             ].map(({ icon, title, items }) => (
