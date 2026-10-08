@@ -15,15 +15,15 @@ import { Menu, X, Shield, ChevronDown, Wrench, PlusCircle } from 'lucide-react';
 const MAIN = [
   { name: 'Home', href: '/' },
   { name: 'About', href: '/about' },
-  { name: 'Activities', href: '/activities' },
-  { name: 'Arts in Nature', href: '/arts' },
-  { name: 'Nursery', href: '/seedlings' },
-  { name: 'Projects', href: '/projects' },
-  { name: 'Gallery', href: '/photogallery' },
-];
-const MORE = [
   { name: 'Mission', href: '/mission' },
   { name: 'Vision', href: '/vision' },
+  { name: 'Activities', href: '/activities' },
+  { name: 'Nursery', href: '/seedlings' },
+  { name: 'Arts in Nature', href: '/arts' },
+];
+const MORE = [
+  { name: 'Projects', href: '/projects' },
+  { name: 'Gallery', href: '/photogallery' },
   { name: 'Beekeeping', href: '/beekeeping' },
   { name: 'Community', href: '/workshops' },
 ];
