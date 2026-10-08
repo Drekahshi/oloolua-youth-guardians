@@ -8,7 +8,8 @@ import RecordActivityModal from '@/components/RecordActivityModal';
 import { 
   TreePine, Users, HeartHandshake, Globe, ArrowRight,
   Sparkles, ShieldCheck, BarChart3, ChevronRight,
-  Phone, Mail
+  Phone, Mail, Sprout, GraduationCap, Coins, BookOpen,
+  Share2, CheckCircle2
 } from 'lucide-react';
 import { 
   INITIAL_SPECIES, INITIAL_SEEDBEDS, INITIAL_TRANSACTIONS,
@@ -17,6 +18,108 @@ import {
 import { ConservationActivity } from '@/types/kai';
 
 /* ─────────────── DATA ─────────────── */
+
+const CFA_ACTIVITY_PILLARS = [
+  {
+    id: 'nursery',
+    title: 'Seedling Production and Nursery Management',
+    icon: Sprout,
+    badge: 'Nursery Operations',
+    color: 'from-emerald-500/20 to-teal-500/10',
+    borderColor: 'border-emerald-500/30',
+    accentColor: 'text-emerald-400',
+    items: [
+      'Participate in growing native tree seedlings in community nurseries',
+      'Learn advanced techniques in seedling propagation',
+      'Receive comprehensive training on best practices for seedling care'
+    ]
+  },
+  {
+    id: 'conservation',
+    title: 'Forest Conservation and Restoration',
+    icon: TreePine,
+    badge: 'Ecological Restoration',
+    color: 'from-green-500/20 to-emerald-500/10',
+    borderColor: 'border-green-500/30',
+    accentColor: 'text-green-400',
+    items: [
+      'Engage actively in tree planting activities',
+      'Participate in forest rehabilitation projects',
+      'Assist in monitoring forest health through regular assessments'
+    ]
+  },
+  {
+    id: 'capacity',
+    title: 'Capacity Building and Training',
+    icon: GraduationCap,
+    badge: 'Skills & Development',
+    color: 'from-amber-500/20 to-yellow-500/10',
+    borderColor: 'border-amber-500/30',
+    accentColor: 'text-[#e4c878]',
+    items: [
+      'Attend specialized workshops on forest management',
+      'Learn about sustainable agricultural practices',
+      'Develop skills in nursery management and tree propagation'
+    ]
+  },
+  {
+    id: 'benefit-sharing',
+    title: 'Community Benefit Sharing',
+    icon: Coins,
+    badge: 'Livelihoods & Enterprise',
+    color: 'from-amber-500/20 to-orange-500/10',
+    borderColor: 'border-amber-500/30',
+    accentColor: 'text-amber-300',
+    items: [
+      'Access opportunities for forest products through sharing mechanisms',
+      'Participate in revenue-sharing programs',
+      'Develop sustainable forest enterprises'
+    ]
+  },
+  {
+    id: 'education',
+    title: 'Environmental Education',
+    icon: BookOpen,
+    badge: 'Awareness & Climate',
+    color: 'from-cyan-500/20 to-blue-500/10',
+    borderColor: 'border-cyan-500/30',
+    accentColor: 'text-cyan-300',
+    items: [
+      'Participate in community awareness programs',
+      'Learn about local ecosystem conservation',
+      'Engage in environmental education initiatives',
+      'Study climate change mitigation strategies'
+    ]
+  },
+  {
+    id: 'resource-management',
+    title: 'Resource Access and Management',
+    icon: ShieldCheck,
+    badge: 'Governance & Rights',
+    color: 'from-teal-500/20 to-emerald-500/10',
+    borderColor: 'border-teal-500/30',
+    accentColor: 'text-teal-300',
+    items: [
+      'Obtain permits for sustainable resource extraction',
+      'Participate in forest management planning',
+      'Contribute to decision-making processes'
+    ]
+  },
+  {
+    id: 'networking',
+    title: 'Networking and Collaboration',
+    icon: Share2,
+    badge: 'Partnerships',
+    color: 'from-purple-500/20 to-pink-500/10',
+    borderColor: 'border-purple-500/30',
+    accentColor: 'text-purple-300',
+    items: [
+      'Connect with other community forest user groups',
+      'Share knowledge and best practices',
+      'Collaborate on conservation projects'
+    ]
+  }
+];
 
 const ACTIVITY_CARDS = [
   { img: '/assets/images/forest5.jpeg', label: 'Tree Planting', desc: 'Restoring forest ecosystems', href: '/seedlings' },
@@ -189,29 +292,84 @@ export default function HomePage() {
         </div>
       </section>
 
-      {/* ── ACTIVITIES (from HTML template) ── */}
-      <section className="py-20 px-4 max-w-7xl mx-auto w-full">
-        <div className="text-center mb-12 space-y-2">
-          <span className="text-[#e4c878] text-xs font-bold uppercase tracking-widest">What We Do</span>
-          <h2 className="text-3xl sm:text-4xl font-extrabold text-white">Our Activities &amp; Indigenous Trees</h2>
-          <p className="text-gray-400 max-w-xl mx-auto text-sm">
-            From tree planting and seedling collection to beekeeping and community education.
+      {/* ── ACTIVITIES & CFA ROLES SECTION ── */}
+      <section className="py-20 px-4 max-w-7xl mx-auto w-full space-y-12">
+        <div className="text-center space-y-4 max-w-4xl mx-auto">
+          <span className="text-[#e4c878] text-xs font-bold uppercase tracking-widest bg-emerald-950/80 px-3 py-1 rounded-full border border-[#e4c878]/30">
+            Field Stewardship &amp; Conservation Mandates
+          </span>
+          <h2 className="text-3xl sm:text-5xl font-extrabold text-white tracking-tight">
+            Our Activities &amp; CFA Member Roles
+          </h2>
+          <p className="text-emerald-100/90 max-w-3xl mx-auto text-sm sm:text-base leading-relaxed bg-[#122b1f]/80 p-4 rounded-xl border border-[#e4c878]/20">
+            As a <span className="text-[#e4c878] font-semibold">Community Forest Association (CFA) approved seedling user group members</span>, we play a crucial role in forest conservation, community development, and sustainable resource management.
           </p>
         </div>
 
-        <div className="grid grid-cols-2 lg:grid-cols-4 gap-5">
-          {ACTIVITY_CARDS.map(({ img, label, desc, href }) => (
-            <Link key={label} href={href} className="group block rounded-2xl overflow-hidden border border-[#e4c878]/20 hover:border-[#e4c878]/60 transition-all shadow-xl hover:shadow-emerald-900/40 hover:-translate-y-1 duration-300">
-              <div className="relative h-48 overflow-hidden">
-                <img src={img} alt={label} className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110" />
-                <div className="absolute inset-0 bg-gradient-to-t from-[#0b1c14] via-transparent to-transparent" />
+        {/* 7 CFA Activity Pillars Grid */}
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+          {CFA_ACTIVITY_PILLARS.map((pillar) => {
+            const Icon = pillar.icon;
+            return (
+              <div 
+                key={pillar.id}
+                className={`p-6 rounded-2xl bg-gradient-to-b ${pillar.color} bg-[#122b1f]/90 border ${pillar.borderColor} hover:border-[#e4c878]/60 transition-all duration-300 shadow-xl hover:shadow-2xl hover:-translate-y-1 flex flex-col justify-between group`}
+              >
+                <div className="space-y-3">
+                  <div className="flex items-center justify-between">
+                    <div className={`w-11 h-11 rounded-xl bg-black/40 border border-white/10 flex items-center justify-center ${pillar.accentColor} group-hover:scale-110 transition-transform`}>
+                      <Icon className="w-5 h-5" />
+                    </div>
+                    <span className="px-2.5 py-0.5 rounded-full text-[10px] font-bold uppercase tracking-wider bg-black/40 text-gray-300 border border-white/10">
+                      {pillar.badge}
+                    </span>
+                  </div>
+
+                  <h3 className="text-base font-bold text-white group-hover:text-[#e4c878] transition-colors leading-snug">
+                    {pillar.title}
+                  </h3>
+
+                  <ul className="space-y-2 pt-1">
+                    {pillar.items.map((item, idx) => (
+                      <li key={idx} className="flex items-start gap-2 text-xs text-gray-200/90 leading-relaxed">
+                        <CheckCircle2 className={`w-3.5 h-3.5 shrink-0 mt-0.5 ${pillar.accentColor}`} />
+                        <span>{item}</span>
+                      </li>
+                    ))}
+                  </ul>
+                </div>
               </div>
-              <div className="p-4 bg-[#122b1f]">
-                <h3 className="font-bold text-white group-hover:text-[#e4c878] transition-colors">{label}</h3>
-                <p className="text-xs text-gray-400 mt-1">{desc}</p>
-              </div>
+            );
+          })}
+        </div>
+
+        {/* Highlighted Activity Photo Cards */}
+        <div className="pt-6 space-y-4">
+          <div className="flex justify-between items-center">
+            <h3 className="text-lg font-bold text-white flex items-center gap-2">
+              <span>🌿</span>
+              <span>Featured Conservation Programs</span>
+            </h3>
+            <Link href="/activities" className="text-xs text-[#e4c878] hover:underline font-bold flex items-center gap-1">
+              <span>View All Activities &amp; Logs</span>
+              <ArrowRight className="w-3.5 h-3.5" />
             </Link>
-          ))}
+          </div>
+
+          <div className="grid grid-cols-2 lg:grid-cols-4 gap-5">
+            {ACTIVITY_CARDS.map(({ img, label, desc, href }) => (
+              <Link key={label} href={href} className="group block rounded-2xl overflow-hidden border border-[#e4c878]/20 hover:border-[#e4c878]/60 transition-all shadow-xl hover:shadow-emerald-900/40 hover:-translate-y-1 duration-300">
+                <div className="relative h-44 overflow-hidden">
+                  <img src={img} alt={label} className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110" />
+                  <div className="absolute inset-0 bg-gradient-to-t from-[#0b1c14] via-transparent to-transparent" />
+                </div>
+                <div className="p-4 bg-[#122b1f]">
+                  <h3 className="font-bold text-white group-hover:text-[#e4c878] transition-colors text-sm">{label}</h3>
+                  <p className="text-xs text-gray-400 mt-1">{desc}</p>
+                </div>
+              </Link>
+            ))}
+          </div>
         </div>
       </section>
 
